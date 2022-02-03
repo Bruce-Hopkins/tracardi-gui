@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { FixedSizeGrid as Grid } from 'react-window';
+import { FixedSizeList as List } from 'react-window';
 import propTypes from 'prop-types';
 
 import "./table.css"
@@ -10,35 +10,30 @@ import "./table.css"
 */ 
 class Table extends React.Component {
   render() {
-    const height = this.props.height | 200,
+    const height = this.props.height | 30,
     width = this.props.width | 300,
-    rows = this.props.rows,
-    rowHeight = this.props.rowHeight | 20,
-    columns = this.props.columns,
-    columnWidth = this.props.columnWidth | 100;
+    data = this.props.data,
+    itemSize = this.props.itemSize | 20;
   
-    const Cell = ({ columnIndex, rowIndex, style }) => {
-      let label;
-        label = `${rows[rowIndex]}, ${columns[columnIndex]}`;
+    const Row = ({ index, style }) => {
+      const row = Object.entries(data[index]);
       return (
-        <div className="list-item" style={style}>
-          {label}
-        </div>
+        <tr key={index} className="listRow">
+          {row.map((cell, index) => <td className="listCell" key={index}>{cell[1]}</td> )}
+        </tr>
       );
     }
   
     return (
       <Fragment>
-        <Grid
+        <List
           height={height}
           width={width}
-          columnCount={columns.length}
-          columnWidth={columnWidth}
-          rowCount={rows.length}
-          rowHeight={rowHeight}
+          itemCount={data.length}
+          itemSize={itemSize}
         >
-          {Cell}
-        </Grid>
+          {Row}
+        </List>
       </Fragment>
     );
   
@@ -48,10 +43,9 @@ class Table extends React.Component {
 Table.propTypes = {
   height: propTypes.number,
   width: propTypes.number,
-  rows: propTypes.array.isRequired,
-  colums: propTypes.array.isRequired,
-  columnWidth: propTypes.number,
-  rowHeight: propTypes.number
+  data: propTypes.array.isRequired,
+  itemSize: propTypes.number
+
 }
 
 export default Table;
