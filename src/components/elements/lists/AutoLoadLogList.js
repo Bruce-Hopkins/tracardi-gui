@@ -5,6 +5,8 @@ import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./AutoLoadLogList.css";
+import Table from "../table/table";
+
 
 const AutoLoadLogList = ({
                              label,
@@ -118,9 +120,8 @@ const AutoLoadLogList = ({
                     <CircularProgress size={20}/></div>}
                 scrollableTarget="MainWindowScroll"
             >
-                <table className="LogListTable">
-                    {renderRows(rows)}
-                </table>
+                <Table data={rows} height={500}/>
+
             </InfiniteScroll>
         </div>
     );

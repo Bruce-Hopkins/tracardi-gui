@@ -11,9 +11,8 @@ import "./table.css"
 class Table extends React.Component {
   render() {
     const height = this.props.height | 30,
-    width = this.props.width | 300,
     data = this.props.data,
-    itemSize = this.props.itemSize | 20;
+    itemSize = this.props.itemSize | 200;
   
     const Row = ({ index, style }) => {
       const row = Object.entries(data[index]);
@@ -28,8 +27,7 @@ class Table extends React.Component {
       <Fragment>
         <List
           height={height}
-          width={width}
-          itemCount={data.length}
+          itemCount={10}
           itemSize={itemSize}
         >
           {Row}
@@ -42,7 +40,6 @@ class Table extends React.Component {
 
 Table.propTypes = {
   height: propTypes.number,
-  width: propTypes.number,
   data: propTypes.array.isRequired,
   itemSize: propTypes.number
 
