@@ -260,10 +260,9 @@ export function SelectInput({value, values, label, errorMessage, items = [], err
     </TextField>
 }
 
-export function TextAreaInput({value, label, errorMessage, onChange = null}) {
+export function TextAreaInput({value, label, errorMessage, rows = 4, onChange = null}) {
 
     const [text, setText] = useState(value)
-
     const handleChange = (event) => {
         setText(event.target.value);
         event.preventDefault();
@@ -281,7 +280,7 @@ export function TextAreaInput({value, label, errorMessage, onChange = null}) {
                       variant="outlined"
                       multiline
                       fullWidth
-                      rows={4}
+                      rows={rows}
     />
 }
 
