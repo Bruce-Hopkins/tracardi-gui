@@ -2,7 +2,7 @@ import React from "react";
 import {BsXLg} from "react-icons/bs";
 import "./HOverX.css"
 
-export default function Tag({children, style, tip, backgroundColor = "#ccc", color = "#000"}) {
+export default function Tag({children, style, tip, backgroundColor = "#ccc", color = "#000", maxWidth=null}) {
     style = {
         backgroundColor,
         color,
@@ -12,8 +12,16 @@ export default function Tag({children, style, tip, backgroundColor = "#ccc", col
         fontSize: "90%",
         borderRadius: 5,
         marginRight: 5,
-        whiteSpace: "nowrap", ...style
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        ...style
     }
+
+    if(maxWidth) {
+        style = {...style, maxWidth}
+    }
+
     if (tip) {
         style = {...style, cursor: "help"}
     }
