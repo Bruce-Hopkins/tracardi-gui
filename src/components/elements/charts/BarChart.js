@@ -1,5 +1,5 @@
 import {BarChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Bar} from 'recharts';
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import "./Chart.css";
 import PropTypes from "prop-types";
@@ -7,6 +7,7 @@ import {useFetch} from "../../../remote_api/remoteState";
 import useTheme from "@mui/material/styles/useTheme";
 import Slider from "@mui/material/Slider";
 import DateRangeSlider from "../datepickers/DateRangeSlider";
+import {DataContext} from "../../AppBox";
 
 
 // todo onLoadRequest is a misleading name - it is an object with information on endpoint to call
@@ -14,6 +15,7 @@ import DateRangeSlider from "../datepickers/DateRangeSlider";
 export default function BarChartElement({onLoadRequest: endpoint, refreshInterval, barChartColors, rangeValue, onRangeChange}) {
 
     const theme = useTheme()
+    const context = useContext(DataContext);
 
     const [refresh, setRefresh] = React.useState(0);
     const [data, setData] = React.useState([]);
@@ -21,7 +23,7 @@ export default function BarChartElement({onLoadRequest: endpoint, refreshInterva
     const barColors = [theme.palette.primary.main, '#00C49F', '#FFBB28', '#FF8042']
 
     const {isLoading} = useFetch(
-        ["getChartData", [endpoint, refresh]],
+        ["getChartData", [endpoint, refresh, context]],
         endpoint,
         data => {
             setData(data)

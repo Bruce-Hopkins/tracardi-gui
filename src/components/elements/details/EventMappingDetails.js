@@ -71,14 +71,22 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
                 <PropertyField name="Event type Id"
                                content={<IconLabel value={data.event_type} icon={<FlowNodeIcons icon="event"/>}/>}/>
                 <PropertyField name="Name" content={data.name}/>
-                <PropertyField name="Description" content={data.description}/>
-
                 <PropertyField name="Tags"
                                content={<TuiTags tags={data.tags} size="small"/>}/>
                 <PropertyField name="Indexing enabled" underline={false}
                                content={<ActiveTag active={data.enabled}/>}/>
             </TuiFormGroupContent>
         </TuiFormGroup>}
+        <TuiFormGroup>
+
+            <TuiFormGroupHeader header="Event Description Template" description="Description template is used to describe what does particular event type and to create a summary of its data."/>
+            <TuiFormGroupContent>
+                {data.description ? data.description
+                    : <NoData header="No description template">
+                        <span style={{textAlign: "center"}}>This event type does not have description template.</span>
+                    </NoData>}
+            </TuiFormGroupContent>
+        </TuiFormGroup>
         <TuiFormGroup>
 
             <TuiFormGroupHeader header="Event Journey Mapping"/>
