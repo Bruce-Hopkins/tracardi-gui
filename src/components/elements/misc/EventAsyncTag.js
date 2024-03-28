@@ -4,7 +4,7 @@ import {capitalizeString} from "./EventTypeTag";
 
 export default function EventAsyncTag({event}) {
 
-    if(event?.config?.async === 'undefined') {
+    if(event?.config?.async === undefined) {
         return ""
     }
 

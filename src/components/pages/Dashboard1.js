@@ -62,7 +62,7 @@ function EventsByType() {
     if(isLoading) {
         return <CenteredCircularProgress/>
     }
-    console.log(data)
+
     if(data) {
         return <><LoadablePieChart header="No of events" subHeader="by type" loading={isLoading}
                                    data={data}
@@ -131,8 +131,6 @@ function Events() {
         <FormDrawer open={eventId!==null} onClose={()=>setEventId(null)}><EventDetailsById id={eventId}/></FormDrawer>
     </RevealContent>
 
-
-    return ""
 }
 
 function Profiles() {
@@ -165,9 +163,6 @@ function Profiles() {
         {renderRows(data)}
         <FormDrawer open={profileId!==null} onClose={()=>setProfileId(null)}><ProfileDetailsById id={profileId}/></FormDrawer>
     </RevealContent>
-
-
-    return ""
 }
 
 export default function Dashboard() {

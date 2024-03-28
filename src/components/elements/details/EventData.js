@@ -85,7 +85,7 @@ const EventApp = ({event}) => {
 const EventData = ({event, metadata, allowedDetails = [], routing=true}) => {
 
     const _theme = useTheme()
-    console.log(event, metadata)
+
     return <TuiForm style={{margin: 20}}>
         <TuiFormGroup>
             <TuiFormGroupHeader header="Event details"/>
