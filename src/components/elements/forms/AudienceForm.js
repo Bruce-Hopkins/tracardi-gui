@@ -79,6 +79,7 @@ function AudienceForm({value, errors, onSubmit}) {
         defaultValue: {
             name: "",
             description: "",
+            enabled: true,
             join: []
         },
         onSubmit

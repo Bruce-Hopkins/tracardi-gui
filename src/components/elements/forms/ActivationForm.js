@@ -15,6 +15,8 @@ import {JsonFormMemo} from "./JsonForm";
 import AudienceFetcherQuery from "./inputs/AudienceFetcherQuery";
 import {connect} from "react-redux";
 import {showAlert} from "../../../redux/reducers/alertSlice";
+import NoData from "../misc/NoData";
+import {VscServerProcess} from "react-icons/vsc";
 
 function ActivationForm({value, onSubmit, onActivate, errors}) {
 
@@ -28,6 +30,7 @@ function ActivationForm({value, onSubmit, onActivate, errors}) {
                 audience: {id: "", name: ""},
                 activation_type: {id: "", name: ""},
                 tags: [],
+                enabled: true,
                 config: {}
             },
             onSubmit
@@ -121,6 +124,7 @@ function ActivationForm({value, onSubmit, onActivate, errors}) {
 
 function ActivationFormById({activationId, onSubmit, showAlert}) {
 
+    const [isRunning, setIsRunning] = useState(false)
     const [errors, setErrors] = useState({})
     const {request} = useRequest()
     const {isLoading, data, error} = useFetch(
@@ -171,6 +175,10 @@ function ActivationFormById({activationId, onSubmit, showAlert}) {
         }
     }
 
+    const handleClose = () => {
+        if (onSubmit instanceof Function) onSubmit(data)
+    }
+
     const handleSubmitAndActivate = async (data) => {
         try {
             let response;
@@ -196,16 +204,24 @@ function ActivationFormById({activationId, onSubmit, showAlert}) {
                     data: payload
                 }, true)
 
-                console.log(response)
-
-                // if (onSubmit instanceof Function) onSubmit(data)
+                setIsRunning(true)
 
             }
         } catch (e) {
 
         }
 
+    }
 
+    if (isRunning) {
+        return <>
+            <NoData
+            header="Activation Started"
+            icon={<VscServerProcess size={50} style={{color: "rgba(128,128,128,.6)"}}/>}>
+                <div style={{marginBottom: 20}}>Activation is running as a background process. Check Monitoring/Background Tasks.</div>
+                <Button label="close" onClick={handleClose}/>
+            </NoData>
+        </>
     }
 
     return <ActivationForm value={data} onSubmit={handleSubmit} onActivate={handleSubmitAndActivate} errors={errors}/>

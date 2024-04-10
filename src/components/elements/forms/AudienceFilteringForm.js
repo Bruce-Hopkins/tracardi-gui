@@ -100,8 +100,8 @@ export default function AudienceFilteringForm({value, onChange, errors}) {
                     onChange={(v) => handleChange("group_by", v)}
                     form={AggregationForm}
                     defaultFormValue={{
-                        aggr: "sum",
-                        by_field: {value: "", ref: true},
+                        aggr: "value_count",
+                        by_field: {value: "type", ref: true},
                         save_as: ""
                     }}
                     width="auto"

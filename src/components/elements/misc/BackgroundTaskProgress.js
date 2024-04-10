@@ -2,6 +2,22 @@ import LinearProgress from "@mui/material/LinearProgress";
 import React, {useEffect, useState} from "react";
 import {getError} from "../../../remote_api/entrypoint";
 import {useRequest} from "../../../remote_api/requestClient";
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+
+const StyledTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+        backgroundColor: '#d81b60',
+        color: 'white',
+        fontSize: theme.typography.pxToRem(15),
+    },
+    [`& .${tooltipClasses.arrow}`]: {
+        color: '#d81b60',
+    },
+}));
+
 
 export default function BackgroundTaskProgress({taskId, refreshInterval = 5}) {
 
@@ -10,6 +26,10 @@ export default function BackgroundTaskProgress({taskId, refreshInterval = 5}) {
 
     const {request} = useRequest()
 
+    const clearUpdateInterval = (status) => {
+        return status === "finished" || status === "error"
+    }
+
     useEffect(() => {
         let timer;
 
@@ -17,7 +37,7 @@ export default function BackgroundTaskProgress({taskId, refreshInterval = 5}) {
             .then(response => {
                 setStatus(response.data);
                 setError(null);
-                if (response?.data?.status !== "running" || response?.data?.status !== "pending") {
+                if (clearUpdateInterval(response?.data?.status)) {
                     clearInterval(timer);
                 } else {
                     timer = setInterval(() => {
@@ -25,7 +45,7 @@ export default function BackgroundTaskProgress({taskId, refreshInterval = 5}) {
                             .then(response => {
                                 setStatus(response.data);
                                 setError(null);
-                                if (response?.data?.status !== "running" || response?.data?.status !== "pending") {
+                                if (clearUpdateInterval(response?.data?.status)) {
                                     clearInterval(timer);
                                 }
                             })
@@ -52,6 +72,10 @@ export default function BackgroundTaskProgress({taskId, refreshInterval = 5}) {
     const normalizeProgress = () => {
         let current = status?.progress ? status.progress : 0;
         return Math.floor(current);
+    }
+
+    if(status?.status === "error") {
+        return <StyledTooltip title={status?.message}><span>{status?.status.toUpperCase()}</span></StyledTooltip>
     }
 
     if (status?.progress) {
@@ -85,6 +109,8 @@ export default function BackgroundTaskProgress({taskId, refreshInterval = 5}) {
                 color="primary"
             /></>
     }
+
+
 
     return status?.status.toUpperCase() || <>Connecting...<LinearProgress color={"primary"}/></>
 
