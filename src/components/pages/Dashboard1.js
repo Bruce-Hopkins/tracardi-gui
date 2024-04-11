@@ -24,6 +24,10 @@ import FormDrawer from "../elements/drawers/FormDrawer";
 import {EventDetailsById} from "../elements/details/EventDetails";
 import {ProfileDetailsById} from "../elements/details/ProfileDetails";
 import RevealContent from "../elements/misc/RevealContent";
+import EventCounter from "../elements/metrics/EventCounter";
+import SessionCounter from "../elements/metrics/SessionCounter";
+import ProfileCounter from "../elements/metrics/ProfileCounter";
+import EntityCounter from "../elements/metrics/EntityCounter";
 
 const Item = styled(Paper)(({theme, style}) => ({
     ...theme.typography.body2,
@@ -171,6 +175,14 @@ export default function Dashboard() {
         <Grid container spacing={2}>
             <Grid container item xs={12} md={6} lg={3}>
                 <Item elevation={0} style={{padding: 20}}>
+                    <div style={{display: "flex", justifyContent: "space-between", flexWrap: "nowrap", flexDirection: "row"}}>
+                        <EventCounter width={200}/>
+                        <ProfileCounter width={200}/>
+                    </div>
+                    <div style={{display: "flex", justifyContent: "space-between", flexWrap: "nowrap", flexDirection: "row"}}>
+                        <SessionCounter width={200}/>
+                        <EntityCounter width={200}/>
+                    </div>
                     <EventsByType />
                 </Item>
             </Grid>
