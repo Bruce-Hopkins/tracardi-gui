@@ -143,8 +143,8 @@ function MainMenu({app, showAlert, changeRoute, onContextChange}) {
 
                 {/*{!window?.CONFIG?.menu?.routing?.disable && <MenuRow app={app} icon={<FaUncharted size={20}/>} label="Routing" collapsed={collapsed} onClick={go("/routing")} route="/routing" roles={["admin", "developer"]} style={{marginTop: 20}}/>}*/}
                 {/*{!window?.CONFIG?.menu?.metrics?.disable && <MenuRow app={app} icon={<VscDashboard size={20}/>} label="Metrics" collapsed={collapsed} onClick={go("/metrics")} route="/metrics" roles={["admin", "developer"]} />}*/}
-                {!window?.CONFIG?.menu?.reporting?.disable && <MenuRow app={app} icon={<BsBarChartFill size={20}/>} label="Reporting" collapsed={collapsed} onClick={go("/reporting")} route="/reporting" roles={["admin", "developer", "marketer"]} style={{marginTop: 20}}/>}
-                {!window?.CONFIG?.menu?.subscription?.disable && <MenuRow app={app} icon={<BsPersonLinesFill size={20}/>} label="Subscriptions" collapsed={collapsed} onClick={go("/subscription")} route="/subscription" roles={["admin", "developer", "marketer"]} />}
+                {!window?.CONFIG?.menu?.reporting?.disable && <MenuRow app={app} icon={<BsBarChartFill size={20}/>} label="Reporting" collapsed={collapsed} onClick={go("/reporting")} route="/reporting" roles={["admin", "developer"]} style={{marginTop: 20}}/>}
+                {!window?.CONFIG?.menu?.subscription?.disable && <MenuRow app={app} icon={<BsPersonLinesFill size={20}/>} label="Subscriptions" collapsed={collapsed} onClick={go("/subscription")} route="/subscription" roles={["admin", "developer"]} />}
 
                 {!window?.CONFIG?.menu?.resources?.disable && <MenuRow app={app} icon={<IoServerOutline size={20}/>} label="Resources" collapsed={collapsed} onClick={go("/resources")} route="/resources" roles={["admin", "developer"]} />}
 
