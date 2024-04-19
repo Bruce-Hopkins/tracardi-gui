@@ -88,9 +88,13 @@ function MainMenu({app, showAlert, changeRoute, onContextChange}) {
                 <b>DATA context: </b> {getDataContextHeader("unknown")} <br/>
                 <b>GUI: </b> mode: {envs.withDeployment}, updates on production: {envs.allowUpdatesOnProduction ? "yes" : "no"}<br/><br />
 
-                <b>Owner: </b> {response?.data?.owner}<br/>
-                <b>Licenses: </b>{response?.data?.licenses.join(", ")}<br/>
-                <b>Expires: </b>{response?.data?.expires}<br/><br />
+                <b>LICENSE:</b><br/>
+                {response?.data?.license?.id && <><b>License ID: </b> {response?.data?.license?.id}<br/></>}
+                {response?.data?.license?.owner && <><b>Owner: </b> {response?.data?.license?.owner}<br/></>}
+                {response?.data?.license?.company && <><b>Company: </b> {response?.data?.license?.company}<br/></>}
+                {response?.data?.license?.version && <><b>Licensed version: </b> {response?.data?.license?.version}<br/></>}
+                {response?.data?.license?.expires && <><b>Expires: </b>{response?.data?.license?.expires}<br/><br /></>}
+                {response?.data?.license?.services && <><b>Services: </b>{response?.data?.license?.services.join(", ")}<br/></>}
             </>
 
             confirm({title: "TRACARDI Version Information", description: message}).then(() => {}).catch(() => {})
