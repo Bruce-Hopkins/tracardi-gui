@@ -1,5 +1,5 @@
 import {
-    DisplayOnlyIfUpdatesAllowedOnProduction,
+    DisplayOnlyIfUpdatesAllowedOnProduction, DisplayOnlyInContext,
     RestrictToMode
 } from "../../../context/RestrictContext";
 import React from "react";
@@ -31,23 +31,31 @@ function DeployButton({id, data, running, draft, onDelete, onUnDeploy, onDeploy,
         }
     }
 
-    return <DisplayOnlyIfUpdatesAllowedOnProduction>
+    return <>
         {(process.env.NODE_ENV && process.env.NODE_ENV === 'development') && <DebugButton data={data}/>}
-        <RestrictToMode mode="with-deployment" forceMode={forceMode}>
 
-            <span className="flexLine" style={{marginLeft: 5, flexWrap: "nowrap"}}>
+        <DisplayOnlyInContext production={false}>
+            <RestrictToMode mode="with-deployment" forceMode={forceMode}>
+                <span className="flexLine" style={{marginLeft: 5, flexWrap: "nowrap"}}>
 
-                {draft && <DraftTag size={20} onClick={handleDeploy} onDeleteClick={handleDelete}/>}
+                    {draft && <DraftTag size={20} onClick={handleDeploy} onDeleteClick={handleDelete}/>}
 
-                {running && <RunningTag onDeleteClick={handleUndeploy}/>}
+                    {running && <RunningTag onDeleteClick={handleUndeploy}/>}
 
-            </span>
+                </span>
+            </RestrictToMode>
 
-        </RestrictToMode>
-        <RestrictToMode mode="no-deployment" forceMode={forceMode}>
-            <IconButton onClick={handleDelete}><BsTrash size={20} style={{margin: 5}}/></IconButton>
-        </RestrictToMode>
-    </DisplayOnlyIfUpdatesAllowedOnProduction>
+            <RestrictToMode mode="no-deployment" forceMode={forceMode}>
+                <IconButton onClick={handleDelete}><BsTrash size={20} style={{margin: 5}}/></IconButton>
+            </RestrictToMode>
+        </DisplayOnlyInContext>
+
+        <DisplayOnlyInContext production={true}>
+            <DisplayOnlyIfUpdatesAllowedOnProduction>
+                <IconButton onClick={handleDelete}><BsTrash size={20} style={{margin: 5}}/></IconButton>
+            </DisplayOnlyIfUpdatesAllowedOnProduction>
+        </DisplayOnlyInContext>
+    </>
 }
 
 function RunningTag({onClick,onDeleteClick}) {

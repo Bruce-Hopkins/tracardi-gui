@@ -23,11 +23,19 @@ export function RestrictToMode({children, mode = 'no-deployment', forceMode}) {
     return ""
 }
 
+export function DisplayOnlyInContext({children, production}) {
 
-export function DisplayOnlyIfUpdatesAllowedOnProduction({children}) {
     const productionContext = useContext(DataContext)
 
-    if (envs.allowUpdatesOnProduction === true && productionContext === false) {
+    if (productionContext === production) {
+        return children
+    }
+
+    return ""
+}
+
+export function DisplayOnlyIfUpdatesAllowedOnProduction({children}) {
+    if (envs.allowUpdatesOnProduction === true) {
         return children
     }
 
