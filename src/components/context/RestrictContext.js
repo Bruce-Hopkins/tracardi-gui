@@ -27,7 +27,7 @@ export function RestrictToMode({children, mode = 'no-deployment', forceMode}) {
 export function DisplayOnlyIfUpdatesAllowedOnProduction({children}) {
     const productionContext = useContext(DataContext)
 
-    if (envs.allowUpdatesOnProduction !== true && productionContext === false) {
+    if (envs.allowUpdatesOnProduction === true && productionContext === false) {
         return children
     }
 
