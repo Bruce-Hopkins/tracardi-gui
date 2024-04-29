@@ -42,3 +42,12 @@ export function DisplayOnlyIfUpdatesAllowedOnProduction({children}) {
     return ""
 }
 
+
+export function DisplayOnlyIf({children, condition}) {
+    if (condition) {
+        return children
+    }
+
+    return ""
+}
+

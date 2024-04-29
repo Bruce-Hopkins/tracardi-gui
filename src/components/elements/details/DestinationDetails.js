@@ -11,7 +11,16 @@ import DestinationForm from "../forms/DestinationForm";
 import { VscEdit, VscTrash } from "react-icons/vsc";
 import {useRequest} from "../../../remote_api/requestClient";
 import ProductionButton from "../forms/ProductionButton";
-
+import NoData from "../misc/NoData";
+import Tag from "../misc/Tag";
+import EventTypeMetadata from "./EventTypeMetadata";
+import PropertyField from "./PropertyField";
+import IconLabel from "../misc/IconLabels/IconLabel";
+import FlowNodeIcons from "../../flow/FlowNodeIcons";
+import TuiTags from "../tui/TuiTags";
+import ActiveTag from "../misc/ActiveTag";
+import {DisplayOnlyIf} from "../../context/RestrictContext";
+import {isNotEmptyArray} from "../../../misc/typeChecking";
 
 function DestinationDetails({id, onDelete, onEdit}) {
 
@@ -85,6 +94,53 @@ function DestinationDetails({id, onDelete, onEdit}) {
     return <>
         {loading && <CenteredCircularProgress/>}
         {!loading && <TuiForm style={{margin: 20}}>
+            <TuiFormGroup>
+                <TuiFormGroupContent>
+
+                    <PropertyField name="Name" content={data?.name}/>
+                    <PropertyField name="Description" content={data?.description}/>
+                    <DisplayOnlyIf condition={isNotEmptyArray(data?.tags)}>
+                        <PropertyField name="Tags"
+                                       content={<TuiTags tags={data?.tags}
+                                                         size="small"/>}/>
+                    </DisplayOnlyIf>
+                    <PropertyField name="Enabled"
+                                   content={<ActiveTag active={data?.enabled}/>}/>
+                    <PropertyField name="Trigger"
+                                   content={<Tag>{data?.on_profile_change_only ? "Trigger on profile change" : "Trigger every event"}</Tag>}/>
+                    <DisplayOnlyIf condition={data?.on_profile_change_only === false}>
+                        {data?.event_type?.name
+                            ? <PropertyField
+                                name="Event type"
+                                content={<IconLabel value={data?.event_type.name}
+                                                    icon={<FlowNodeIcons icon="event"/>}
+                                />}
+                            />
+                            : <PropertyField
+                                name="Event type"
+                                content={<IconLabel value={data?.event_type}
+                                                    icon={<FlowNodeIcons icon="event"/>}
+                                />}
+                            />}
+                    </DisplayOnlyIf>
+
+                </TuiFormGroupContent>
+            </TuiFormGroup>
+            <TuiFormGroup>
+                <TuiFormGroupHeader header="Destination Class"/>
+                <TuiFormGroupContent>
+                    <Tag>{data?.destination?.package}</Tag>
+                </TuiFormGroupContent>
+            </TuiFormGroup>
+
+            <TuiFormGroup>
+                <TuiFormGroupHeader header="Conditional triggering"
+                                    description="This destination will be triggered only if this condition is met."/>
+
+                <TuiFormGroupContent>
+                    {data?.condition ? data?.condition : <NoData header="No conditional triggering">This destination will be triggered without additional conditions.</NoData>}
+                </TuiFormGroupContent>
+            </TuiFormGroup>
             <TuiFormGroup>
                 <TuiFormGroupHeader header={data?.name}/>
                 <TuiFormGroupContent>
