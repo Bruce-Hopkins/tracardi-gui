@@ -54,7 +54,7 @@ export default function CommitFrom({value, onClose, onLoad}) {
     function sanitizeString(str) {
         return str
             // Remove all non-alphanumeric characters except spaces
-            .replace(/[^a-zA-Z0-9 ]/g, '')
+            .replace(/[^a-zA-Z0-9 _-]/g, '')
             .trim()
             // Replace spaces with hyphens
             .replace(/\s+/g, '-')
