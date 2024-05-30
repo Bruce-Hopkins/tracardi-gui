@@ -43,7 +43,7 @@ export default function DateValue({date: dateString, fallback, style}) {
 
     return <span className="flexLine" style={{...style, cursor: "pointer"}} onClick={handleTimeChange}>
         {local ? <BsClock size={20}/> : <BsGlobe size={20}/>}
-        <span style={{margin: 5, marginRight: 10}}>{date.date || '<empty>'}</span> <TimeDifference date={date.isoDate}/>
+        <span style={{margin: 5, marginRight: 10}}>{date.date || '<n/a>'}</span> <TimeDifference date={date.isoDate}/>
         </span>
 }
 

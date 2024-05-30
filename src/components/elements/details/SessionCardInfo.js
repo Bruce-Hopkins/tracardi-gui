@@ -20,9 +20,13 @@ export default function SessionCardInfo({session, displayContext=true}) {
             name="Channel"
             content={session?.metadata?.channel}/>}
 
-        <PropertyField labelWidth={labelWidth} name="Created"
-                       content={<DateValue date={session?.metadata?.time?.create}/>
-                       }/>
+         <PropertyField labelWidth={labelWidth} name="Created"
+                        content={<DateValue date={session?.metadata?.time?.create}/>
+                        }/>
+
+         <PropertyField labelWidth={labelWidth} name="Inserted"
+                        content={<DateValue date={session?.metadata?.time?.insert}/>
+                        }/>
 
         {session?.utm?.source && <PropertyField
             labelWidth={labelWidth}
