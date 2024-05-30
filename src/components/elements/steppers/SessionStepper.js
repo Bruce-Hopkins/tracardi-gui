@@ -85,11 +85,11 @@ export default function SessionStepper({session, profileId, onEventSelect}) {
     return <div className="SessionStepper">
 
         {session && <div className="Header">
-            Session starting {session?.metadata?.time?.insert && <DateValue date={session?.metadata?.time?.insert} />}
+            Session starting {session?.metadata?.time?.create && <DateValue date={session?.metadata?.time?.create} />}
             </div>}
         {Array.isArray(eventsData) && eventsData.length > 0 && <Stepper
             orientation="vertical"
-            connector={<div className="StepConnector"/>}
+            connector={<div className="StepConnector" style={{marginLeft: 324}}/>}
         >
             {
                 eventsData.map(event => (
@@ -102,8 +102,8 @@ export default function SessionStepper({session, profileId, onEventSelect}) {
                             alignSelf: "center",
                             paddingLeft: 8,
                             paddingRight: 8,
-                            width: 300
-                        }}><DateValue date={event?.metadata?.time?.insert}/></div>
+                            width: 320
+                        }}><DateValue date={event?.metadata?.time?.create} fallback={event?.metadata?.time?.insert}/></div>
                         <StepLabel
                             StepIconComponent={() => stepIconComponent(event)}
                         >

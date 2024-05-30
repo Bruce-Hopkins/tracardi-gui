@@ -28,14 +28,18 @@ function getDate(local, dateString) {
     return {date, isoDate: iso_date}
 }
 
-export default function DateValue({date: dateString, style}) {
+export default function DateValue({date: dateString, fallback, style}) {
 
     const [local, setLocal] = useState(true)
 
     const handleTimeChange = () => {
         setLocal(!local)
     }
-    const date = getDate(local, dateString)
+    let date = getDate(local, dateString)
+
+    if(!date.date && fallback) {
+        date = getDate(local, fallback)
+    }
 
     return <span className="flexLine" style={{...style, cursor: "pointer"}} onClick={handleTimeChange}>
         {local ? <BsClock size={20}/> : <BsGlobe size={20}/>}

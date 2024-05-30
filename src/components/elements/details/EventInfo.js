@@ -57,6 +57,9 @@ const EventDataDetails = ({event, metadata, allowedDetails = []}) => {
                 {metadata?.index && <PropertyField name="Index" content={metadata.index}/>}
                 <PropertyField name="Type"
                                content={<EventTypeTag event={event} />}/>
+                {event?.metadata?.time?.create && <PropertyField name="Create time"
+                               content={<DateValue date={event?.metadata?.time?.create}/>}
+                />}
                 <PropertyField name="Insert time"
                                content={<DateValue date={event?.metadata?.time?.insert}/>}
                 />
