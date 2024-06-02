@@ -201,8 +201,6 @@ export default function Dashboard() {
                     <Events />
                 </Item>
             </Grid>
-
         </Grid>
-
     </div>
 }
