@@ -44,7 +44,5 @@ export default function EntityCounter({width=200}) {
         return <CenteredCircularProgress />
     }
 
-    return <div>
-        <Counter label="Entities" value={value} width={width} hint="Stored"/>
-    </div>
+    return <Counter label="Entities" value={value} width={width} hint="Stored"/>
 }
