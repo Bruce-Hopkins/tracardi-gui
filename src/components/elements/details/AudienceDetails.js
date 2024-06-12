@@ -74,6 +74,34 @@ export function AudienceDetailsById({audienceId}) {
     </div>
 }
 
+function AudienceEstimate({label, total}) {
+    return <Counter label={label}
+                    width={200}
+                    margin={0}
+                    value={total}
+    />
+}
+
+function getCounter(data) {
+    if(data?.estimate) {
+
+        let _value;
+        if(data?.min!==null && data?.max!==null) {
+            _value = `${abbreviateNumber(data?.min)}-${abbreviateNumber(data?.max)}`
+        } else if (data?.min===null && data?.max===null) {
+            _value = "Max Profiles"
+        } else if (data?.min!==null && data?.max===null) {
+            _value = `${abbreviateNumber(data?.min)}-Max`
+        } else if (data?.min===null && data?.max!==null) {
+            _value = `0-${abbreviateNumber(data?.max)}`
+        }
+
+        return <AudienceEstimate label="Audience Estimate" total={_value}/>
+    } else {
+        return <AudienceCounter label="Audience Count" total={data?.total}/>
+    }
+}
+
 export default function AudienceDetails({audience}) {
     const {isLoading, data, error} = useFetch(
         [`ComputeAudience-${audience?.name}`, [audience]],
@@ -93,7 +121,7 @@ export default function AudienceDetails({audience}) {
 
     return <>
         <div style={{padding: 30}}>
-            <AudienceCounter total={data?.total}/>
+            {getCounter(data)}
         </div>
         <Tabs tabs={["Audience Sample", "Queries"]}>
             <TabCase id={0}>
