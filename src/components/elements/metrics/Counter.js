@@ -9,7 +9,7 @@ export default function Counter({label, value, subValue, subValueSuffix = "", wi
             justifyContent: "center",
             fontSize: "250%",
             fontWeight: 600
-        }}>{abbreviateNumber(value)}</div>
+        }}>{typeof value === "string" ? value : abbreviateNumber(value)}</div>
         <div style={{textAlign: "center"}}>{subValue && round(subValue,3)} {subValueSuffix}</div>
         {hint && <div style={{ textAlign: "center"}}>{hint}</div>}
     </div>
