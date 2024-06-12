@@ -13,7 +13,7 @@ import {Paper} from "@mui/material";
 import {getEventsCount} from "../../../remote_api/endpoints/event";
 import {abbreviateNumber, toPercentage} from "../../../misc/converters";
 
-function AudienceCounter({total}) {
+function AudienceCounter({label, total}) {
     const {isLoading, data: eventCount, error} = useFetch(
         ['eventCount', []],
         getEventsCount(),
@@ -23,7 +23,7 @@ function AudienceCounter({total}) {
         {retry: 0})
 
     if(isLoading) {
-        return <Counter label="Audience Count"
+        return <Counter label={label}
                         width={200}
                         margin={0}
                         value={total ? total : "unknown"}
@@ -31,7 +31,7 @@ function AudienceCounter({total}) {
         />
     }
 
-    return <Counter label="Audience Count"
+    return <Counter label={label}
                     width={200}
                     margin={0}
                     value={total}
