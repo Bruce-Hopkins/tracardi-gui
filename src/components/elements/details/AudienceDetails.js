@@ -89,9 +89,9 @@ function getCounter(data) {
         if(data?.min!==null && data?.max!==null) {
             _value = `${abbreviateNumber(data?.min)}-${abbreviateNumber(data?.max)}`
         } else if (data?.min===null && data?.max===null) {
-            _value = "Max Profiles"
+            _value = "All Profiles"
         } else if (data?.min!==null && data?.max===null) {
-            _value = `${abbreviateNumber(data?.min)}-Max`
+            _value = `${abbreviateNumber(data?.min)}-All`
         } else if (data?.min===null && data?.max!==null) {
             _value = `0-${abbreviateNumber(data?.max)}`
         }
