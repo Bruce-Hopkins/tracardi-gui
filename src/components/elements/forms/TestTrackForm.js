@@ -47,64 +47,62 @@ export default function TestTrackForm({testId, onSave, sxOnly = false}) {
     }
 
     const exampleContext = {
-        "context": {
-            "time": {
-                "local": "2024-02-15T00:07:03.364Z",
-                "tz": "Europe/Warsaw"
-            },
-            "device": {
-                "gpu": {
-                    "vendor": {
-                        "id": 37445,
-                        "name": "NVIDIA Corporation"
-                    },
-                    "renderer": {
-                        "id": 37446,
-                        "renderer": "NVIDIA GeForce GTX 980/PCIe/SSE2"
-                    }
-                }
-            },
-            "browser": {
-                "local": {
-                    "browser": {
-                        "name": "firefox",
-                        "engine": "Gecko",
-                        "appVersion": "5.0 (X11)",
-                        "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0",
-                        "language": "en-US",
-                        "onLine": true,
-                        "javaEnabled": false,
-                        "cookieEnabled": true
-                    },
-                    "device": {
-                        "platform": "Linux x86_64"
-                    }
-                }
-            },
-            "screen": {
-                "local": {
-                    "width": 2133,
-                    "height": 1200,
-                    "innerWidth": 2133,
-                    "innerHeight": 710,
-                    "availWidth": 2133,
-                    "availHeight": 1178,
-                    "colorDepth": 24,
-                    "pixelDepth": 24,
-                    "orientation": "landscape-primary"
-                }
-            },
-            "location": {
-                "country": {
-                    "name": "Poland",
-                    "code": "PL"
+        "time": {
+            "local": "2024-02-15T00:07:03.364Z",
+            "tz": "Europe/Warsaw"
+        },
+        "device": {
+            "gpu": {
+                "vendor": {
+                    "id": 37445,
+                    "name": "NVIDIA Corporation"
                 },
-                "city": "Warsaw",
-                "county": "Mazovia",
-                "latitude": 52.1349,
-                "longitude": 18.1894,
-                "ip": "45.1.25.6"
+                "renderer": {
+                    "id": 37446,
+                    "renderer": "NVIDIA GeForce GTX 980/PCIe/SSE2"
+                }
             }
+        },
+        "browser": {
+            "local": {
+                "browser": {
+                    "name": "firefox",
+                    "engine": "Gecko",
+                    "appVersion": "5.0 (X11)",
+                    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0",
+                    "language": "en-US",
+                    "onLine": true,
+                    "javaEnabled": false,
+                    "cookieEnabled": true
+                },
+                "device": {
+                    "platform": "Linux x86_64"
+                }
+            }
+        },
+        "screen": {
+            "local": {
+                "width": 2133,
+                "height": 1200,
+                "innerWidth": 2133,
+                "innerHeight": 710,
+                "availWidth": 2133,
+                "availHeight": 1178,
+                "colorDepth": 24,
+                "pixelDepth": 24,
+                "orientation": "landscape-primary"
+            }
+        },
+        "location": {
+            "country": {
+                "name": "Poland",
+                "code": "PL"
+            },
+            "city": "Warsaw",
+            "county": "Mazovia",
+            "latitude": 52.1349,
+            "longitude": 18.1894,
+            "ip": "45.1.25.6"
         }
     }
 
