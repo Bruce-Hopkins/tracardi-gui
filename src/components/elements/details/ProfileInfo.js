@@ -66,7 +66,7 @@ export const ProfileData = ({profile}) => {
             <fieldset style={{marginBottom: 20}}>
                 <legend style={{fontSize: 13}}>Profile metadata</legend>
                 <PropertyField name="Primary Id" content={<IdLabel label={profile?.primary_id || <Tag>None</Tag>}/>}/>
-                <PropertyField name="Anonymous Id" content={<IdLabel label={profile.id}/>}/>
+                <PropertyField name="Client Id" content={<IdLabel label={profile.id}/>}/>
                 {profile?.metadata?.time?.create &&
                 <PropertyField name="Created" content={<DateValue date={profile?.metadata?.time?.create}/>}/>}
                 {profile?.metadata?.time?.insert &&
