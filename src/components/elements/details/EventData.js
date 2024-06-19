@@ -150,28 +150,28 @@ const EventData = ({event, metadata, allowedDetails = [], routing=true}) => {
         </ShowHide>
 
         <TuiFormGroup>
-            <Tabs tabs={["Data", "Traits", "Properties", "UTM"]} tabsStyle={{backgroundColor: _theme.palette.background.paper}}>
+            <Tabs tabs={["Properties", "Traits", "Data", "UTM"]} tabsStyle={{backgroundColor: _theme.palette.background.paper}}>
                 <TabCase id={0}>
                     <section style={{margin: 20}}>
-                        {!isEmptyObjectOrNull(event?.data) ? <EventDataTable event={event}/> :
-                            <NoData header="No indexed data">
-                                This event does not have any indexed data.
+                        {!isEmptyObjectOrNull(event?.properties) ? <EventProperties event={event}/>:
+                            <NoData header="No properties">
+                                This event does not have any properties.
                             </NoData>}
                     </section>
                 </TabCase>
                 <TabCase id={1}>
                     <section style={{margin: 20}}>
-                    {!isEmptyObjectOrNull(event?.traits) ? <EventTraits event={event}/> :
-                        <NoData header="No traits">
-                            This event does not have any traits.
-                        </NoData>}
+                        {!isEmptyObjectOrNull(event?.traits) ? <EventTraits event={event}/> :
+                            <NoData header="No traits">
+                                This event does not have any traits.
+                            </NoData>}
                     </section>
                 </TabCase>
                 <TabCase id={2}>
                     <section style={{margin: 20}}>
-                        {!isEmptyObjectOrNull(event?.properties) ? <EventProperties event={event}/>:
-                            <NoData header="No properties">
-                                This event does not have any properties.
+                        {!isEmptyObjectOrNull(event?.data) ? <EventDataTable event={event}/> :
+                            <NoData header="No indexed data">
+                                This event does not have any indexed data.
                             </NoData>}
                     </section>
                 </TabCase>
