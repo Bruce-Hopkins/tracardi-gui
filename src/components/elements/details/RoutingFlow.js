@@ -282,17 +282,18 @@ const RoutingFlow = ({event}) => {
                              addFormProps={{event_type: event.type}}
                              passData={true}
                 />
-                <ProcessStep step={"6"}
-                             label="Workflow"
-                             optional="Does the event trigger any workflow?"
-                             endpoint={{url: `/rules/by_event_type/${event.type}`}}
-                             nodata="This event does not trigger any to workflow"
-                             passData={true}
-                             details={PreviewFlow}
-                             add={RuleForm}
-                             addFormProps={{data:{event_type: {id: event.type, name: event.type}}}}
+                {window._env_.SERVER?.ENABLE_WORKFLOW !== false && <ProcessStep step={"6"}
+                                                                      label="Workflow"
+                                                                      optional="Does the event trigger any workflow?"
+                                                                      endpoint={{url: `/rules/by_event_type/${event.type}`}}
+                                                                      nodata="This event does not trigger any to workflow"
+                                                                      passData={true}
+                                                                      details={PreviewFlow}
+                                                                      add={RuleForm}
+                                                                      addFormProps={{data:{event_type: {id: event.type, name: event.type}}}}
 
-                />
+                />}
+
             </Stepper>
         </Box>)
 }

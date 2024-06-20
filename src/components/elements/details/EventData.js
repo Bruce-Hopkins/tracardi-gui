@@ -13,7 +13,6 @@ import DateValue from "../misc/DateValue";
 import EventWarnings from "../misc/EventWarnings";
 import EventErrorTag from "../misc/EventErrorTag";
 import NoData from "../misc/NoData";
-import TuiWorkflowTags from "../tui/TuiWorkflowTags";
 import Tabs, {TabCase} from "../tabs/Tabs";
 import useTheme from "@mui/material/styles/useTheme";
 import EventTypeTag from "../misc/EventTypeTag";

@@ -14,6 +14,7 @@ const Installer = ({children}) => {
         ["installStatus", [installed]],
         getInstallStatus(),
         data => {
+            window._env_.SERVER = data?.config
             return data
         },
         {

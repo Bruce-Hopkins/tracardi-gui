@@ -191,8 +191,8 @@ export function EventRow({row, filterFields}) {
                 </div>
                 <div style={{display: "flex"}}>
                     <Button label="Json" size="small" icon={<VscJson size={20}/>} onClick={() => handleJsonClick(row)}/>
-                    <Button label="Debug" size="small" icon={<VscDebug size={20}/>}
-                            onClick={() => handleDebugClick(true)}/>
+                    {window._env_.SERVER?.ENABLE_WORKFLOW !== false && <Button label="Debug" size="small" icon={<VscDebug size={20}/>}
+                                                                     onClick={() => handleDebugClick(true)}/>}
 
                 </div>
             </div>
