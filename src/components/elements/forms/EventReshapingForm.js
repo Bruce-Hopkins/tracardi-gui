@@ -195,7 +195,7 @@ export default function EventReshapingForm({onSubmit, init}) {
                     Reshaping is the process of changing the data schema. Track payload is the data that arrives at the
                     event collector and it can be filtered, and split into different parts. To do this, use an object
                     template, which creates a new schema where you can reference data from the raw payload. <DocsLink
-                    src="http://docs.tracardi.com/getting_started/codings/object_template/"> Do you need help with object templates? </DocsLink>
+                    src="http://manual.tracardi.com/getting_started/codings/object_template/"> Do you need help with object templates? </DocsLink>
                 </span>}>
                     <fieldset>
                         <legend>Reshaping</legend>

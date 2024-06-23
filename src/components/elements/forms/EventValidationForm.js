@@ -163,7 +163,7 @@ export default function EventValidationForm({onSubmit, init}) {
                     />
                 </TuiFormGroupField>
                 <TuiFormGroupField header="Validation schema" description={<>
-                    {"Set validation schema. More on JsonSchema validation"} <DocsLink label="label" src="http://docs.tracardi.com/getting_started/codings/event_validation/"> in documentation </DocsLink> </>}>
+                    {"Set validation schema. More on JsonSchema validation"} <DocsLink label="label" src="http://manual.tracardi.com/getting_started/codings/event_validation/"> in documentation </DocsLink> </>}>
                     <fieldset style={{marginTop: 10}}>
                         <legend>Schema</legend>
                         <JsonEditor value={jsonSchema} onChange={(value) => setJsonSchema(value)} autocomplete={true}/>

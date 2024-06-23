@@ -199,7 +199,7 @@ export default function EventRedirectForm({
                                    description={<>
                                    <span>Type properties of the event. This object will be sent as event properties.
                                        Use object template to reference data. </span><DocsLink
-                                       src="http://docs.tracardi.com/getting_started/codings/object_template/"> Do you need
+                                       src="http://manual.tracardi.com/getting_started/codings/object_template/"> Do you need
                                        help? </DocsLink>
                                    </>}>
 

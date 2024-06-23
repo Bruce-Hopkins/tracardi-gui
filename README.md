@@ -2,7 +2,7 @@
 
   <p align="center">
    <br/>
-    <a href="https://docs.tracardi.com" rel="dofollow"><strong>Explore Tracardi Documentation</strong></a> ·
+    <a href="https://manual.tracardi.com" rel="dofollow"><strong>Explore Tracardi Documentation</strong></a> ·
     <a href="https://opencollective.com/tracardi-cdp">⭐️ Support the project</a> ·
     <a href="https://join.slack.com/t/tracardi/shared_invite/zt-1bpf35skl-8Fr5FX5a6cji7tX18JNNDA">👨‍💻 Join community</a> ·
     <a href="https://bit.ly/3pbdbPR">:tv: Watch tutorials on YOUTUBE</a>
@@ -76,7 +76,7 @@ Visit http://127.0.0.1:8787 and complete installation in Tracardi GUI.
 
 ## 👇 Other types of installation
 
-There are other types of installation. All are described in detail in our [documentation](http://docs.tracardi.com/installation/). 
+There are other types of installation. All are described in detail in our [documentation](http://manual.tracardi.com/installation/). 
 
 ## 👇 Need help ?
 
@@ -101,7 +101,7 @@ There are other types of installation. All are described in detail in our [docum
 
 ## 👇 Documentation
 
-* System documentation is available at: [http://docs.tracardi.com](http://docs.tracardi.com).
+* System documentation is available at: [http://manual.tracardi.com](http://manual.tracardi.com).
 * Api documentation is always available after installation at http://127.0.0.1:8686/docs.
 * Tracardi has also build-in documentation into the system.
 

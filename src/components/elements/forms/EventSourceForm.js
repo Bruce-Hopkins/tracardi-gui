@@ -181,7 +181,7 @@ const EventSourceDescriptionForm = ({value: _value, style, errorNameMessage, onC
 
                 <TuiFormGroupField header="Name" description={<>
                     <span>Event source name can be any string that identifies Event source. </span>
-                    <DocsLink src="http://docs.tracardi.com/getting_started/components/event_source/">Would you like to learn
+                    <DocsLink src="http://manual.tracardi.com/getting_started/components/event_source/">Would you like to learn
                         more?</DocsLink>
                 </>}>
                     <TextField

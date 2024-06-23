@@ -89,7 +89,7 @@ const JavascriptDetails = ({data}) => {
                                     description={
                                         <>
                                             <span>Please paste this code into your web page. This code should appear on every page.</span>
-                                            <DocsLink src="http://docs.tracardi.com/getting_started/processes/integration/js/">Do you
+                                            <DocsLink src="http://manual.tracardi.com/getting_started/processes/integration/js/">Do you
                                                 need help?</DocsLink>
                                         </>
                                     }/>
@@ -133,7 +133,7 @@ const JavascriptDetails = ({data}) => {
                         and <b>event-type</b> inside URL should be
                         replaced with the event type you would like to emit. Please refer to the documentation to see
                         what are profile less events as calling this web hook will emit one of them.
-                        <DocsLink src="http://docs.tracardi.com/getting_started/processes/integration/webhook/">Webhook event documentation</DocsLink>
+                        <DocsLink src="http://manual.tracardi.com/getting_started/processes/integration/webhook/">Webhook event documentation</DocsLink>
                     </p>
 
                     <TextField
