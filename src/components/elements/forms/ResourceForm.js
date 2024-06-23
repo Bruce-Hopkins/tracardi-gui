@@ -292,7 +292,7 @@ function ResourceForm({init, onClose, showAlert}) {
             <TuiFormGroup style={{marginTop: 20}}>
                 <TuiFormGroupHeader header="Resource configuration help"/>
                 <TuiFormGroupContent>
-                    <MdManual mdFile={docPath} basePath="/manual/en/docs/resources/" />
+                    <MdManual mdFile={docPath} basePath="/manual/en/docs/getting_started/components/resources/" />
                 </TuiFormGroupContent>
             </TuiFormGroup>
         }

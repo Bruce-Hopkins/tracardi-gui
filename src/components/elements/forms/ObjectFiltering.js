@@ -39,7 +39,7 @@ export default function ObjectFiltering({type, where, onFilterClick, initRefresh
                                   onRefreshChange={onRefreshChange}
 
             />
-            <div style={{fontSize: 12}}>Do not know how to filter. Click <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={external("http://docs.tracardi.com/running/filtering/", true)}>here</span> for information.</div>
+            <div style={{fontSize: 12}}>Do not know how to filter. Click <span style={{textDecoration: "underline", cursor: "pointer"}} onClick={external("http://docs.tracardi.com/getting_started/codings/search/searchng_after_082/", true)}>here</span> for information.</div>
         </div>
         <div className="Action">
             <Button label="Filter"

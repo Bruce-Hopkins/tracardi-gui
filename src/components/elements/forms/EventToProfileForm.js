@@ -188,7 +188,7 @@ export default function EventToProfileForm({
                     <TuiFormGroupField header="Trigger condition" description={
                         <span>Set additional condition that must be met to start data coping. You may leave this field empty
                             if all the events must be processed.
-                        <DocsLink src="http://docs.tracardi.com/notations/logic_notation/"> How to write a
+                        <DocsLink src="http://docs.tracardi.com/getting_started/codings/logic_notation/"> How to write a
                             condition </DocsLink></span>
                     }>
                         <TextField

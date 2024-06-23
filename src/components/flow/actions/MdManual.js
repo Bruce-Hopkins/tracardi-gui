@@ -4,7 +4,7 @@ import "./MdManual.css";
 import CenteredCircularProgress from "../../elements/progress/CenteredCircularProgress";
 import {useRequest} from "../../../remote_api/requestClient";
 
-const MdManual = ({mdFile, basePath='/manual/en/docs/flow/actions/', baseURL = null, style=null}) => {
+const MdManual = ({mdFile, basePath='/manual/en/docs/getting_started/processes/workflow/actions/', baseURL = null, style=null}) => {
 
     const [page,setPage] = useState('');
     const [loading, setLoading] = useState(false);
