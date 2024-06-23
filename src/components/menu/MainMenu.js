@@ -81,7 +81,7 @@ function MainMenu({app, showAlert, changeRoute, onContextChange}) {
             const message = <>
 
                 <b>Frontend Version:</b> {version()}<br/>
-                <b>Backend Version: </b> {response?.data?.version}.{response?.data?.name} {response?.data?.version && `(tag: ${response?.data?.version})`}<br/>
+                <b>Backend Version: </b> {response?.data?.version}.{response?.data?.name} {response?.data?.tag && `(tag: ${response?.data?.tag})`}<br/>
                 <b>DB Version: </b> {response?.data?.db_version}<br/>
                 <b>API context: </b> {response?.data?.production ? "public": "private"}<br/>
                 <b>API instance ID: </b> {response?.data?.instance}<br/>
