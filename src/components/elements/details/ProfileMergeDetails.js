@@ -23,7 +23,7 @@ export function ProfileMergePendingDetails({ id }) {
 }
 
 export default function ProfileMergeDetails({profile}) {
-    if(profile?.metadata?.system?.aux?.auto_merge) {
+    if(Array.isArray(profile?.metadata?.system?.aux?.auto_merge) && profile?.metadata?.system?.aux?.auto_merge.length > 0) {
         return <ProfileMergePendingDetails id={profile?.id}/>
     }
     return <EventStatusTag label="Merged"
