@@ -28,7 +28,7 @@ const SessionContextData = ({sessionId}) => {
         return <FetchError error={error}/>
     }
 
-    return <div style={{padding: 20, width: 540, overflowY: "auto"}}>
+    return <div style={{padding: 20, width: 520, overflowY: "auto"}}>
         <ObjectInspector data={data.context} theme={theme} expandLevel={4}/>
     </div>
 }

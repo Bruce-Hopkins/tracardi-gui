@@ -60,6 +60,10 @@ export const ProfileData = ({profile}) => {
     const media = object2dot(profile?.data?.media, true)
     const geo = object2dot(profile?.data?.devices?.last?.geo, true)
     const contact = object2dot(profile?.data?.contact, true);
+    const job = object2dot(profile?.data?.job, true);
+    const loyalty = object2dot(profile?.data?.loyalty, true);
+    const identifier = object2dot(profile?.data?.identifier, true);
+
 
     return <Grid container spacing={2} style={{padding: 20}}>
         <Grid item xs={6}>
@@ -192,37 +196,40 @@ export const ProfileData = ({profile}) => {
 
             </div>
             <div style={{borderRadius: 5, border: "solid 1px rgba(128,128,128,0.5)", marginTop: 20}}>
-                <Tabs tabs={["Segments", "Interests", "Preferences", "Metrics"]}
+                <Tabs tabs={["Segment Tags", "Interests", "Preferences"]}
                       tabsStyle={{backgroundColor: _theme.palette.background.paper}}>
                     <TabCase id={0}>
                         <div className="ProfileInfoTab">
                             {isNotEmptyArray(profile?.segments)
                                 ? <div className="flexLine" style={{gap: 5}}><TuiTags tags={profile?.segments}/></div>
-                                : <NoData header="No Segments"/>}
+                                : <NoData header="No Segment Tags"/>}
                         </div>
                     </TabCase>
                     <TabCase id={1}>
                         <div className="ProfileInfoTab">
                             {!isEmptyObjectOrNull(profile?.interests)
-                                ? Object.keys(profile?.interests).map(key => <PropertyField key={key}
-                                                                                            name={key}
-                                                                                            content={profile?.interests[key]}/>)
+                                ? Object.keys(profile?.interests).map(key => <PropertyField
+                                    key={key}
+                                    name={key}
+                                    content={profile?.interests[key]}
+                                    field={`interests.${key}`}
+                                    metadata={profile?.metadata?.fields[`interests.${key}`]}
+                                />)
                                 : <NoData header="No Interests"/>}
                         </div>
                     </TabCase>
                     <TabCase id={2}>
                         <div className="ProfileInfoTab">
                             {!isEmptyObjectOrNull(profile?.data?.preferences)
-                                ? Object.keys(profile?.data?.preferences).map(key => <PropertyField key={key}
-                                                                                                    name={key}
-                                                                                                    content={profile?.data?.preferences[key]}/>)
+                                ? Object.keys(profile?.data?.preferences).map(key => <PropertyField
+                                    key={key}
+                                    name={key}
+                                    content={profile?.data?.preferences[key]}
+                                    field={`data.preferences.${key}`}
+                                    metadata={profile?.metadata?.fields[`data.preferences.${key}`]}
+                                />)
                                 : <NoData header="No Preferences"/>}
 
-                        </div>
-                    </TabCase>
-                    <TabCase id={3}>
-                        <div className="ProfileInfoTab">
-                            <Properties properties={profile?.data?.metrics}/>
                         </div>
                     </TabCase>
                 </Tabs>
@@ -232,24 +239,44 @@ export const ProfileData = ({profile}) => {
                       tabsStyle={{backgroundColor: _theme.palette.background.paper}}>
                     <TabCase id={0}>
                         <div className="ProfileInfoTab">
-                            {!isEmptyObjectOrNull(profile?.data?.job)
-                                ? <Properties properties={profile?.data?.job}/>
-                                : <NoData header="No Job Data"/>}
+                            {!isEmptyObjectOrNull(job)
+                                ? Object.keys(job).map(key => <PropertyField
+                                    key={key}
+                                    name={key}
+                                    content={job[key]}
+                                    field={`data.job.${key}`}
+                                    metadata={profile?.metadata?.fields[`data.job.${key}`]}
+                                />)
+                                : <NoData header="No Job Data"/>
+                            }
                         </div>
                     </TabCase>
                     <TabCase id={1}>
                         <div className="ProfileInfoTab">
-                            {!isEmptyObjectOrNull(profile?.data?.loyalty)
-                                ? <Properties properties={profile?.data?.loyalty}/>
-                                : <NoData header="No Loyalty Data"/>}
+                            {!isEmptyObjectOrNull(loyalty)
+                                ? Object.keys(loyalty).map(key => <PropertyField
+                                    key={key}
+                                    name={key}
+                                    content={loyalty[key]}
+                                    field={`data.loyalty.${key}`}
+                                    metadata={profile?.metadata?.fields[`data.loyalty.${key}`]}
+                                />)
+                                : <NoData header="No Loyalty Data"/>
+                            }
                         </div>
                     </TabCase>
                     <TabCase id={2}>
                         <div className="ProfileInfoTab">
-                            {!isEmptyObjectOrNull(profile?.data?.identifier)
-                                ? <Properties properties={profile?.data?.identifier}/>
-                                : <NoData header="No Identifiers"/>}
-
+                            {!isEmptyObjectOrNull(identifier)
+                                ? Object.keys(identifier).map(key => <PropertyField
+                                    key={key}
+                                    name={key}
+                                    content={identifier[key]}
+                                    field={`data.identifier.${key}`}
+                                    metadata={profile?.metadata?.fields[`data.identifier.${key}`]}
+                                />)
+                                : <NoData header="No Identifiers"/>
+                            }
                         </div>
                     </TabCase>
                     <TabCase id={3}>
