@@ -105,7 +105,7 @@ export const ProfileData = ({profile}) => {
                     <ProfileMergeDetails profile={profile}/></span>}/>
                 <PropertyField name="Index & TTL" content={<span className="flexLine">
                     {profile?._meta?.index &&
-                    <Tag style={{marginRight: 10}} maxWidth={255}> {profile?._meta?.index}</Tag>}
+                    <Tag style={{marginRight: 10}} maxWidth={250}> {profile?._meta?.index}</Tag>}
                     <ProfileCacheDetails id={profile?.id}/>
                 </span>}/>
             </fieldset>
