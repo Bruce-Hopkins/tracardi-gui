@@ -35,6 +35,7 @@ const RSSFeed = () => {
 
     return (
         <div className="RssFeed" style={{width: 420}}>
+            <div style={{fontSize: '1.6rem', padding: 20, borderBottom: '1px solid rgba(128,128,128,.5)'}}>What's new at <span className="Tracardi">Tracardi</span>.</div>
             <List>
                 {feedItems && feedItems.map((item, index) => (
                     <ListItem key={index} alignItems="flex-start">

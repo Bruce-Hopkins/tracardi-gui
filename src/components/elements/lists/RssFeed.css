@@ -1,3 +1,10 @@
 .RssFeed A {
     color: #805fcf
 }
+.RssFeed .Tracardi {
+    padding-left: 3px;
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-family: Viga, "IBM Plex Sans", serif;
+}
