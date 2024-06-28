@@ -5,6 +5,8 @@ import "./PropertyField.css";
 import TuiTags from "../tui/TuiTags";
 import {KeyCloakContext} from "../../context/KeyCloakContext";
 import hasRoles from "../../authentication/hasRoles";
+import {ChangeTimeIcon} from "../misc/ChangeTimeIcon";
+
 
 const PropertyField = ({
                            name,
@@ -15,7 +17,9 @@ const PropertyField = ({
                            whiteSpace = 'normal',
                            valueAlign = "flex-start",
                            labelWidth = 200,
-                           detailsRoles = null
+                           detailsRoles = null,
+                           metadata,
+                           field
                        }
 ) => {
 
@@ -59,6 +63,7 @@ const PropertyField = ({
                                             : content
                         }
                     </div>
+                    {metadata && <ChangeTimeIcon field={field} metadata={metadata}/>}
                     {children && hasRoles(authContext?.state?.roles, detailsRoles) &&
                     <FiMoreHorizontal size={18} className="FieldMore" onClick={() => setDisplayDetails(true)}/>
                     }

@@ -4,6 +4,7 @@ import IconButton from "../../misc/IconButton";
 
 export default function PopOverIconButton({
                                               children, label, icon, style,
+                                              singleIcon = false,
                                               anchor = {
                                                   vertical: 'bottom',
                                                   horizontal: 'right',
@@ -42,13 +43,19 @@ export default function PopOverIconButton({
     };
 
     return <>
-        <IconButton
-            icon={icon}
-            style={style}
-            label={label}
-            onClick={handleDisplay}
-            selected={selected}
-        >{icon}</IconButton>
+        {singleIcon
+            ? <div
+                style={style}
+                onClick={handleDisplay}
+            >{icon}</div>
+            : <IconButton
+                icon={icon}
+                style={style}
+                label={label}
+                onClick={handleDisplay}
+                selected={selected}
+            >{icon}</IconButton>}
+
         <Popover
             id={id}
             open={open}

@@ -56,8 +56,10 @@ export default function ProfileCardInfo({profile, displayDetails=false}) {
                                        icon={window?.CONFIG?.profile?.icon1 || "profile"} size={20}/></span>}
                                    value={profile.id}/>}
                 />}
-                <PropertyField labelWidth={labelWidth} name="First seen"
+                <PropertyField labelWidth={labelWidth} name="Created"
                                content={<DateValue date={profile.metadata?.time?.insert}/>}/>
+                {profile.metadata?.time?.update && <PropertyField labelWidth={labelWidth} name="Last update"
+                               content={<DateValue date={profile.metadata?.time?.update}/>}/>}
                 <PropertyField labelWidth={labelWidth} name="Session start" content={<>
                     <DateValue date={profile?.metadata?.time?.visit?.current}/>
                     {profile?.metadata?.time?.visit?.tz && <IconLabel

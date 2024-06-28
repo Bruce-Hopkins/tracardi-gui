@@ -37,7 +37,8 @@ export const ProfileCard = ({profile}) => {
             <PropertyField name="Name" labelWidth={60} content={<ProfileLabel label={profileFullName}
                                                                               profileLess={profile === null}/>}/>
             {profile?.metadata?.time?.visit?.current &&
-            <PropertyField name="Last visit" labelWidth={60} content={<DateValue date={profile?.metadata.time.visit.current}/>}/>}
+            <PropertyField name="Last visit" labelWidth={60}
+                           content={<DateValue date={profile?.metadata.time.visit.current}/>}/>}
             {profile?.data?.devices?.last?.geo?.city && <PropertyField labelWidth={60} name="Location" content={
                 <IconLabel
                     value={displayLocation(profile?.data?.devices?.last?.geo)}
@@ -72,7 +73,8 @@ export const ProfileData = ({profile}) => {
                 {profile?.metadata?.time?.insert &&
                 <PropertyField name="Inserted" content={<DateValue date={profile?.metadata?.time?.insert}/>}/>}
                 <PropertyField name="Updated" content={<DateValue date={profile?.metadata?.time?.update}/>}/>
-                {profile?.metadata?.time?.segmentation && <PropertyField name="Segmented" content={<DateValue date={profile?.metadata?.time?.segmentation}/>}/>}
+                {profile?.metadata?.time?.segmentation &&
+                <PropertyField name="Segmented" content={<DateValue date={profile?.metadata?.time?.segmentation}/>}/>}
                 {profile?.metadata?.time?.visit?.last &&
                 <PropertyField name="Previous Visit" content={<DateValue date={profile?.metadata.time.visit.last}/>}/>}
 
@@ -96,21 +98,25 @@ export const ProfileData = ({profile}) => {
                                   </div>}/>}
                 <PropertyField name="Status" content={<span className="flexLine">
                     <ActiveTag active={profile?.active} trueLabel="Active" falseLabel="Inactive"/>
-                    <ProfileMergeDetails profile={profile}/></span> }/>
+                    <ProfileMergeDetails profile={profile}/></span>}/>
                 <PropertyField name="Index & TTL" content={<span className="flexLine">
-                    {profile?._meta?.index &&<Tag style={{marginRight: 10}} maxWidth={255}> {profile?._meta?.index}</Tag>}
+                    {profile?._meta?.index &&
+                    <Tag style={{marginRight: 10}} maxWidth={255}> {profile?._meta?.index}</Tag>}
                     <ProfileCacheDetails id={profile?.id}/>
                 </span>}/>
             </fieldset>
-
             <div style={{borderRadius: 5, border: "solid 1px rgba(128,128,128,0.5)"}}>
                 <Tabs tabs={["PII", "Contacts", "Traits", "Last GEO", "Media", "Aux"]}
                       tabsStyle={{backgroundColor: _theme.palette.background.paper}}>
                     <TabCase id={0}>
                         <div className="ProfileInfoTab">
-                            {displayPii && pii ? Object.keys(pii).map(key => <PropertyField key={key}
-                                                                                            name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
-                                                                                            content={pii[key]}/>)
+                            {displayPii && pii ? Object.keys(pii).map(key => <PropertyField
+                                    key={key}
+                                    name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
+                                    content={pii[key]}
+                                    field={`data.pii.${key}`}
+                                    metadata={profile?.metadata?.fields[`data.pii.${key}`]}
+                                />)
                                 : <NoData header="No Personal Data"/>
                             }
                         </div>
@@ -118,9 +124,13 @@ export const ProfileData = ({profile}) => {
                     </TabCase>
                     <TabCase id={1}>
                         <div className="ProfileInfoTab">
-                            {displayPii && contact ? Object.keys(contact).map(key => <PropertyField key={key}
-                                                                                                    name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
-                                                                                                    content={contact[key]}/>)
+                            {displayPii && contact ? Object.keys(contact).map(key => <PropertyField
+                                    key={key}
+                                    name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
+                                    content={contact[key]}
+                                    field={`data.contact.${key}`}
+                                    metadata={profile?.metadata?.fields[`data.contact.${key}`]}
+                                />)
                                 : <NoData header="No Contact Data"/>
                             }
                         </div>
@@ -128,9 +138,13 @@ export const ProfileData = ({profile}) => {
                     <TabCase id={2}>
                         <div className="ProfileInfoTab">
                             {traits && !isEmptyObjectOrNull(traits)
-                                ? Object.keys(traits).map(key => <PropertyField key={key}
-                                                                                   name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
-                                                                                   content={traits[key]}/>)
+                                ? Object.keys(traits).map(key => <PropertyField
+                                    key={key}
+                                    name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
+                                    content={traits[key]}
+                                    field={`traits.${key}`}
+                                    metadata={profile?.metadata?.fields[`traits.${key}`]}
+                                />)
 
                                 : <NoData header="No Traits"/>}
                         </div>
@@ -138,27 +152,39 @@ export const ProfileData = ({profile}) => {
                     <TabCase id={3}>
                         <div className="ProfileInfoTab">
                             {geo && !isEmptyObjectOrNull(geo)
-                                ? geo && Object.keys(geo).map(key => <PropertyField key={key}
-                                                                                        name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
-                                                                                        content={geo[key]}/>)
+                                ? geo && Object.keys(geo).map(key => <PropertyField
+                                key={key}
+                                name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
+                                content={geo[key]}
+                                field={`data.devices.last.geo.${key}`}
+                                metadata={profile?.metadata?.fields[`data.devices.last.geo.${key}`]}
+                            />)
                                 : <NoData header="No Geo Location"/>}
                         </div>
                     </TabCase>
                     <TabCase id={4}>
                         <div className="ProfileInfoTab">
                             {media && !isEmptyObjectOrNull(media)
-                                ? media && Object.keys(media).map(key => <PropertyField key={key}
-                                                                                    name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
-                                                                                    content={media[key]}/>)
+                                ? media && Object.keys(media).map(key => <PropertyField
+                                key={key}
+                                name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
+                                content={media[key]}
+                                field={`data.media.${key}`}
+                                metadata={profile?.metadata?.fields[`data.media.${key}`]}
+                            />)
                                 : <NoData header="No Media"/>}
                         </div>
                     </TabCase>
                     <TabCase id={5}>
                         <div className="ProfileInfoTab">
                             {aux && !isEmptyObjectOrNull(aux)
-                                ? aux && Object.keys(aux).map(key => <PropertyField key={key}
-                                                                                    name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
-                                                                                    content={aux[key]}/>)
+                                ? aux && Object.keys(aux).map(key => <PropertyField
+                                key={key}
+                                name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
+                                content={aux[key]}
+                                field={`aux.${key}`}
+                                metadata={profile?.metadata?.fields[`aux.${key}`]}
+                            />)
                                 : <NoData header="No Auxiliary Data"/>}
                         </div>
                     </TabCase>

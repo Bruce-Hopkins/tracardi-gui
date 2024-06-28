@@ -18,7 +18,12 @@ export default function SessionDeviceCard({session}) {
             content={<BrowserLabel browser={session?.app?.name || "Unknown"} version={session?.app?.version || ""}
                                    robot={session?.app?.bot || ""}/>}
         />
-
+        {session?.context?.browser?.local?.browser?.name && <PropertyField
+            labelWidth={labelWidth}
+            name="Browser"
+            content={<BrowserLabel browser={session?.context?.browser?.local?.browser?.name} version={session?.app?.version || ""}
+                                   robot={session?.app?.bot || ""}/>}
+        /> }
         <PropertyField
             labelWidth={labelWidth}
             name="OS"
