@@ -7,7 +7,7 @@ import {IoLogoYoutube, IoDocumentTextOutline, IoLogoTwitter} from "react-icons/i
 import {AiOutlineSlack} from "react-icons/ai";
 import {BsGithub, BsFillQuestionCircleFill} from "react-icons/bs";
 import useTheme from "@mui/material/styles/useTheme";
-import IconButton from "./IconButton";
+import {IconButton} from '@mui/material';
 
 export default function NeedHelpButton() {
 
@@ -29,8 +29,7 @@ export default function NeedHelpButton() {
         <PopupState variant="popover" popupId="demo-popup-popover">
             {(popupState) => (
                 <>
-                    <IconButton label="Need help?"
-                                {...bindTrigger(popupState)} >
+                    <IconButton {...bindTrigger(popupState)} >
                         <BsFillQuestionCircleFill size={20}/>
                     </IconButton>
 

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Popover from "@mui/material/Popover";
-import IconButton from "../../misc/IconButton";
+import {IconButton} from '@mui/material';
 
 export default function PopOverIconButton({
                                               children, label, icon, style,

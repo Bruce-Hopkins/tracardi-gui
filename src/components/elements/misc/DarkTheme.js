@@ -1,6 +1,6 @@
 import {BsMoon} from "react-icons/bs";
 import React from "react";
-import IconButton from "./IconButton";
+import {IconButton} from '@mui/material';
 import useTheme from "@mui/material/styles/useTheme";
 
 export default function DarkThemeButton({onDarkMode}) {

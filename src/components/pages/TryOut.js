@@ -37,6 +37,7 @@ import CommitFrom from "../elements/forms/CommitForm";
 import DrawerButton from "../elements/forms/buttons/DrawerButton";
 import TestTrackForm from "../elements/forms/TestTrackForm";
 import MetaDataFrom from "../elements/forms/MetadataForm";
+import RSSDrawer from "../elements/lists/RSSFeed";
 
 function ComparisonOperation({value, label, onChange}) {
 
@@ -310,6 +311,7 @@ export default function TryOut() {
     //value={{value:"123", ref:true}} autocomplete="profile"
     return (
         <div>
+            <RSSDrawer />
             <TextField size="small"
                        variant="outlined"
                        label="Aggregation Name"
