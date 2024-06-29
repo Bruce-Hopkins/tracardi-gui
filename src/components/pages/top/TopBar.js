@@ -10,7 +10,7 @@ import DarkThemeButton from "../../elements/misc/DarkTheme";
 import PopOverIconButton from "../../elements/forms/buttons/PopOverIconButton";
 import {BsPersonCircle} from "react-icons/bs";
 import UserAccount from "../UserAccount";
-import RSSDrawer from "../../elements/lists/RSSFeed";
+import FeedDrawer from "../../elements/lists/RSSFeed";
 
 export default function TopBar({children, onDarkMode}) {
 
@@ -39,7 +39,7 @@ export default function TopBar({children, onDarkMode}) {
             <div style={{display: "flex", alignItems: "center", marginLeft: 20, marginRight: 10}}>
 
             <NeedHelpButton/>
-            <RSSDrawer/>
+            <FeedDrawer/>
             <DarkThemeButton onDarkMode={onDarkMode}/>
             <PopOverIconButton icon={<BsPersonCircle size={20}/>} transform = {{
                 vertical: 'top',

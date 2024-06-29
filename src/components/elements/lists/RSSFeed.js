@@ -3,18 +3,16 @@ import {XMLParser} from 'fast-xml-parser';
 import {Drawer, IconButton, List, ListItem, ListItemText} from '@mui/material';
 import {VscBell} from "react-icons/vsc";
 import './RssFeed.css';
-import {getRssFeed} from "../../../remote_api/endpoints/rss";
+import {getFeed} from "../../../remote_api/endpoints/rss";
 import {useFetch} from "../../../remote_api/remoteState";
 import CenteredCircularProgress from "../progress/CenteredCircularProgress";
-import ErrorBox from "../../errors/ErrorBox";
 import FetchError from "../../errors/FetchError";
 
-const RSSFeed = () => {
+const Feed = () => {
 
-    // const [feedItems, setFeedItems] = useState([]);
     const { data: feedItems, isLoading, error } = useFetch(
-        ['rssFeed'],
-        getRssFeed(),
+        ['feed'],
+        getFeed(),
         (data) => {
             const parser = new XMLParser();
             const result = parser.parse(data);
@@ -64,7 +62,7 @@ const RSSFeed = () => {
     );
 };
 
-const RSSDrawer = () => {
+const FeedDrawer = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
@@ -75,10 +73,10 @@ const RSSDrawer = () => {
                 <VscBell/>
             </IconButton>
             <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
-                <RSSFeed/>
+                <Feed/>
             </Drawer>
         </div>
     );
 }
 
-export default RSSDrawer;
+export default FeedDrawer;

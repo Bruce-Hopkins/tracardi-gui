@@ -1,5 +1,5 @@
-export function getRssFeed() {
+export function getFeed() {
     return {
-        url: `/rss`,
+        url: `/feed`,
     }
 }
