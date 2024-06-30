@@ -1,3 +1,3 @@
 export default function version() {
-    return "0.9.0";
+    return "1.0.0";
 }
