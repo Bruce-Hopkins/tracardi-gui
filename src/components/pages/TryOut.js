@@ -37,7 +37,7 @@ import CommitFrom from "../elements/forms/CommitForm";
 import DrawerButton from "../elements/forms/buttons/DrawerButton";
 import TestTrackForm from "../elements/forms/TestTrackForm";
 import MetaDataFrom from "../elements/forms/MetadataForm";
-import FeedDrawer from "../elements/lists/RSSFeed";
+import FeedDrawer from "../elements/lists/Feed";
 
 function ComparisonOperation({value, label, onChange}) {
 

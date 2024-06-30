@@ -10,7 +10,7 @@ import DarkThemeButton from "../../elements/misc/DarkTheme";
 import PopOverIconButton from "../../elements/forms/buttons/PopOverIconButton";
 import {BsPersonCircle} from "react-icons/bs";
 import UserAccount from "../UserAccount";
-import FeedDrawer from "../../elements/lists/RSSFeed";
+import FeedDrawer from "../../elements/lists/Feed";
 
 export default function TopBar({children, onDarkMode}) {
 
