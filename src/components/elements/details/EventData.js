@@ -185,32 +185,8 @@ const EventData = ({event, metadata, allowedDetails = [], routing=true}) => {
             </Tabs>
         </TuiFormGroup>
         <TuiFormGroup>
-            <Tabs tabs={["OS", "Application", "Device", "Context", "Request", "Config"]} tabsStyle={{backgroundColor: _theme.palette.background.paper}}>
+            <Tabs tabs={["Context", "Request", "Application", "Device", "OS", "Config"]} tabsStyle={{backgroundColor: _theme.palette.background.paper}}>
                 <TabCase id={0}>
-                    <section style={{margin: 20}}>
-                        {!isEmptyObjectOrNull(event?.os) && event?.os?.name ? <EventOs event={event}/> :
-                            <NoData header="No operating system data">
-                                This event does not have any information on OS.
-                            </NoData>}
-                    </section>
-                </TabCase>
-                <TabCase id={1}>
-                    <section style={{margin: 20}}>
-                        {!isEmptyObjectOrNull(event?.app)  ? <EventApp event={event}/> :
-                            <NoData header="No application data">
-                                This event does not have any information on used application.
-                            </NoData>}
-                    </section>
-                </TabCase>
-                <TabCase id={2}>
-                    <section style={{margin: 20}}>
-                        {!isEmptyObjectOrNull(event?.device) && event?.device?.name ? <EventDevice event={event}/> :
-                            <NoData header="No device data">
-                                This event does not have any information on used device.
-                            </NoData>}
-                    </section>
-                </TabCase>
-                <TabCase id={3}>
                     <section style={{margin: 20}}>
                         {!isEmptyObjectOrNull(event?.context) ?<><ContextInfo event={event}/>
                                 <div style={{marginTop: 20}}>
@@ -221,11 +197,35 @@ const EventData = ({event, metadata, allowedDetails = [], routing=true}) => {
                             </NoData>}
                     </section>
                 </TabCase>
-                <TabCase id={4}>
+                <TabCase id={1}>
                     <section style={{margin: 20}}>
                         {!isEmptyObjectOrNull(event?.request) ? <EventRequest event={event}/> :
                             <NoData header="No request data">
                                 This event does not have any information on request.
+                            </NoData>}
+                    </section>
+                </TabCase>
+                <TabCase id={2}>
+                    <section style={{margin: 20}}>
+                        {!isEmptyObjectOrNull(event?.app)  ? <EventApp event={event}/> :
+                            <NoData header="No application data">
+                                This event does not have any information on used application.
+                            </NoData>}
+                    </section>
+                </TabCase>
+                <TabCase id={3}>
+                    <section style={{margin: 20}}>
+                        {!isEmptyObjectOrNull(event?.device) && event?.device?.name ? <EventDevice event={event}/> :
+                            <NoData header="No device data">
+                                This event does not have any information on used device.
+                            </NoData>}
+                    </section>
+                </TabCase>
+                <TabCase id={4}>
+                    <section style={{margin: 20}}>
+                        {!isEmptyObjectOrNull(event?.os) && event?.os?.name ? <EventOs event={event}/> :
+                            <NoData header="No operating system data">
+                                This event does not have any information on OS.
                             </NoData>}
                     </section>
                 </TabCase>
@@ -239,8 +239,6 @@ const EventData = ({event, metadata, allowedDetails = [], routing=true}) => {
                 </TabCase>
             </Tabs>
         </TuiFormGroup>
-
-
     </TuiForm>
 }
 
