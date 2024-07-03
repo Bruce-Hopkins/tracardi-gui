@@ -7,22 +7,8 @@ import {useFetch} from "../../../remote_api/remoteState";
 import {getProfileEvents} from "../../../remote_api/endpoints/profile";
 import EventDetailsDialog from "../dialog/EventDetailsDialog";
 import {capitalizeString} from "../misc/EventTypeTag";
-import {BsGear} from "react-icons/bs";
 import NoData from "../misc/NoData";
-
-const stepIconComponent = event => {
-    if (event?.source?.id.startsWith("@internal")) {
-        return <BsGear size={12} style={{marginRight: 10}}/>
-    }
-    return <div className="EventIcon" style={{
-        backgroundColor: {
-            collected: "#006db3",
-            error: "#d81b60",
-            processed: "#43a047"
-        }[event?.metadata?.status]
-    }}/>
-}
-
+import eventDot from "./EventDot";
 
 function EventStream({events}) {
 
@@ -56,9 +42,10 @@ function EventStream({events}) {
                                     paddingLeft: 8,
                                     paddingRight: 8,
                                     width: 320
-                                }}><DateValue date={event?.metadata?.time?.create} fallback={event?.metadata?.time?.insert}/></div>
+                                }}><DateValue date={event?.metadata?.time?.create}
+                                              fallback={event?.metadata?.time?.insert}/></div>
                                 <StepLabel
-                                    StepIconComponent={() => stepIconComponent(event)}
+                                    StepIconComponent={() => eventDot(event)}
                                     onClick={() => handleDetails(event)}
                                 >
                                     {event?.name || capitalizeString(event?.type)}
@@ -66,7 +53,11 @@ function EventStream({events}) {
                             </Step>
 
                         ))
-                        : <NoData header="No events"><div align="center">Events are stored in batches, which means they will be visible after sometime the profile has been saved.</div></NoData>
+                        : <NoData header="No events">
+                            <div align="center">Events are stored in batches, which means they will be visible after
+                                sometime the profile has been saved.
+                            </div>
+                        </NoData>
                 }
 
             </Stepper>

@@ -38,18 +38,7 @@
     border-radius: 1px;
     margin-left: 324px;
 }
-.EventStream .EventIcon {
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-.EventStream .MuiStep-root:hover > .MuiStepLabel-root > .MuiStepLabel-iconContainer > .EventIcon {
-    width: 12px;
-    height: 12px;
-    margin-right: 8px;
-    transform: translate(-1px, 0);
-}
+
 .EventStream .MuiStep-root:hover {
     cursor: pointer;
     background-color: rgba(0, 109, 179, .05);

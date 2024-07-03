@@ -3,7 +3,7 @@ import {isString} from "../../../misc/typeChecking";
 import "./HighlightedTag.css";
 import useTheme from "@mui/material/styles/useTheme";
 
-export default function EventStatusTag({label, defaultSuccessLabel='processed', title="Status of the event."}) {
+export default function EventStatusTag({label, defaultSuccessLabel='Processed', title="Status of the event."}) {
 
     const theme = useTheme()
 

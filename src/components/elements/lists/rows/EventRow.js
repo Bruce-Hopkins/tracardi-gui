@@ -6,7 +6,6 @@ import JsonStringify from "../../misc/JsonStingify";
 import React, {useState} from "react";
 import DateValue from "../../misc/DateValue";
 import EventTypeTag from "../../misc/EventTypeTag";
-import EventStatusTag from "../../misc/EventStatusTag";
 import EventValidation from "../../misc/EventValidation";
 import EventWarnings from "../../misc/EventWarnings";
 import EventErrorTag from "../../misc/EventErrorTag";
@@ -30,6 +29,7 @@ import urlPrefix from "../../../../misc/UrlPrefix";
 import EventJourneyTag from "../../misc/EventJourneyTag";
 import MergingAlert from "../../misc/MergingAlert";
 import EventAsyncTag from "../../misc/EventAsyncTag";
+import CrossDomainEvent from "../../misc/CrossDomainEvent";
 
 export function EventRow({row, filterFields}) {
 
@@ -162,7 +162,8 @@ export function EventRow({row, filterFields}) {
                                        drawerSize={1000}
                                        content={<div style={{display: "flex", gap: 5, alignItems: "center"}}>
                                            <EventTypeTag event={row} />
-                                           <EventStatusTag label={row?.metadata?.status}/>
+                                           {/*<EventStatusTag label={row?.metadata?.status}/>*/}
+                                           <CrossDomainEvent event={row}/>
                                            <EventValidation eventMetaData={row?.metadata}/>
                                            <MergingAlert eventMetaData={row?.metadata}/>
                                            <EventWarnings eventMetaData={row?.metadata}/>

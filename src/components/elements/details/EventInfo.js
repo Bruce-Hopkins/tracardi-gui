@@ -24,6 +24,7 @@ import EventJourneyTag from "../misc/EventJourneyTag";
 import MergingAlert from "../misc/MergingAlert";
 import hasRoles from "../../authentication/hasRoles";
 import {KeyCloakContext} from "../../context/KeyCloakContext";
+import CrossDomainEvent from "../misc/CrossDomainEvent";
 
 
 const EventDataDetails = ({event, metadata, allowedDetails = []}) => {
@@ -64,7 +65,9 @@ const EventDataDetails = ({event, metadata, allowedDetails = []}) => {
                                content={<DateValue date={event?.metadata?.time?.insert}/>}
                 />
                 <PropertyField name="Status"
-                               content={<><EventStatusTag label={event?.metadata?.status}/>
+                               content={<>
+                                   <CrossDomainEvent event={event}/>
+                                   <EventStatusTag label={event?.metadata?.status}/>
                                    <MergingAlert eventMetaData={event?.metadata}/>
                                    <EventValidation eventMetaData={event?.metadata}/>
                                    <EventWarnings eventMetaData={event?.metadata}/>

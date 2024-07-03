@@ -21,6 +21,7 @@ import MergingAlert from "../misc/MergingAlert";
 import ShowHide from "../misc/ShowHide";
 import Tag from "../misc/Tag";
 import EventAsyncTag from "../misc/EventAsyncTag";
+import CrossDomainEvent from "../misc/CrossDomainEvent";
 
 const ContextInfo = ({event}) => {
     const context = object2dot(event?.context);
@@ -99,7 +100,9 @@ const EventData = ({event, metadata, allowedDetails = [], routing=true}) => {
                 />
 
                 <PropertyField name="Status"
-                               content={<><EventStatusTag label={event?.metadata?.status}/>
+                               content={<>
+                                   <CrossDomainEvent event={event}/>
+                                   <EventStatusTag label={event?.metadata?.status}/>
                                    <EventValidation eventMetaData={event?.metadata}/>
                                    <MergingAlert eventMetaData={event?.metadata}/>
                                    <EventWarnings eventMetaData={event?.metadata}/>
