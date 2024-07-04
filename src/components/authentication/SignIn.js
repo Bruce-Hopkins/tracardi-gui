@@ -109,14 +109,25 @@ const SignInForm = () => {
         event.preventDefault();
 
         getLocation().then(result => {
+            let properties = {}
             if(envs.license === 'open-source'){
-                track("9d9230c3-def2-451a-9b52-c554686f3e27", 'tracardi-login', {
+                properties ={
+                    license: "open-source",
                     email,
                     apiUrl,
                     platform: "Tracardi " + version(),
                     location: result
-                }, false).then(() => {})
+                }
+            } else {
+                properties ={
+                    license: "commercial",
+                    apiUrl,
+                    platform: "Tracardi " + version(),
+                    location: result
+                }
             }
+
+            track("9d9230c3-def2-451a-9b52-c554686f3e27", 'tracardi-login', properties, true).then(() => {})
 
         })
 
