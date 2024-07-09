@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {XMLParser} from 'fast-xml-parser';
 import {Drawer, IconButton, List, ListItem, ListItemText} from '@mui/material';
 import {VscBell} from "react-icons/vsc";
 import './Feed.css';
@@ -14,13 +13,7 @@ const Feed = () => {
         ['feed'],
         getFeed(),
         (data) => {
-            const parser = new XMLParser();
-            const result = parser.parse(data);
-
-            // Assuming a standard RSS structure
-            const items = result.rss.channel.item;
-            return Array.isArray(items) ? items : [items];
-
+            return data;
         });
 
     if(isLoading) {
@@ -41,8 +34,8 @@ const Feed = () => {
                             primary={item.title}
                             secondary={
                                 <>
-                                    <span dangerouslySetInnerHTML={{__html: item.description}}/>
-                                    <a href={item.link} target="_blank" rel="noopener noreferrer">Read the post</a>
+                                    <span style={{display: "block", marginTop: 10}} dangerouslySetInnerHTML={{__html: item.description}}/>
+                                    <a style={{display: "block", marginTop: 10}} href={item.link} target="_blank" rel="noopener noreferrer">Read the post</a>
                                 </>
                             }
                             sx={{
