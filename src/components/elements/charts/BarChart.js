@@ -1,11 +1,9 @@
 import {BarChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Bar} from 'recharts';
 import React, {useContext, useEffect} from "react";
-import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import "./Chart.css";
 import PropTypes from "prop-types";
 import {useFetch} from "../../../remote_api/remoteState";
 import useTheme from "@mui/material/styles/useTheme";
-import Slider from "@mui/material/Slider";
 import DateRangeSlider from "../datepickers/DateRangeSlider";
 import {DataContext} from "../../AppBox";
 

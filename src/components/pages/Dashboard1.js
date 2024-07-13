@@ -151,7 +151,11 @@ function Profiles() {
     const renderRows = (data) => {
         if(data?.result) {
             return data.result.map((row, index) => {
-                return <div onClick={()=>setProfileId(row.id)} style={{cursor: "pointer"}}><ProfileCard profile={row}/></div>
+                return <div key={index}
+                            onClick={()=>setProfileId(row.id)}
+                            style={{cursor: "pointer"}}>
+                    <ProfileCard profile={row}/>
+                </div>
             })
         }
     }

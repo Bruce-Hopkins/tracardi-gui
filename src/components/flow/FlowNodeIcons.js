@@ -103,7 +103,8 @@ import {
     SiIntercom,
     SiJavascript,
     SiOpenai,
-    SiTelegram
+    SiTelegram,
+    SiApachekafka
 } from "react-icons/si";
 import {GrMysql} from "react-icons/gr";
 import {
@@ -285,6 +286,7 @@ export const icons = {
     "telegram": (size) => <SiTelegram size={size} />,
     "subscription": (size) => <BsPersonLinesFill size={size}/>,
     "activate": (size) => <MdOutlineSendTimeExtension size={size}/>,
+    "kafka": (size) => <SiApachekafka size={size}/>,
 }
 
 
