@@ -55,11 +55,14 @@ export default function BarChartElement({onLoadRequest: endpoint, refreshInterva
 
     const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
+            const speed = payload[0]?.payload?.speed
+            console.log(speed)
             return (
                 <div className="ChartToolTip">
                     <p>{`Start time : ${label}`}</p>
                     <p>{`Time span : ${payload[0].payload.interval}`}</p>
                     <p>{`Value : ${payload.map((item) => item.value)}`}</p>
+                    {speed && <p>Speed : ~{speed}</p>}
                 </div>
             );
         }
