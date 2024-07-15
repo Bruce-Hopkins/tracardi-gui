@@ -447,8 +447,10 @@ export function FlowEditorPane(
                 handleDisplayDebugPane(true);
             },
             request
-        )
-    }, [id, reactFlowInstance, setEdges, setNodes, showAlert])
+        ).then(()=>{
+            console.debug("Debugging ended.")
+        })
+    }, [id, reactFlowInstance, setEdges, setNodes, showAlert, eventId])
 
     const onElementsRemove = () => {
         setDisplayElementDetails(false);

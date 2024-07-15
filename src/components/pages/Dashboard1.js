@@ -28,6 +28,7 @@ import EventCounter from "../elements/metrics/EventCounter";
 import SessionCounter from "../elements/metrics/SessionCounter";
 import ProfileCounter from "../elements/metrics/ProfileCounter";
 import EntityCounter from "../elements/metrics/EntityCounter";
+import FetchError from "../errors/FetchError";
 
 const Item = styled(Paper)(({theme, style}) => ({
     ...theme.typography.body2,
@@ -65,6 +66,10 @@ function EventsByType() {
 
     if(isLoading) {
         return <CenteredCircularProgress/>
+    }
+
+    if(error) {
+        return <FetchError error={error}/>
     }
 
     if(data) {
@@ -123,6 +128,10 @@ function Events() {
         }
     }
 
+    if(error) {
+        return <FetchError error={error}/>
+    }
+
     if(isLoading) {
         return <CenteredCircularProgress/>
     }
@@ -158,6 +167,10 @@ function Profiles() {
                 </div>
             })
         }
+    }
+
+    if(error) {
+        return <FetchError error={error}/>
     }
 
     if(isLoading) {

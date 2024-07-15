@@ -60,12 +60,13 @@ export function save(id, flowMetaData, reactFlowInstance, onError, onReady, prog
     })
 }
 
-export function debug(id, eventId, reactFlowInstance, onError, progress, onReady, request) {
+export async function debug(id, eventId, reactFlowInstance, onError, progress, onReady, request) {
     const endpoint = getFlowDebug(eventId)
 
     progress(true);
 
-    request({
+    try {
+        const response = await request({
             ...endpoint,
             data: {
                 id: id,
@@ -74,7 +75,7 @@ export function debug(id, eventId, reactFlowInstance, onError, progress, onReady
                 flowGraph: prepareGraph(reactFlowInstance),
                 tags: [],
             }
-    }).then((response) => {
+        })
 
         if (response) {
             const flow = reactFlowInstance.toObject();
@@ -156,12 +157,14 @@ export function debug(id, eventId, reactFlowInstance, onError, progress, onReady
                 logs: response?.data?.logs
             });
         }
-    }).catch(e => {
+
+    } catch (e) {
         if (e) {
             e = getError(e)
             onError({message: e[0].msg, type: "error", hideAfter: 5000});
         }
-    }).finally(
+    } finally {
         progress(false)
-    )
+    }
+
 }
