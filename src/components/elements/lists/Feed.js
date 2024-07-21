@@ -6,8 +6,22 @@ import {getFeed} from "../../../remote_api/endpoints/feed";
 import {useFetch} from "../../../remote_api/remoteState";
 import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import FetchError from "../../errors/FetchError";
+import {addParamsToUrl} from "../../../misc/UrlPrefix";
+import storageValue from "../../../misc/localStorageDriver";
 
 const Feed = () => {
+
+    let urlParams = {
+        utm_source: 'tracardi',
+        utm_medium: 'rss'
+    }
+
+    const profileID = new storageValue('tracardi-profile-id').read(null)
+
+    if(profileID) {
+        urlParams["__tr_pid"] = profileID
+    }
+
 
     const { data: feedItems, isLoading, error } = useFetch(
         ['feed'],
@@ -35,7 +49,7 @@ const Feed = () => {
                             secondary={
                                 <>
                                     <span style={{display: "block", marginTop: 10}} dangerouslySetInnerHTML={{__html: item.description}}/>
-                                    <a style={{display: "block", marginTop: 10}} href={item.link} target="_blank" rel="noopener noreferrer">Read the post</a>
+                                    <a style={{display: "block", marginTop: 10}} href={addParamsToUrl(item.link,urlParams)} target="_blank" rel="noopener noreferrer">Read the post</a>
                                 </>
                             }
                             sx={{
