@@ -3,20 +3,15 @@ import "../lists/cards/SourceCard.css";
 import "./ResourceDetails.css";
 import "./Details.css";
 import Properties from "./DetailProperties";
-import Rows from "../misc/Rows";
 import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import {useConfirm} from "material-ui-confirm";
 import FormDrawer from "../drawers/FormDrawer";
-import {VscTrash, VscEdit} from "react-icons/vsc";
 import ResourceForm from "../forms/ResourceForm";
 import PropTypes from "prop-types";
 import {TuiForm, TuiFormGroup, TuiFormGroupContent, TuiFormGroupHeader} from "../tui/TuiForm";
 import CredentialsVault from "../misc/CredentialsVault";
-import FlowNodeIcons from "../../flow/FlowNodeIcons";
-import TuiTags from "../tui/TuiTags";
-import TimeDifference from "../datepickers/TimeDifference";
 import {useRequest} from "../../../remote_api/requestClient";
-import ProductionButton from "../forms/ProductionButton";
+import {DetailsHeader} from "./DetailsHeader";
 
 const TrackerUseScript = React.lazy(() => import('../tracker/TrackerUseScript'));
 const TrackerScript = React.lazy(() => import('../tracker/TrackerScript'));
@@ -85,37 +80,18 @@ export default function ResourceDetails({id, onDeleteComplete}) {
         })
     }
     const Details = () => <>
-        <div style={{display: "flex", margin: "5px 20px 20px 20px", flexDirection: "column"}}>
-
-            <div style={{display: "flex", justifyContent: "space-between", alignItems: 'center', marginBottom: 10}}>
-                <div style={{display: "flex", flexDirection: "row", alignItems: 'center'}}>
-                    <FlowNodeIcons icon={data.icon} size={30}/>
-                    <h1 className="header"
-                        style={{marginBottom: 0, marginLeft: 10}}> {data.name} ({data.type})</h1>
-                </div>
-                <div style={{display: "flex", alignItems: "start"}}>
-                    <Rows>
-                        {data?.locked !== true && <ProductionButton
-                            onClick={onEdit}
-                            icon={<VscEdit size={20}/>}
-                            label="Edit"
-                            disabled={typeof data === "undefined"}/>}
-                        <ProductionButton onClick={onDelete}
-                                          icon={<VscTrash size={20}/>}
-                                          label="Delete"
-                                          disabled={typeof data === "undefined"}/>
-                    </Rows>
-                </div>
-            </div>
-            {data.description && <h2 className="subHeader">{data.description}</h2>}
-            <div>
-                Created: {data.timestamp} <TimeDifference date={data.timestamp}/>
-            </div>
-            <div style={{marginBottom: 10}}>
-                <TuiTags tags={data.tags} style={{marginLeft: 5, marginTop: 10}}/>
-            </div>
-        </div>
-
+        <DetailsHeader
+            data={data}
+            name={data?.name}
+            type={data?.type}
+            description={data?.description}
+            icon={data?.icon}
+            timestamp={data?.timestamp}
+            tags={data?.tags}
+            locked={data?.locked}
+            onDelete={onDelete}
+            onEdit={onEdit}
+        />
         <TuiForm>
             <TuiFormGroup>
                 <TuiFormGroupHeader header="Credentials"/>

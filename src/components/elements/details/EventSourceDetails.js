@@ -31,7 +31,7 @@ import JsonBrowser from "../misc/JsonBrowser";
 import {useRequest} from "../../../remote_api/requestClient";
 import {getError} from "../../../remote_api/entrypoint";
 import useTheme from "@mui/material/styles/useTheme";
-import ProductionButton from "../forms/ProductionButton";
+import {DetailsHeader} from "./DetailsHeader";
 
 
 const TrackerUseScript = React.lazy(() => import('../tracker/TrackerUseScript'));
@@ -216,11 +216,11 @@ export default function EventSourceDetails({id, onDeleteComplete}) {
         })
     }, [id, refresh])
 
-    const onEdit = () => {
+    const handleEdit = () => {
         setEditData(data)
     }
 
-    const onDelete = () => {
+    const handleDelete = () => {
         confirm({
             title: "Do you want to delete this event source?",
             description: "This action can not be undone."
@@ -361,38 +361,26 @@ export default function EventSourceDetails({id, onDeleteComplete}) {
         </>;
     };
 
+    if(loading) {
+        return <CenteredCircularProgress/>
+    }
+
     return <>
-        {loading && <CenteredCircularProgress/>}
         {data && <>
-            <div style={{display: "flex", margin: 30, flexDirection: "column"}}>
-
-                <div style={{display: "flex", justifyContent: "space-between", alignItems: 'center', marginBottom: 10}}>
-                    <div style={{display: "flex", flexDirection: "row", alignItems: 'center'}}>
-                        <h1 className="header"
-                            style={{marginBottom: 0}}> {data.name} ({data.type})</h1>
-                    </div>
-                    {/*<DisplayOnlyOnTestContext>*/}
-                        <div style={{display: "flex", alignItems: "start"}}>
-                            <Rows>
-                                {data?.locked !== true && <ProductionButton onClick={onEdit}
-                                                                            icon={<VscEdit size={20}/>}
-                                                                            label="Edit"
-                                                                            disabled={typeof data === "undefined"}/>}
-                                <ProductionButton onClick={onDelete}
-                                                  icon={<VscTrash size={20}/>}
-                                                  label="Delete"
-                                                  disabled={typeof data === "undefined"}/>
-                            </Rows>
-                        </div>
-                    {/*</DisplayOnlyOnTestContext>*/}
-                </div>
-                {data.description && <h2 className="subHeader">{data.description}</h2>}
-                <div style={{marginBottom: 10}}>
-                    <TuiTags tags={data.tags} style={{marginLeft: 5, marginTop: 10}}/>
-                </div>
-
+            <div style={{padding: 20}}>
+                <DetailsHeader
+                    data={data}
+                    name={data?.name}
+                    type={data?.type}
+                    description={data?.description}
+                    icon="source"
+                    timestamp={data?.timestamp}
+                    tags={data?.tags}
+                    locked={data?.locked}
+                    onDelete={handleDelete}
+                    onEdit={handleEdit}
+                />
             </div>
-
             <Tabs
                 tabs={["Details", "Use & Javascript", "Analytics", "Raw"]}
                 defaultTab={tab}

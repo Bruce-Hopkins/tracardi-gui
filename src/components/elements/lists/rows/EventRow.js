@@ -30,10 +30,10 @@ import EventJourneyTag from "../../misc/EventJourneyTag";
 import MergingAlert from "../../misc/MergingAlert";
 import EventAsyncTag from "../../misc/EventAsyncTag";
 import CrossDomainEvent from "../../misc/CrossDomainEvent";
+import {JsonModalButton} from "../../forms/buttons/JsonModalDetailsButton";
 
 export function EventRow({row, filterFields}) {
 
-    const [jsonData, setJsonData] = useState(null);
     const [debugModalWindow, setDebugModalWindow] = useState(false);
 
     const navigate = useNavigate();
@@ -42,10 +42,6 @@ export function EventRow({row, filterFields}) {
         if (value) {
             navigate(urlPrefix(`/flow/collection/edit/${value.flow.id}/${row.id}`))
         }
-    }
-
-    const handleJsonClick = (data) => {
-        setJsonData(data)
     }
 
     const handleDebugClick = (open) => {
@@ -59,9 +55,6 @@ export function EventRow({row, filterFields}) {
     const displayCreateTime = window?.CONFIG?.event?.display?.row?.createTime
 
     return <>
-        {jsonData && <DataTreeDialog open={jsonData !== null}
-                                     data={jsonData}
-                                     onClose={() => setJsonData(null)}/>}
         {debugModalWindow && <ModalDialog
             fullWidth={false}
             maxWidth="xs"
@@ -191,7 +184,7 @@ export function EventRow({row, filterFields}) {
                         <JsonStringify data={{traits: row?.traits}} filterFields={filterFields}/></fieldset>}
                 </div>
                 <div style={{display: "flex"}}>
-                    <Button label="Json" size="small" icon={<VscJson size={20}/>} onClick={() => handleJsonClick(row)}/>
+                    <JsonModalButton data={row}/>
                     {window._env_.SERVER?.ENABLE_WORKFLOW !== false && <Button label="Debug" size="small" icon={<VscDebug size={20}/>}
                                                                      onClick={() => handleDebugClick(true)}/>}
 

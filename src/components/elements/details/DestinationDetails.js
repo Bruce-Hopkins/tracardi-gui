@@ -13,7 +13,6 @@ import {useRequest} from "../../../remote_api/requestClient";
 import ProductionButton from "../forms/ProductionButton";
 import NoData from "../misc/NoData";
 import Tag from "../misc/Tag";
-import EventTypeMetadata from "./EventTypeMetadata";
 import PropertyField from "./PropertyField";
 import IconLabel from "../misc/IconLabels/IconLabel";
 import FlowNodeIcons from "../../flow/FlowNodeIcons";
@@ -21,6 +20,8 @@ import TuiTags from "../tui/TuiTags";
 import ActiveTag from "../misc/ActiveTag";
 import {DisplayOnlyIf} from "../../context/RestrictContext";
 import {isNotEmptyArray} from "../../../misc/typeChecking";
+import {JsonModalButton} from "../forms/buttons/JsonModalDetailsButton";
+import {DetailsHeader} from "./DetailsHeader";
 
 function DestinationDetails({id, onDelete, onEdit}) {
 
@@ -91,9 +92,23 @@ function DestinationDetails({id, onDelete, onEdit}) {
         )
     }
 
-    return <>
-        {loading && <CenteredCircularProgress/>}
-        {!loading && <TuiForm style={{margin: 20}}>
+    if(loading) {
+        return <CenteredCircularProgress/>
+    }
+
+    return <TuiForm style={{margin: 20}}>
+            <DetailsHeader
+                data={data}
+                name={data?.name}
+                type={data?.type}
+                description={data?.description}
+                icon="destination"
+                timestamp={data?.timestamp}
+                tags={data?.tags}
+                locked={data?.locked}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+            />
             <TuiFormGroup>
                 <TuiFormGroupContent>
 
@@ -106,19 +121,21 @@ function DestinationDetails({id, onDelete, onEdit}) {
                     </DisplayOnlyIf>
                     <PropertyField name="Enabled"
                                    content={<ActiveTag active={data?.enabled}/>}/>
+                    <PropertyField name="Locked (Read Only)"
+                                   content={<ActiveTag active={data?.locked === true}/>}/>
                     <PropertyField name="Trigger"
                                    content={<Tag>{data?.on_profile_change_only ? "Trigger on profile change" : "Trigger every event"}</Tag>}/>
                     <DisplayOnlyIf condition={data?.on_profile_change_only === false}>
                         {data?.event_type?.name
                             ? <PropertyField
                                 name="Event type"
-                                content={<IconLabel value={data?.event_type.name}
+                                content={<IconLabel value={data?.event_type.name || "All"}
                                                     icon={<FlowNodeIcons icon="event"/>}
                                 />}
                             />
                             : <PropertyField
                                 name="Event type"
-                                content={<IconLabel value={data?.event_type}
+                                content={<IconLabel value={data?.event_type || "All"}
                                                     icon={<FlowNodeIcons icon="event"/>}
                                 />}
                             />}
@@ -146,15 +163,16 @@ function DestinationDetails({id, onDelete, onEdit}) {
                 <TuiFormGroupContent>
                     <TuiFormGroupContent>
                         <TuiFormGroupField description={data?.description}>
+                            <JsonModalButton data={data}/>
                             <Properties properties={data}/>
                         </TuiFormGroupField>
                     </TuiFormGroupContent>
                 </TuiFormGroupContent>
             </TuiFormGroup>
-            <div style={{display: "flex"}}>
+            {data?.locked !== true && <div style={{display: "flex"}}>
                 <ProductionButton label="Edit" onClick={handleEdit} icon={<VscEdit size={20}/>}/>
                 <ProductionButton label="Delete" onClick={handleDelete} progress={deleteProgress} icon={<VscTrash size={20}/>}/>
-            </div>
+            </div>}
 
             <FormDrawer
                 width={750}
@@ -167,9 +185,7 @@ function DestinationDetails({id, onDelete, onEdit}) {
                     value={data}
                 />}
             </FormDrawer>
-        </TuiForm>}
-    </>
-
+        </TuiForm>
 }
 
 DestinationDetails.propTypes = {

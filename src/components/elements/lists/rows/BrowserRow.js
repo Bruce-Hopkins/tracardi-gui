@@ -73,6 +73,7 @@ const BrowserRow = ({id, data, icon, onClick, onSettingsClick, onDelete, tags, s
                             onUnDeploy={onUnDeploy}
                             onDeploy={onDeploy}
                             forceMode={forceMode}
+                            locked={lock}
             />}
 
 

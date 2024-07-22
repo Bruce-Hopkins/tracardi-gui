@@ -1,34 +1,22 @@
 import PropertyField from "./PropertyField";
 import DateValue from "../misc/DateValue";
-import React, {useState} from "react";
+import React from "react";
 import IdLabel from "../misc/IconLabels/IdLabel";
 import {profileName} from "../../../misc/formaters";
 import {BsGlobe} from "react-icons/bs";
 import IconLabel from "../misc/IconLabels/IconLabel";
 import FlowNodeIcons from "../../flow/FlowNodeIcons";
 import {ProfileImage} from "./ProfileImage";
-import DataTreeDialog from "../dialog/DataTreeDialog";
-import Button from "../forms/Button";
-import {VscJson} from "react-icons/vsc";
 import ProfileDetails from "./ProfileDetails";
 import {displayLocation} from "../../../misc/location";
+import {JsonModalButton} from "../forms/buttons/JsonModalDetailsButton";
 
 export default function ProfileCardInfo({profile, displayDetails=false}) {
 
     const labelWidth = 180
     const profileFullName = profileName(profile)
 
-    const [jsonData, setJsonData] = useState(null);
-
-    const handleJsonClick = (data) => {
-        setJsonData(data)
-    }
-
-
     return <>
-        {jsonData && <DataTreeDialog open={jsonData !== null}
-                                     data={jsonData}
-                                     onClose={() => setJsonData(null)}/>}
         <div style={{display: "flex", gap: 20}}>
             <div style={{
                 flex: "2 1 0",
@@ -39,7 +27,7 @@ export default function ProfileCardInfo({profile, displayDetails=false}) {
                 justifyContent: "space-between"
             }}>
                 <ProfileImage profile={profile}/>
-                <Button label="Json" size="small" icon={<VscJson size={20}/>} onClick={() => handleJsonClick(profile)}/>
+                <JsonModalButton data={profile}/>
             </div>
 
             <div style={{width: "100%"}}>
