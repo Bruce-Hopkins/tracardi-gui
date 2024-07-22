@@ -163,7 +163,6 @@ function DestinationDetails({id, onDelete, onEdit}) {
                 <TuiFormGroupContent>
                     <TuiFormGroupContent>
                         <TuiFormGroupField description={data?.description}>
-                            <JsonModalButton data={data}/>
                             <Properties properties={data}/>
                         </TuiFormGroupField>
                     </TuiFormGroupContent>
