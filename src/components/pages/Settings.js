@@ -153,7 +153,12 @@ export default function Settings() {
                 />
                 <TuiFormGroupContent>
                     {!error && setting.map((row, index) => {
-                        return <KeyValueDesc key={index} label={row.label} value={row.value} description={row.desc}/>
+                        return <KeyValueDesc key={index}
+                                             label={row.label}
+                                             value={row.value}
+                                             description={row.desc}
+                                             cluster={row?.cluster_wide}
+                        />
                     })}
                     {error && <ErrorsBox errorList={error}/>}
                 </TuiFormGroupContent>

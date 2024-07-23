@@ -1,8 +1,9 @@
 import './KeyValueDesc.css';
 import React from "react";
 import {IoCheckmarkCircleOutline, IoCloseCircleOutline, IoBanOutline} from "react-icons/io5";
+import Button from "../forms/Button";
 
-export default function KeyValueDesc({label, value, description}) {
+export default function KeyValueDesc({label, value, description, cluster}) {
 
     const v = (value) => {
         if(typeof value === "boolean") {
@@ -20,7 +21,7 @@ export default function KeyValueDesc({label, value, description}) {
             <aside>{description}</aside>
         </div>
         <div className="Value">
-            {v(value)}
+            {cluster ? <Button label="Configurable" icon={v(value)} style={{width: 300, marginRight: 5}}/> : v(value)}
         </div>
     </div>
 }
