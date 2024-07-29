@@ -4,6 +4,7 @@ import CardBrowser from "../elements/lists/CardBrowser";
 import {VscCopy} from "react-icons/vsc";
 import EventToProfileForm from "../elements/forms/EventToProfileForm";
 import EventToProfileDetails from "../elements/details/EventToProfileDetails";
+import Tag from "../elements/misc/Tag";
 
 export default function EventToProfile() {
 
@@ -11,6 +12,9 @@ export default function EventToProfile() {
     const addFunc = useCallback((close) => <EventToProfileForm onSubmit={close}/>, []);
     const detailsFunc = useCallback((id, close) => <EventToProfileDetails id={id} onDeleteComplete={close}
                                                                          onEditComplete={close}/>, [])
+    const descFunc = useCallback((row) => (<>{
+        row.event_type?.name && <Tag>{row.event_type.name} ({row.event_type.id})</Tag>}
+        {row.description && <span style={{marginRight: 5}}>{row.description}</span>}</>), [])
 
     return <CardBrowser
         label="Map event properties to profile"
@@ -26,5 +30,6 @@ export default function EventToProfile() {
         deploymentTable="event_to_profile_mapping"
         deleteEndpoint='/event-to-profile/'
         icon="copy"
+        descriptionFunc={descFunc}
     />
 }

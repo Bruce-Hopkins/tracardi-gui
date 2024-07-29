@@ -20,7 +20,6 @@ import {SessionDetailsById} from "../../details/SessionDetails";
 import IconLabel from "../../misc/IconLabels/IconLabel";
 import {displayLocation} from "../../../../misc/location";
 import OsIcon from "../../misc/IconLabels/OsLabel";
-import DataTreeDialog from "../../dialog/DataTreeDialog";
 import {EventTypeFlowsAC} from "../../forms/inputs/EventTypeFlowsAC";
 import ModalDialog from "../../dialog/ModalDialog";
 import {TuiForm, TuiFormGroupField} from "../../tui/TuiForm";

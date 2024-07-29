@@ -60,8 +60,6 @@ const ListOfForms = ({
     const [listOfValues, setListOfValues] = useState(_values)
     const row = useRef(initCurrentRow)
 
-    console.log("render ListOfForms", listOfValues)
-
     const handleChange = (list) => {
         if (onChange instanceof Function) {
             onChange(Object.values(list))

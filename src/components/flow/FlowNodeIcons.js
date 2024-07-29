@@ -8,7 +8,7 @@ import {
     BsBoxArrowInRight, BsFillRecordFill, BsFillBarChartFill, BsCreditCard, BsSortAlphaDown,
     BsFolderCheck, BsClock, BsBoxArrowRight, BsGithub, BsPersonX, BsClockHistory, BsListCheck,
     BsTag, BsDatabase,BsDatabaseX, BsDatabaseCheck,BsDatabaseAdd, BsPlayCircle,
-    BsGear,BsPersonLinesFill
+    BsGear,BsPersonLinesFill, BsFillArrowDownCircleFill
 } from "react-icons/bs";
 import {AiOutlineSisternode, AiOutlineAlert, AiOutlineWhatsApp} from "react-icons/ai";
 import {TiTimes, TiFlowSwitch} from "react-icons/ti";
@@ -287,6 +287,7 @@ export const icons = {
     "subscription": (size) => <BsPersonLinesFill size={size}/>,
     "activate": (size) => <MdOutlineSendTimeExtension size={size}/>,
     "kafka": (size) => <SiApachekafka size={size}/>,
+    "circle-arrow-down": (size) => <BsFillArrowDownCircleFill size={size}/>,
 }
 
 
