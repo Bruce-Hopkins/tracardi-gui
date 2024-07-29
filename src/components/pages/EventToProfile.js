@@ -12,8 +12,9 @@ export default function EventToProfile() {
     const addFunc = useCallback((close) => <EventToProfileForm onSubmit={close}/>, []);
     const detailsFunc = useCallback((id, close) => <EventToProfileDetails id={id} onDeleteComplete={close}
                                                                          onEditComplete={close}/>, [])
-    const descFunc = useCallback((row) => (<>{
-        row.event_type?.name && <Tag>{row.event_type.name} ({row.event_type.id})</Tag>}
+    const descFunc = useCallback((row) => (<>
+        {row.event_type?.name && <Tag>{row.event_type.name} ({row.event_type.id})</Tag>}
+        {row.config?.condition && <Tag backgroundColor="#3B82F6" color="white" tip={row.config?.condition}>Conditional</Tag>}
         {row.description && <span style={{marginRight: 5}}>{row.description}</span>}</>), [])
 
     return <CardBrowser
