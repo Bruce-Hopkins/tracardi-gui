@@ -81,7 +81,7 @@ export default function ResourceDetails({id, onDeleteComplete}) {
     }
     const Details = () => <>
         <DetailsHeader
-            data={data}
+            data={{...data, credentials}}
             name={data?.name}
             type={data?.type}
             description={data?.description}
