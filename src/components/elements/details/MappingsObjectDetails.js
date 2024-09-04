@@ -41,6 +41,9 @@ export default function MappingsObjectDetails({properties, show, exclude, keyPre
                 case 2:
                     op = "appends data from"
                     break;
+                case 3:
+                    op = "is updated by"
+                    break;
                 default:
                     op = item.op
             }

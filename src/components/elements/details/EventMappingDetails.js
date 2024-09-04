@@ -79,7 +79,8 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
         </TuiFormGroup>}
         <TuiFormGroup>
 
-            <TuiFormGroupHeader header="Event Description Template" description="Description template is used to describe what does particular event type and to create a summary of its data."/>
+            <TuiFormGroupHeader header="Event Description Template"
+                                description="Description template is used to describe what does particular event type and to create a summary of its data."/>
             <TuiFormGroupContent>
                 {data.description ? data.description
                     : <NoData header="No description template">
@@ -92,8 +93,9 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
             <TuiFormGroupHeader header="Event Journey Mapping"/>
             <TuiFormGroupContent>
                 {data.journey ? <PropertyField name="Journey stage" content={data.journey} underline={false}/>
-                : <NoData header="No journey mapping">
-                        <span style={{textAlign: "center"}}>This event type is not mapped to any customer journey state.</span>
+                    : <NoData header="No journey mapping">
+                        <span
+                            style={{textAlign: "center"}}>This event type is not mapped to any customer journey state.</span>
                     </NoData>}
             </TuiFormGroupContent>
         </TuiFormGroup>
@@ -107,7 +109,8 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
             <TuiFormGroupContent>
                 {!isEmptyObjectOrNull(data?.index_schema) ?
                     objectMap(data?.index_schema, (key, value) => {
-                        return <AssignValueToKey key={key} value={`event@properties.${key}`} label={`event@traits.${value}`} op="moves to"/>
+                        return <AssignValueToKey key={key} value={`event@properties.${key}`}
+                                                 label={`event@traits.${value}`} op="moves to"/>
                     }) : <NoData header="No data mapping">
                         <span style={{textAlign: "center"}}>Data is stored in event properties, it can be searched but it will not be visible as event traits, and no reporting will be possible.</span>
                     </NoData>
@@ -115,16 +118,16 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
             </TuiFormGroupContent>
         </TuiFormGroup>
         {!data.build_in && <Rows style={{marginTop: 20, marginBottom: 20}}>
-                <ProductionButton onClick={handleEdit}
-                        icon={<VscEdit size={20}/>}
-                        label="Edit" disabled={typeof data === "undefined"}/>
-                <ProductionButton
-                    progress={deleteProgress}
-                    icon={<VscTrash size={20}/>}
-                    onClick={handleDelete}
-                    label="Delete"
-                    disabled={typeof data === "undefined"}/>
-            </Rows>}
+            <ProductionButton onClick={handleEdit}
+                              icon={<VscEdit size={20}/>}
+                              label="Edit" disabled={typeof data === "undefined"}/>
+            <ProductionButton
+                progress={deleteProgress}
+                icon={<VscTrash size={20}/>}
+                onClick={handleDelete}
+                label="Delete"
+                disabled={typeof data === "undefined"}/>
+        </Rows>}
     </TuiForm>
 
     return <div className="Box10" style={{height: "100%"}}>
