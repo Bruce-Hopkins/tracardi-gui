@@ -6,6 +6,7 @@ import {ProfileDetailsById} from "./ProfileDetails";
 import SessionContextInfo from "./SessionContextInfo";
 import ProfileLabel from "../misc/IconLabels/ProfileLabel";
 import Chip from "@mui/material/Chip";
+import Tag from "../misc/Tag";
 
 export default function SessionCardInfo({session, displayContext=true}) {
 
@@ -19,7 +20,10 @@ export default function SessionCardInfo({session, displayContext=true}) {
             labelWidth={labelWidth}
             name="Channel"
             content={session?.metadata?.channel}/>}
-
+         {session?.context?.referer?.host && <PropertyField
+             labelWidth={labelWidth}
+             name="Referer"
+             content={<Tag tip="This session origin">{session.context.referer.host}</Tag>}/>}
          <PropertyField labelWidth={labelWidth} name="Created"
                         content={<DateValue date={session?.metadata?.time?.create}/>
                         }/>

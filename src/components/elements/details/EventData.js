@@ -117,7 +117,8 @@ const EventData = ({event, metadata, allowedDetails = [], routing=true}) => {
                 {event?.source && <PropertyField name="Event source" content={event.source.id} drawerSize={820} detailsRoles={['admin', 'developer']}>
                     {allowedDetails.includes("source") && <EventSourceDetails id={event.source.id}/>}
                 </PropertyField>}
-
+                {event?.context?.page?.referer?.host &&
+                <PropertyField name="Referer" content={<Tag>{event.context.page.referer.host}</Tag>}/>}
                 <PropertyField name="Channel" content={event?.metadata?.channel}/>
             </TuiFormGroupContent>
         </TuiFormGroup>

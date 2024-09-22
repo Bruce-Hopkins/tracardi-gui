@@ -31,6 +31,7 @@ import EventAsyncTag from "../../misc/EventAsyncTag";
 import CrossDomainEvent from "../../misc/CrossDomainEvent";
 import {JsonModalButton} from "../../forms/buttons/JsonModalDetailsButton";
 import {UtmTags} from "../../misc/UtmTags";
+import {OriginTag} from "../../misc/OriginTag";
 import Tag from "../../misc/Tag";
 
 export function EventRow({row, filterFields}) {
@@ -110,6 +111,11 @@ export function EventRow({row, filterFields}) {
                                      device={row?.device?.type}
                                      resolution={row?.device?.resolution}/>}
                 />}
+                {row?.context?.page?.referer?.host &&
+                <PropertyField labelWidth={labelWidth}
+                               name="Referer"
+                               content={<Tag tip="Customer came from">{row.context.page.referer.host}</Tag>}/>
+                }
                 {displayChannel && row?.metadata?.channel &&
                 <PropertyField labelWidth={labelWidth} name="Channel" content={row?.metadata.channel}/>}
                 {row?.utm?.source &&
@@ -165,7 +171,7 @@ export function EventRow({row, filterFields}) {
                                        content={
                                            <div style={{display: "flex", gap: 5, alignItems: "center"}}>
                                                <EventTypeTag event={row}/>
-                                               {row?.request?.headers?.referer && <Tag tip="Origin">{row.request.headers.referer}</Tag>}
+                                               <OriginTag event={row}/>
                                                {/*<EventStatusTag label={row?.metadata?.status}/>*/}
                                                <CrossDomainEvent event={row}/>
                                                <EventValidation eventMetaData={row?.metadata}/>
