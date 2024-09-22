@@ -15,7 +15,7 @@ import ProfileLabel from "../../misc/IconLabels/ProfileLabel";
 import EventSourceDetails from "../../details/EventSourceDetails";
 import Button from "../../forms/Button";
 import {BsGlobe} from "react-icons/bs";
-import {VscDebug, VscJson} from "react-icons/vsc";
+import {VscDebug} from "react-icons/vsc";
 import {SessionDetailsById} from "../../details/SessionDetails";
 import IconLabel from "../../misc/IconLabels/IconLabel";
 import {displayLocation} from "../../../../misc/location";
@@ -30,6 +30,7 @@ import MergingAlert from "../../misc/MergingAlert";
 import EventAsyncTag from "../../misc/EventAsyncTag";
 import CrossDomainEvent from "../../misc/CrossDomainEvent";
 import {JsonModalButton} from "../../forms/buttons/JsonModalDetailsButton";
+import {UtmTags} from "../../misc/UtmTags";
 
 export function EventRow({row, filterFields}) {
 
@@ -73,7 +74,12 @@ export function EventRow({row, filterFields}) {
 
         </ModalDialog>}
         <div style={{display: "flex"}}>
-            <div style={{flex: "1 1 0", minWidth: 560, borderRight: "solid 1px rgba(128,128,128, 0.5)", paddingRight: 17}}>
+            <div style={{
+                flex: "1 1 0",
+                minWidth: 565,
+                borderRight: "solid 1px rgba(128,128,128, 0.5)",
+                paddingRight: 17
+            }}>
                 <PropertyField labelWidth={labelWidth} name="id" content={<IdLabel label={row?.id}/>}/>
                 {displayCreateTime && row?.metadata?.time?.create &&
                 <PropertyField labelWidth={labelWidth} name="Created" content={<>
@@ -92,7 +98,8 @@ export function EventRow({row, filterFields}) {
                 </>}/>
                 {row?.device?.geo?.country?.name && <PropertyField labelWidth={labelWidth} name="Location" content={
                     <IconLabel
-                        value={<span title={row?.device?.ip} style={{cursor: "help"}}>{displayLocation(row?.device?.geo)}</span>}
+                        value={<span title={row?.device?.ip}
+                                     style={{cursor: "help"}}>{displayLocation(row?.device?.geo)}</span>}
                         icon={<BsGlobe size={20} style={{marginRight: 5}}/>}
                     />}/>}
                 {row?.os?.name && <PropertyField
@@ -104,6 +111,8 @@ export function EventRow({row, filterFields}) {
                 />}
                 {displayChannel && row?.metadata?.channel &&
                 <PropertyField labelWidth={labelWidth} name="Channel" content={row?.metadata.channel}/>}
+                {row?.utm?.source &&
+                <PropertyField labelWidth={labelWidth} name="UTM" content={<UtmTags utm={row?.utm}/>}/>}
                 <PropertyField labelWidth={labelWidth}
                                name={window?.CONFIG?.profile?.id || "Profile id"}
                                content={<ProfileLabel label={row?.profile?.id}
@@ -119,7 +128,7 @@ export function EventRow({row, filterFields}) {
                 {displaySource && <PropertyField labelWidth={labelWidth}
                                                  name="Source id"
                                                  content={<IdLabel label={row?.source?.id}/>}
-                detailsRoles={['admin', 'maintainer', 'developer']}
+                                                 detailsRoles={['admin', 'maintainer', 'developer']}
                 >
                     <EventSourceDetails id={row?.source?.id}/>
                 </PropertyField>}
@@ -152,22 +161,30 @@ export function EventRow({row, filterFields}) {
                     <div style={{paddingRight: 15, marginBottom: 10}}>
                         <PropertyField underline={false}
                                        drawerSize={1000}
-                                       content={<div style={{display: "flex", gap: 5, alignItems: "center"}}>
-                                           <EventTypeTag event={row} />
-                                           {/*<EventStatusTag label={row?.metadata?.status}/>*/}
-                                           <CrossDomainEvent event={row}/>
-                                           <EventValidation eventMetaData={row?.metadata}/>
-                                           <MergingAlert eventMetaData={row?.metadata}/>
-                                           <EventWarnings eventMetaData={row?.metadata}/>
-                                           <EventErrorTag eventMetaData={row?.metadata}/>
-                                           <EventAsyncTag event={row} />
-                                           {row.journey?.state && <EventJourneyTag>{row.journey.state}</EventJourneyTag>}
-                                           {row?.hit?.name &&
-                                           <span title={row?.hit?.url} style={{cursor: "help"}}>{row?.hit?.name}</span>}
-                                       </div>}>
+                                       content={
+                                           <div style={{display: "flex", gap: 5, alignItems: "center"}}>
+                                               <EventTypeTag event={row}/>
+                                               {/*<EventStatusTag label={row?.metadata?.status}/>*/}
+                                               <CrossDomainEvent event={row}/>
+                                               <EventValidation eventMetaData={row?.metadata}/>
+                                               <MergingAlert eventMetaData={row?.metadata}/>
+                                               <EventWarnings eventMetaData={row?.metadata}/>
+                                               <EventErrorTag eventMetaData={row?.metadata}/>
+                                               <EventAsyncTag event={row}/>
+                                               {row.journey?.state &&
+                                               <EventJourneyTag>{row.journey.state}</EventJourneyTag>}
+
+                                           </div>}>
                             <EventDetailsById id={row?.id}/>
                         </PropertyField>
                     </div>
+
+                    {row?.hit?.name &&
+                    <fieldset style={{borderWidth: "1px 0 0 0", borderRadius: 0}}>
+                        <legend>Page Title</legend>
+                        <div title={row?.hit?.url}
+                             style={{cursor: "help"}}>{row?.hit?.name}</div>
+                    </fieldset>}
 
                     {!isEmptyObject(row?.properties) && <fieldset style={{borderWidth: "1px 0 0 0", borderRadius: 0}}>
                         <legend>Properties</legend>
@@ -184,8 +201,9 @@ export function EventRow({row, filterFields}) {
                 </div>
                 <div style={{display: "flex"}}>
                     <JsonModalButton data={row}/>
-                    {window._env_.SERVER?.ENABLE_WORKFLOW !== false && <Button label="Debug" size="small" icon={<VscDebug size={20}/>}
-                                                                     onClick={() => handleDebugClick(true)}/>}
+                    {window._env_.SERVER?.ENABLE_WORKFLOW !== false &&
+                    <Button label="Debug" size="small" icon={<VscDebug size={20}/>}
+                            onClick={() => handleDebugClick(true)}/>}
 
                 </div>
             </div>
