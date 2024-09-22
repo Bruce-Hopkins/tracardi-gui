@@ -165,7 +165,7 @@ export function EventRow({row, filterFields}) {
                                        content={
                                            <div style={{display: "flex", gap: 5, alignItems: "center"}}>
                                                <EventTypeTag event={row}/>
-                                               {row?.request?.headers?.referer && <Tag tip="Referer URL">{row.request.headers.referer}</Tag>}
+                                               {row?.request?.headers?.referer && <Tag tip="Origin">{row.request.headers.referer}</Tag>}
                                                {/*<EventStatusTag label={row?.metadata?.status}/>*/}
                                                <CrossDomainEvent event={row}/>
                                                <EventValidation eventMetaData={row?.metadata}/>
