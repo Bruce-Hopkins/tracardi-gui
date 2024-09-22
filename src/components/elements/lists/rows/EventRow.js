@@ -31,6 +31,7 @@ import EventAsyncTag from "../../misc/EventAsyncTag";
 import CrossDomainEvent from "../../misc/CrossDomainEvent";
 import {JsonModalButton} from "../../forms/buttons/JsonModalDetailsButton";
 import {UtmTags} from "../../misc/UtmTags";
+import Tag from "../../misc/Tag";
 
 export function EventRow({row, filterFields}) {
 
@@ -164,6 +165,7 @@ export function EventRow({row, filterFields}) {
                                        content={
                                            <div style={{display: "flex", gap: 5, alignItems: "center"}}>
                                                <EventTypeTag event={row}/>
+                                               {row?.request?.headers?.referer && <Tag tip="Referer URL">{row.request.headers.referer}</Tag>}
                                                {/*<EventStatusTag label={row?.metadata?.status}/>*/}
                                                <CrossDomainEvent event={row}/>
                                                <EventValidation eventMetaData={row?.metadata}/>
