@@ -24,7 +24,7 @@ function getCookie(name) {
 }
 
 export const track = async (sourceId, eventType, properties, async=true) => {
-    let trackerUrl = "//track.tracardi.com"
+    let trackerUrl = "https://track.tracardi.com"
 
     const profile = new storageValue("tracardi-profile-id")
     const cookie = getCookie("tracardi-session-id")
