@@ -56,7 +56,6 @@ export default function BarChartElement({onLoadRequest: endpoint, refreshInterva
     const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
             const speed = payload[0]?.payload?.speed
-            console.log(speed)
             return (
                 <div className="ChartToolTip">
                     <p>{`Start time : ${label}`}</p>

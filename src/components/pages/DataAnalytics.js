@@ -44,7 +44,7 @@ export default function DataAnalytics({
     };
 
     const convertSliderValue = (value) => {
-        if (value === max) {
+        if (!value || value === max) {
             return null;
         } else if (value >= 364 + 24 && value < max) {
             return {type: "minus", value: -(max - value), entity: "minute"}
@@ -64,15 +64,15 @@ export default function DataAnalytics({
     };
 
     const _range = () => getSavedData(type, "Range") || [364, max]
-    const _minDate = () => getSavedData(type, "DateFrom") || convertSliderValue(_range[0])
-    const _maxDate = () => getSavedData(type, "DateTo") || convertSliderValue(_range[1])
+    const _minDate = () => convertSliderValue(_range()[0])
+    const _maxDate = () => convertSliderValue(_range()[1])
 
     const [refresh, setRefresh] = useState(getRefreshRate());
     const [range, setRange] = useState(_range())
     const [query, setQuery] = useState(
         addTimeZone({
-            minDate: _minDate(),
-            maxDate: _maxDate(),
+            minDate:  {absolute: null, delta: _minDate()},
+            maxDate:  {absolute: null, delta: _maxDate()},
             where: getSavedData(type, "Query") || "",
             limit: 30,
         })
@@ -82,8 +82,8 @@ export default function DataAnalytics({
         savedData(type, "Query", where);
         setFilterNumber(filterNumber + 1)
         setQuery(addTimeZone({
-            minDate: _minDate(),
-            maxDate: _maxDate(),
+            minDate: {absolute: null, delta: _minDate()},
+            maxDate:  {absolute: null, delta: _maxDate()},
             where: where,
             limit: 30,
         }));
@@ -109,14 +109,6 @@ export default function DataAnalytics({
             limit: 30,
         }));
 
-        savedData(type ,"DateTo", {
-            absolute: null,
-            delta: maxDate
-        });
-        savedData(type, "DateFrom", {
-            absolute: null,
-            delta: minDate
-        });
         savedData(type ,"Range", range);
 
         setFilterNumber(filterNumber + 1)
