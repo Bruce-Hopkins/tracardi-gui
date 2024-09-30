@@ -91,38 +91,6 @@ const EventSourceAdvancedForm = ({value: _value, onChange}) => {
                     </span>
                         </div>
                     </TuiFormGroupField>
-                    <TuiFormGroupField header="Event source requires user consent"
-                                       description="Data collected through this source requires user consent.
-                                   System will embed the Javascript snippet to get the user consents.">
-                        <div style={{display: "flex", alignItems: "center"}}>
-                            <Switch
-                                checked={value.requires_consent}
-                                onChange={(ev) => handleChange('requires_consent', ev.target.checked)}
-                                name="enabledSource"
-                            />
-                            <span>
-                        Data collected through this source requires user consent
-                    </span>
-                        </div>
-                    </TuiFormGroupField>
-                    <TuiFormGroupField header="Return profile data in response to client"
-                                       description="For security reasons, the system returns only the profile id when
-                                   collecting data (events). In justified cases, it is possible to provide the browser
-                                   with all data collected in the profile. When turned on, set event
-                                   options to 'profile: true' to include profile data in response. Read 'event tracking'
-                                   chapter in manual for details and use this option with caution. ">
-                        <NotImplemented>This feature is disabled for security reasons. This feature will be removed in future versions. Use Create Response in the workflow.</NotImplemented>
-                        <div style={{display: "flex", alignItems: "center"}}>
-                            <Switch
-                                checked={value.returns_profile}
-                                onChange={(ev) => handleChange('returns_profile', ev.target.checked)}
-                                name="returnsProfile"
-                            />
-                            <span>
-                        Return profile data with response
-                    </span>
-                        </div>
-                    </TuiFormGroupField>
                     <TuiFormGroupField header="Make events from this source always transitional"
                                        description="Transitional events are only processed but not saved in database. If you set
                                    source to collect only transitional events then no event will be stored in the system.
