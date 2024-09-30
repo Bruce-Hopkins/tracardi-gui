@@ -110,7 +110,7 @@ const SignInForm = () => {
 
         getLocation().then(result => {
             let properties = {}
-            if(envs.license === 'open-source'){
+            if(!envs?.license || envs.license === 'open-source'){
                 properties ={
                     license: "open-source",
                     email,
@@ -160,7 +160,7 @@ const SignInForm = () => {
             setProgress(false)
         }
     };
-
+    console.log(envs?.license)
     return (
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={signInTheme}>
