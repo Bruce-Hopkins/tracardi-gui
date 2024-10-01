@@ -43,7 +43,10 @@ export default function TestTrackForm({testId, onSave, sxOnly = false}) {
                 "properties": {}
             }
         ],
-        "context": {}
+        "context": {},
+        "options": {
+            "queue": false
+        }
     }
 
     const exampleContext = {
@@ -117,6 +120,7 @@ export default function TestTrackForm({testId, onSave, sxOnly = false}) {
         event_type: {id: "", name: ""},
         properties: "{}",
         async: true,
+        queue: defaultRequest.options.queue,
         context: "{}",
         request: JSON.stringify(defaultRequest, null, " "),
         response: ""
@@ -140,7 +144,10 @@ export default function TestTrackForm({testId, onSave, sxOnly = false}) {
                     "properties": parse(init?.properties) || {}
                 }
             ],
-            "context": parse(init?.context) || {}
+            "context": parse(init?.context) || {},
+            "options": {
+                "queue": init?.queue
+            }
         }
     }
     const {request} = useRequest()
@@ -319,8 +326,16 @@ export default function TestTrackForm({testId, onSave, sxOnly = false}) {
                             </TuiFormGroupField>
 
                             <TuiFormGroupField>
-                                <BoolInput label="Async event storing" value={data?.async}
-                                           onChange={v => handleChange({async: v})}/>
+                                <TuiColumnsFlex width={250}>
+                                    <TuiTopHeaderWrapper>
+                                        <BoolInput label="Async event storing" value={data?.async}
+                                                   onChange={v => handleChange({async: v})}/>
+                                    </TuiTopHeaderWrapper>
+                                    <TuiTopHeaderWrapper>
+                                        <BoolInput label="Queue payload" value={data?.queue}
+                                                   onChange={v => handleChange({queue: v})}/>
+                                    </TuiTopHeaderWrapper>
+                                </TuiColumnsFlex>
                             </TuiFormGroupField>
 
                             <TuiFormGroupContent>
