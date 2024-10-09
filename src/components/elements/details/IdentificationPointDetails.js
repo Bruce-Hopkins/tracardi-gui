@@ -62,7 +62,9 @@ export function IdentificationPointCard({data, onDeleteComplete, onEditComplete,
                                     then the customer's profile will be merged with other profiles that share
                                     the same email."/>
                 <TuiFormGroupContent>
-                    {data.source.name && <div style={{fontSize: 18}}><Tag backgroundColor="black" color="white">WHEN</Tag>event source is <Tag>{data.source.name}</Tag> AND:</div>}
+                    {data.source.name && <div style={{fontSize: 18}}>
+                        <Tag backgroundColor="black" color="white">WHEN</Tag>event type is <Tag>{data.event_type.id} ({data.event_type.name})</Tag> AND
+                        event source is <Tag>{data.source.name}</Tag> AND </div>}
                     { data?.fields &&
                         data?.fields.map((item, index) => {
                             return <AssignValueToKey key={index}

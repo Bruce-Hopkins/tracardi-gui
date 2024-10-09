@@ -24,9 +24,9 @@ export default function EventTypeMetadata({data}) {
                 />}
                 <PropertyField name="Name" content={data?.name}/>
             <PropertyField name="Description" content={data?.description}/>
-            <PropertyField name="Tags"
-                           content={<TuiTags tags={data?.tags}
-                                             size="small"/>}/>
+            {data?.tags && <PropertyField name="Tags"
+                           content={<TuiTags tags={data.tags}
+                                             size="small"/>}/>}
             <PropertyField name="Enabled"
                            underline={false}
                            content={<ActiveTag active={data?.enabled}/>}/>

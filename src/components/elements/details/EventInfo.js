@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import {object2dot} from "../../../misc/dottedObject";
 import PropertyField from "./PropertyField";
-import {TuiForm, TuiFormGroup, TuiFormGroupContent, TuiFormGroupHeader} from "../tui/TuiForm";
+import {TuiForm, TuiFormGroup, TuiFormGroupContent} from "../tui/TuiForm";
 import {isEmptyObjectOrNull} from "../../../misc/typeChecking";
 import EventSourceDetails from "./EventSourceDetails";
 import EventStatusTag from "../misc/EventStatusTag";

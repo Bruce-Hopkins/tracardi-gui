@@ -18,6 +18,7 @@ import {objectMap} from "../../../misc/mappers";
 import AssignValueToKey from "./AssignValueToKey";
 import {useRequest} from "../../../remote_api/requestClient";
 import ProductionButton from "../forms/ProductionButton";
+import Tag from "../misc/Tag";
 
 export function EventMappingCard({data, onDeleteComplete, onEditComplete, displayMetadata = true}) {
 
@@ -107,14 +108,18 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
                                 transferred, and no error will occur."
             />
             <TuiFormGroupContent>
-                {!isEmptyObjectOrNull(data?.index_schema) ?
-                    objectMap(data?.index_schema, (key, value) => {
-                        return <AssignValueToKey key={key} value={`event@properties.${key}`}
-                                                 label={`event@traits.${value}`} op="moves to"/>
-                    }) : <NoData header="No data mapping">
-                        <span style={{textAlign: "center"}}>Data is stored in event properties, it can be searched but it will not be visible as event traits, and no reporting will be possible.</span>
-                    </NoData>
-                }
+                <div style={{marginBottom: 10, fontSize: 22}}><Tag backgroundColor="black" color="white">WHEN</Tag>event type is <Tag>{data.event_type}</Tag>:</div>
+                <div style={{paddingLeft: 20}}>
+                    {!isEmptyObjectOrNull(data?.index_schema) ?
+                        objectMap(data?.index_schema, (key, value) => {
+                            return <AssignValueToKey key={key} value={`event@properties.${key}`}
+                                                     label={`event@traits.${value}`} op="moves to"/>
+                        }) : <NoData header="No data mapping">
+                            <span style={{textAlign: "center"}}>Data is stored in event properties, it can be searched but it will not be visible as event traits, and no reporting will be possible.</span>
+                        </NoData>
+                    }
+                </div>
+
             </TuiFormGroupContent>
         </TuiFormGroup>
         {!data.build_in && <Rows style={{marginTop: 20, marginBottom: 20}}>
