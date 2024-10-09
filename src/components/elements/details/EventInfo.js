@@ -25,76 +25,97 @@ import MergingAlert from "../misc/MergingAlert";
 import hasRoles from "../../authentication/hasRoles";
 import {KeyCloakContext} from "../../context/KeyCloakContext";
 import CrossDomainEvent from "../misc/CrossDomainEvent";
+import ProfileLabel from "../misc/IconLabels/ProfileLabel";
 
 
 const EventDataDetails = ({event, metadata, allowedDetails = []}) => {
 
     const authContext = useContext(KeyCloakContext)
 
+    const RequestData = () => {
+        const context = object2dot(event?.request);
+        return <div style={{margin: 20}}>{Object.keys(context).map(key => <PropertyField key={key} name={key}
+                                                                                         content={context[key]}/>)}</div>
+    }
+
+
     const ContextInfo = () => {
         const context = object2dot(event?.context);
-        return <div style={{margin: 20}}>{Object.keys(context).map(key => <PropertyField key={key} name={key} content={context[key]}/>)}</div>
+        return <div style={{margin: 20}}>{Object.keys(context).map(key => <PropertyField key={key} name={key}
+                                                                                         content={context[key]}/>)}</div>
     }
 
     const EventProperties = () => {
         const eventProperties = object2dot(event?.properties);
         return <div style={{margin: 20}}>{Object.keys(eventProperties).map(key => <PropertyField key={key} name={key}
-                                                                         content={eventProperties[key]}/>)}</div>
+                                                                                                 content={eventProperties[key]}/>)}</div>
     }
     const EventTraits = () => {
         const traits = object2dot(event?.traits);
         return <div style={{margin: 20}}>{Object.keys(traits).map(key => <PropertyField key={key} name={key}
-                                                                content={traits[key]}/>)}</div>
+                                                                                        content={traits[key]}/>)}</div>
     }
 
     return <TuiForm>
         <TuiFormGroup>
-            <TuiFormGroupHeader header="Event details"/>
-            <TuiFormGroupContent style={{display: "flex", flexDirection: "column"}}>
-                <PropertyField name="Id" content={<IdLabel label={event?.id}/>}>
-                    <EventDetails event={event}
-                                  routing={hasRoles(authContext?.state?.roles, ['admin', 'developer'])}/>
-                </PropertyField>
-                {metadata?.index && <PropertyField name="Index" content={metadata.index}/>}
-                <PropertyField name="Type"
-                               content={<EventTypeTag event={event} />}/>
-                {event?.metadata?.time?.create && <PropertyField name="Create time"
-                               content={<DateValue date={event?.metadata?.time?.create}/>}
-                />}
-                <PropertyField name="Insert time"
-                               content={<DateValue date={event?.metadata?.time?.insert}/>}
-                />
-                <PropertyField name="Status"
-                               content={<>
-                                   <CrossDomainEvent event={event}/>
-                                   <EventStatusTag label={event?.metadata?.status}/>
-                                   <MergingAlert eventMetaData={event?.metadata}/>
-                                   <EventValidation eventMetaData={event?.metadata}/>
-                                   <EventWarnings eventMetaData={event?.metadata}/>
-                                   <EventErrorTag eventMetaData={event?.metadata}/>
-                               </>}/>
-                {event.journey.state && <PropertyField name="Journey state"
-                               content={<EventJourneyTag>{event.journey.state}</EventJourneyTag>}/>}
-                {event?.session && <PropertyField name="Session id" content={event.session?.id}>
+            <Tabs tabs={["Event details", "Advanced"]}>
+                <TabCase id={0}>
+                    <TuiFormGroupContent style={{display: "flex", flexDirection: "column", padding: 20}}>
+                        <PropertyField name="Id" content={<IdLabel label={event?.id}/>}>
+                            <EventDetails event={event}
+                                          routing={hasRoles(authContext?.state?.roles, ['admin', 'developer'])}/>
+                        </PropertyField>
 
-                </PropertyField>}
-                {event?.source && <PropertyField name="Event source" content={event.source.id} drawerSize={820}>
-                    {allowedDetails.includes("source") && <EventSourceDetails id={event.source.id}/>}
-                </PropertyField>}
-                <PropertyField name="Tags"
-                               content={Array.isArray(event?.tags?.values) &&
-                               <TuiTags tags={event.tags.values} size="small"/>}
-                />
-                {Array.isArray(event?.metadata?.processed_by?.rules) && <PropertyField
-                    name="Routed by rules"
-                    content={<TuiTags tags={event.metadata?.processed_by?.rules} size="small"/>}/>}
+                        <PropertyField name="Type"
+                                       content={<EventTypeTag event={event}/>}/>
+                        {event?.metadata?.time?.create && <PropertyField name="Create time"
+                                                                         content={<DateValue
+                                                                             date={event?.metadata?.time?.create}/>}
+                        />}
+                        <PropertyField name="Insert time"
+                                       content={<DateValue date={event?.metadata?.time?.insert}/>}
+                        />
+                        <PropertyField name="Status"
+                                       content={<>
+                                           <CrossDomainEvent event={event}/>
+                                           <EventStatusTag label={event?.metadata?.status}/>
+                                           <MergingAlert eventMetaData={event?.metadata}/>
+                                           <EventValidation eventMetaData={event?.metadata}/>
+                                           <EventWarnings eventMetaData={event?.metadata}/>
+                                           <EventErrorTag eventMetaData={event?.metadata}/>
+                                       </>}/>
+                        {event.journey.state && <PropertyField name="Journey state"
+                                                               content={
+                                                                   <EventJourneyTag>{event.journey.state}</EventJourneyTag>}/>}
 
-            </TuiFormGroupContent>
+
+                    </TuiFormGroupContent>
+                </TabCase>
+                <TabCase id={1}>
+                    <TuiFormGroupContent style={{display: "flex", flexDirection: "column", padding: 20}}>
+                        {event?.session && <PropertyField name="Session id" content={event.session?.id}/>}
+                        {event?.profile && <PropertyField name="Profile id" content={<ProfileLabel label={event.profile?.id}/>}/>}
+                        {event?.source && <PropertyField name="Event source" content={event.source.id} drawerSize={820}>
+                            {allowedDetails.includes("source") && <EventSourceDetails id={event.source.id}/>}
+                        </PropertyField>}
+                        {metadata?.index && <PropertyField name="Index" content={metadata.index}/>}
+                        {metadata?.ip && <PropertyField name="IP Address" content={metadata.ip}/>}
+                        {Array.isArray(event?.metadata?.processed_by?.rules) && <PropertyField
+                            name="Routed by rules"
+                            content={<TuiTags tags={event.metadata?.processed_by?.rules} size="small"/>}/>}
+                        <PropertyField name="Tags"
+                                       content={Array.isArray(event?.tags?.values) &&
+                                       <TuiTags tags={event.tags.values} size="small"/>}
+                        />
+                    </TuiFormGroupContent>
+                </TabCase>
+            </Tabs>
         </TuiFormGroup>
         <TuiFormGroup>
-            <Tabs tabs={["Properties", "Traits", "Data", "Context"]}>
+            <Tabs tabs={["Properties", "Traits", "Data", "Context", "Request"]}>
                 <TabCase id={0}>
-                    {!isEmptyObjectOrNull(event?.properties) ? <TuiFormGroupContent><EventProperties/></TuiFormGroupContent> :
+                    {!isEmptyObjectOrNull(event?.properties) ?
+                        <TuiFormGroupContent><EventProperties/></TuiFormGroupContent> :
                         <NoData header="No properties">
                             This event does not have any properties.
                         </NoData>}
@@ -117,6 +138,12 @@ const EventDataDetails = ({event, metadata, allowedDetails = []}) => {
                     {!isEmptyObjectOrNull(event?.context) ? <TuiFormGroupContent><ContextInfo/></TuiFormGroupContent> :
                         <NoData header="No context">
                             This event does not have any context data.
+                        </NoData>}
+                </TabCase>
+                <TabCase id={4}>
+                    {!isEmptyObjectOrNull(event?.request) ? <TuiFormGroupContent><RequestData/></TuiFormGroupContent> :
+                        <NoData header="No request data">
+                            This event does not have any request data.
                         </NoData>}
                 </TabCase>
             </Tabs>
