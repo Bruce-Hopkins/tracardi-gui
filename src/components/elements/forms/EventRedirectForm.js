@@ -163,11 +163,11 @@ export default function EventRedirectForm({
             <TuiFormGroupHeader header="Redirect configuration"/>
             <TuiFormGroupContent>
                 <TuiFormGroupField header="Source"
-                                   description="Select event source through which you would like to collect the event.">
+                                   description="Select REDIRECT event source through which you would like to collect the event.">
                     <TuiSelectEventSource value={eventSource}
                                           onlyValueWithOptions={true}
                                           onSetValue={setEventSource}
-                                          label="Source"
+                                          label="Source of type redirect"
                                           type="redirect"
                     />
                 </TuiFormGroupField>

@@ -149,9 +149,7 @@ const AppBox = () => {
                             new PrivateTab(["admin", "developer"],
                                 <EventSources/>, "/inbound/sources", "Event Sources"),
                             new PrivateTab(["admin", "developer"],
-                                <EventRedirect/>, "/inbound/event/redirect", <>
-                                    <BsStar size={20} style={{marginRight: 5}}/>{"Event redirects"}
-                                </>)
+                                <EventRedirect/>, "/inbound/event/redirect", "Event redirects")
                         ]}
                         />
                     </Suspense>
