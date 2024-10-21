@@ -38,6 +38,8 @@ import DrawerButton from "../elements/forms/buttons/DrawerButton";
 import TestTrackForm from "../elements/forms/TestTrackForm";
 import MetaDataFrom from "../elements/forms/MetadataForm";
 import FeedDrawer from "../elements/lists/Feed";
+import HorizontalValueBar from "../elements/charts/HorizontalValueBar";
+import HorizontalValueBars from "../elements/charts/HorizontalValueBars";
 
 function ComparisonOperation({value, label, onChange}) {
 
@@ -311,6 +313,12 @@ export default function TryOut() {
     //value={{value:"123", ref:true}} autocomplete="profile"
     return (
         <div>
+            <HorizontalValueBars data={{
+                'Task A skadjksaldkljsa sajdjsakldjklasjd lksakldjklasj dklasjkldjaslkj': 50,
+                'Task B': "asas",
+                'Task C': {},
+                'Task D': 60
+            }}/>
             <FeedDrawer />
             <TextField size="small"
                        variant="outlined"

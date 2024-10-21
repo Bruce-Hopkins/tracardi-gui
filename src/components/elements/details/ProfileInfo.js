@@ -27,6 +27,7 @@ import Tag from "../misc/Tag";
 import ProfileCacheDetails from "./ProfileCacheDetails";
 import ProfileMergeDetails from "./ProfileMergeDetails";
 import "./ProfileInfo.css"
+import HorizontalValueBars from "../charts/HorizontalValueBars";
 
 export const ProfileCard = ({profile}) => {
     const profileFullName = profileName(profile)
@@ -208,13 +209,7 @@ export const ProfileData = ({profile}) => {
                     <TabCase id={1}>
                         <div className="ProfileInfoTab">
                             {!isEmptyObjectOrNull(profile?.interests)
-                                ? Object.keys(profile?.interests).map(key => <PropertyField
-                                    key={key}
-                                    name={key}
-                                    content={profile?.interests[key]}
-                                    field={`interests.${key}`}
-                                    metadata={profile?.metadata?.fields[`interests.${key}`]}
-                                />)
+                                ? <div><p>Top 15 Interests</p><HorizontalValueBars data={profile?.interests}/></div>
                                 : <NoData header="No Interests"/>}
                         </div>
                     </TabCase>
