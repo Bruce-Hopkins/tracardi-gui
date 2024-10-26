@@ -15,6 +15,7 @@ import EventTypeMetadata from "./EventTypeMetadata";
 import Tag from "../misc/Tag";
 import {useRequest} from "../../../remote_api/requestClient";
 import ProductionButton from "../forms/ProductionButton";
+import {DetailsHeader} from "./DetailsHeader";
 
 function Spanner({children}) {
     return <div style={{padding: 20}}>{children}</div>
@@ -28,7 +29,7 @@ export function EventReshapingCard({data, onDeleteComplete, onEditComplete, disp
     const confirm = useConfirm();
     const {request} = useRequest()
 
-    const onEditClick = () => {
+    const handleEditClick = () => {
         if (data) {
             setDisplayEdit(true);
         }
@@ -39,7 +40,7 @@ export function EventReshapingCard({data, onDeleteComplete, onEditComplete, disp
         setDisplayEdit(false);
     }
 
-    const onDelete = () => {
+    const handleDelete = () => {
         confirm({
             title: "Do you want to delete this event reshaping schema?",
             description: "This action can not be undone."
@@ -63,6 +64,18 @@ export function EventReshapingCard({data, onDeleteComplete, onEditComplete, disp
     }
 
     const Details = () => <>
+        <DetailsHeader
+            data={data}
+            name={data?.name}
+            type={data?.type}
+            description={data?.description}
+            icon="map-properties"
+            timestamp={data?.timestamp}
+            tags={data?.tags}
+            locked={data?.locked}
+            onDelete={handleDelete}
+            onEdit={handleEditClick}
+        />
         <TuiForm>
             {displayMetadata && <EventTypeMetadata data={data}/>}
             <TuiFormGroup>
@@ -101,13 +114,13 @@ export function EventReshapingCard({data, onDeleteComplete, onEditComplete, disp
         </TuiForm>
             <div style={{marginBottom: 20}}>
                 <Rows style={{marginTop: 20}}>
-                    <ProductionButton onClick={onEditClick}
+                    <ProductionButton onClick={handleEditClick}
                                       icon={<VscEdit size={20}/>}
                                       label="Edit"
                                       disabled={typeof data === "undefined"}/>
                     {onDeleteComplete && <ProductionButton
                         icon={<VscTrash size={20}/>}
-                        onClick={onDelete}
+                        onClick={handleDelete}
                         label="Delete"
                         disabled={typeof data === "undefined"}
                     />}

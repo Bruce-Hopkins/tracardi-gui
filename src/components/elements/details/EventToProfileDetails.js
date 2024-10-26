@@ -14,6 +14,7 @@ import MappingsObjectDetails from "./MappingsObjectDetails";
 import Tag from "../misc/Tag";
 import {useRequest} from "../../../remote_api/requestClient";
 import ProductionButton from "../forms/ProductionButton";
+import {DetailsHeader} from "./DetailsHeader";
 
 export function EventToProfileCard({data, onDeleteComplete, onEditComplete, displayMetadata = true}) {
 
@@ -23,7 +24,7 @@ export function EventToProfileCard({data, onDeleteComplete, onEditComplete, disp
     const confirm = useConfirm();
     const {request} = useRequest()
 
-    const onEditClick = () => {
+    const handleEditClick = () => {
         if (data) {
             setDisplayEdit(true);
         }
@@ -34,7 +35,7 @@ export function EventToProfileCard({data, onDeleteComplete, onEditComplete, disp
         if (onEditComplete instanceof Function) onEditComplete(flowData);
     }
 
-    const onDelete = () => {
+    const handleDelete = () => {
         confirm({
             title: "Do you want to delete this coping schema?",
             description: "This action can not be undone."
@@ -62,6 +63,18 @@ export function EventToProfileCard({data, onDeleteComplete, onEditComplete, disp
     }
 
     const Details = () => <>
+        <DetailsHeader
+            data={data}
+            name={data?.name}
+            type={data?.type}
+            description={data?.description}
+            icon="map-properties"
+            timestamp={data?.timestamp}
+            tags={data?.tags}
+            locked={data?.locked}
+            onDelete={handleDelete}
+            onEdit={handleEditClick}
+        />
         <TuiForm>
             {displayMetadata && <EventTypeMetadata data={data}/>}
             <TuiFormGroup>
@@ -98,13 +111,13 @@ export function EventToProfileCard({data, onDeleteComplete, onEditComplete, disp
         </TuiForm>
         {!data.build_in && <Rows style={{marginBottom: 20, marginTop: 20}}>
             <ProductionButton
-                onClick={onEditClick}
+                onClick={handleEditClick}
                 icon={<VscEdit size={20}/>}
                 label="Edit" disabled={typeof data === "undefined"}/>
             <ProductionButton
                 progress={deleteProgress}
                 icon={<VscTrash size={20}/>}
-                onClick={onDelete}
+                onClick={handleDelete}
                 label="Delete"
                 disabled={typeof data === "undefined"}/>
         </Rows>}

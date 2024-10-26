@@ -1,10 +1,10 @@
 import React, {useCallback} from "react";
 import "../elements/lists/CardBrowser.css";
 import CardBrowser from "../elements/lists/CardBrowser";
-import {VscCopy} from "react-icons/vsc";
 import EventToProfileForm from "../elements/forms/EventToProfileForm";
 import EventToProfileDetails from "../elements/details/EventToProfileDetails";
 import Tag from "../elements/misc/Tag";
+import FlowNodeIcons from "../flow/FlowNodeIcons";
 
 export default function EventToProfile() {
 
@@ -22,7 +22,7 @@ export default function EventToProfile() {
         description="List of schemas that define how you transfer information from events to your profile."
         urlFunc={urlFunc}
         buttonLabel="New mapping"
-        buttonIcon={<VscCopy size={20}/>}
+        buttonIcon={<FlowNodeIcons icon="map-properties"/>}
         drawerDetailsWidth={900}
         detailsFunc={detailsFunc}
         drawerAddTitle="New mapping"
@@ -30,7 +30,7 @@ export default function EventToProfile() {
         addFunc={addFunc}
         deploymentTable="event_to_profile_mapping"
         deleteEndpoint='/event-to-profile/'
-        icon="copy"
+        icon="map-properties"
         descriptionFunc={descFunc}
     />
 }

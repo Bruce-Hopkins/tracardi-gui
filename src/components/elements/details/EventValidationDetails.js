@@ -14,6 +14,7 @@ import EventTypeMetadata from "./EventTypeMetadata";
 import Tag from "../misc/Tag";
 import {useRequest} from "../../../remote_api/requestClient";
 import ProductionButton from "../forms/ProductionButton";
+import {DetailsHeader} from "./DetailsHeader";
 
 export function EventValidationCard({data, onDeleteComplete, onEditComplete, displayMetadata = true}) {
 
@@ -59,6 +60,18 @@ export function EventValidationCard({data, onDeleteComplete, onEditComplete, dis
     }
 
     const Details = () => <>
+        <DetailsHeader
+                data={data}
+                name={data?.name}
+                type={data?.type}
+                description={data?.description}
+                icon="validator"
+                timestamp={data?.timestamp}
+                tags={data?.tags}
+                locked={data?.locked}
+                onDelete={handleDelete}
+                onEdit={handleEditClick}
+            />
         <TuiForm>
             {displayMetadata && <EventTypeMetadata data={data}/>}
             {data.validation.condition && <TuiFormGroup>

@@ -19,6 +19,7 @@ import AssignValueToKey from "./AssignValueToKey";
 import {useRequest} from "../../../remote_api/requestClient";
 import ProductionButton from "../forms/ProductionButton";
 import Tag from "../misc/Tag";
+import {DetailsHeader} from "./DetailsHeader";
 
 export function EventMappingCard({data, onDeleteComplete, onEditComplete, displayMetadata = true}) {
 
@@ -136,6 +137,18 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
     </TuiForm>
 
     return <div className="Box10" style={{height: "100%"}}>
+        <DetailsHeader
+            data={data}
+            name={data?.name}
+            type={data?.type}
+            description={data?.description}
+            icon="map-properties"
+            timestamp={data?.timestamp}
+            tags={data?.tags}
+            locked={data?.locked}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+        />
         {data && <Details/>}
         <FormDrawer
             width={800}

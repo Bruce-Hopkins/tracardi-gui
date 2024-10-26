@@ -2,9 +2,9 @@ import React, {useCallback} from "react";
 import "../elements/lists/CardBrowser.css";
 import CardBrowser from "../elements/lists/CardBrowser";
 import EventMappingForm from "../elements/forms/EventMappingForm";
-import {BsFolderCheck} from "react-icons/bs";
 import EventMappingDetails from "../elements/details/EventMappingDetails";
 import EventJourneyTag from "../elements/misc/EventJourneyTag";
+import FlowNodeIcons from "../flow/FlowNodeIcons";
 
 export default function EventMapping() {
 
@@ -20,7 +20,7 @@ export default function EventMapping() {
         description="List of event types."
         urlFunc={urlFunc}
         buttonLabel="New mapping"
-        buttonIcon={<BsFolderCheck size={20}/>}
+        buttonIcon={<FlowNodeIcons icon="map-properties"/>}
         drawerDetailsWidth={900}
         detailsFunc={detailsFunc}
         drawerAddTitle="New mapping"
@@ -28,7 +28,7 @@ export default function EventMapping() {
         addFunc={addFunc}
         deploymentTable="event_mapping"
         deleteEndpoint="/event-type/mapping/"
-        icon="validator"
+        icon="map-properties"
         descriptionFunc={descFunc}
     />
 }
