@@ -6,7 +6,7 @@ import urlPrefix from "../../misc/UrlPrefix";
 import version from '../../misc/version';
 import {BiChevronLeftCircle, BiChevronRightCircle} from "react-icons/bi";
 import {BsGear} from "react-icons/bs";
-import {VscPulse, VscTools, VscOrganization} from "react-icons/vsc";
+import {VscPulse, VscTools, VscOrganization, VscLaw} from "react-icons/vsc";
 import {IoServerOutline} from "react-icons/io5";
 import {BsClipboardCheck, BsBoxArrowRight, BsBoxArrowInRight} from "react-icons/bs";
 import {useConfirm} from "material-ui-confirm";
@@ -126,6 +126,17 @@ function MainMenu({app, showAlert, changeRoute, onContextChange}) {
     }
 
     const style = {backgroundColor: theme.palette.primary.main, color: "#fff"}
+    const enableResources = window._env_.SERVER?.ENABLE_PROFILE_DESTINATIONS !== false || window._env_.SERVER?.ENABLE_EVENT_DESTINATIONS !== false || window._env_.SERVER?.ENABLE_WORKFLOW !== false
+    const enableAudiences = window._env_.SERVER?.ENABLE_AUDIENCES !== false
+    const enableWorkflows = window._env_.SERVER?.ENABLE_WORKFLOW !== false
+    const enableDest = window._env_.SERVER?.ENABLE_EVENT_DESTINATIONS !== false
+        || window._env_.SERVER?.ENABLE_PROFILE_DESTINATIONS !== false
+    const enableValidation = window._env_.SERVER?.ENABLE_EVENT_VALIDATION !== false
+    const enableMapping = window._env_.SERVER?.ENABLE_EVENT_RESHAPING !== false
+        || window._env_.SERVER?.ENABLE_EVENT_MAPPING !== false
+        || window._env_.SERVER?.ENABLE_EVENT_TO_PROFILE_MAPPING !== false
+    const enableDataCompliance =  window._env_.SERVER?.ENABLE_DATA_COMPLIANCE !== false
+    const enableIdentification =  window._env_.SERVER?.ENABLE_IDENTIFICATION_POINTS !== false
 
     return <div style={style} className={collapsed ? "MainMenu CollapsedMainMenu": "MainMenu FullMainMenu"}>
         <div>
@@ -134,14 +145,16 @@ function MainMenu({app, showAlert, changeRoute, onContextChange}) {
                 <MenuRow app={app} icon={<BsHouse size={20}/>} label="Dashboard" collapsed={collapsed} onClick={go("/dashboard")} route="/dashboard" roles={["admin", "developer", "marketer", "maintainer"]} style={{marginBottom: 20}}/>
 
                 {!window?.CONFIG?.menu?.inbound?.disable && <MenuRow app={app} icon={<BsBoxArrowInRight size={20}/>} label="Inbound Traffic" collapsed={collapsed} onClick={go("/inbound")} route="/inbound" roles={["admin", "developer"]}/>}
-                {!window?.CONFIG?.menu?.transformations?.disable && <MenuRow app={app} icon={<FlowNodeIcons icon="map-properties"  size={20}/>} label="Mapping" collapsed={collapsed} onClick={go("/transformations")} route="/transformations" roles={["admin", "developer"]}/>}
+                {!window?.CONFIG?.menu?.validation?.disable && enableValidation && <MenuRow app={app} icon={<FlowNodeIcons icon="validator"  size={20}/>} label="Validation" collapsed={collapsed} onClick={go("/validation")} route="/validation" roles={["admin", "developer"]}/>}
 
-                {!window?.CONFIG?.menu?.identification?.disable && <MenuRow app={app} icon={<FlowNodeIcons icon="identity"  size={20}/>} label="Identification" collapsed={collapsed} onClick={go("/identification")} route="/identification" roles={["admin", "developer"]}/>}
+                {!window?.CONFIG?.menu?.transformations?.disable && enableMapping && <MenuRow app={app} icon={<FlowNodeIcons icon="map-properties"  size={20}/>} label="Mapping" collapsed={collapsed} onClick={go("/transformations")} route="/transformations" roles={["admin", "developer"]}/>}
+
+                {!window?.CONFIG?.menu?.identification?.disable && enableIdentification && <MenuRow app={app} icon={<FlowNodeIcons icon="identity"  size={20}/>} label="Identification" collapsed={collapsed} onClick={go("/identification")} route="/identification" roles={["admin", "developer"]}/>}
                 {!window?.CONFIG?.menu?.data?.disable && <MenuRow app={app} icon={<BsFolder size={20}/>} label="Data" collapsed={collapsed} onClick={go("/data")} route="/data" roles={["admin", "developer", "marketer"]}/>}
-                {!window?.CONFIG?.menu?.outbound?.disable && <MenuRow app={app} icon={<BsBoxArrowRight size={20}/>} label="Outbound Traffic" collapsed={collapsed} onClick={go("/outbound")} route="/outbound" roles={["admin", "developer"]}/>}
+                {!window?.CONFIG?.menu?.outbound?.disable  && enableDest && <MenuRow app={app} icon={<BsBoxArrowRight size={20}/>} label="Outbound Traffic" collapsed={collapsed} onClick={go("/outbound")} route="/outbound" roles={["admin", "developer"]}/>}
 
-                {!window?.CONFIG?.menu?.audience?.disable && <MenuRow app={app} icon={<VscOrganization size={20}/>} label="Audience" collapsed={collapsed} onClick={go("/audience")} route="/audience" roles={["admin", "developer", "marketer"]} style={{marginTop: 20}}/>}
-                {!window?.CONFIG?.menu?.integration?.disable && window._env_.SERVER?.ENABLE_WORKFLOW !== false && <MenuRow app={app} icon={<BsGear size={20}/>} label="Automation" collapsed={collapsed} onClick={go("/processing")} route="/processing" roles={["admin", "developer"]}/>}
+                {!window?.CONFIG?.menu?.audience?.disable && enableAudiences && <MenuRow app={app} icon={<VscOrganization size={20}/>} label="Audience" collapsed={collapsed} onClick={go("/audience")} route="/audience" roles={["admin", "developer", "marketer"]} style={{marginTop: 20}}/>}
+                {!window?.CONFIG?.menu?.integration?.disable && enableWorkflows && <MenuRow app={app} icon={<BsGear size={20}/>} label="Automation" collapsed={collapsed} onClick={go("/processing")} route="/processing" roles={["admin", "developer"]}/>}
                 {/*{!window?.CONFIG?.menu?.triggers?.disable && <MenuRow app={app} icon={<BsPlayCircle size={20}/>} label="Triggers" collapsed={collapsed} onClick={go("/triggers")} route="/triggers" roles={["admin", "developer"]} />}*/}
                 {/*{!window?.CONFIG?.menu?.segmentation?.disable && <MenuRow app={app} icon={<VscOrganization size={20}/>} label="Segmentation" collapsed={collapsed} onClick={go("/segmentation")} route="/segmentation" roles={["admin", "developer", "marketer"]} />}*/}
 
@@ -150,7 +163,7 @@ function MainMenu({app, showAlert, changeRoute, onContextChange}) {
                 {!window?.CONFIG?.menu?.reporting?.disable && <MenuRow app={app} icon={<BsBarChartFill size={20}/>} label="Reporting" collapsed={collapsed} onClick={go("/reporting")} route="/reporting" roles={["admin", "developer"]} style={{marginTop: 20}}/>}
                 {!window?.CONFIG?.menu?.subscription?.disable && <MenuRow app={app} icon={<BsPersonLinesFill size={20}/>} label="Subscriptions" collapsed={collapsed} onClick={go("/subscription")} route="/subscription" roles={["admin", "developer"]} />}
 
-                {!window?.CONFIG?.menu?.resources?.disable && <MenuRow app={app} icon={<IoServerOutline size={20}/>} label="Resources" collapsed={collapsed} onClick={go("/resources")} route="/resources" roles={["admin", "developer"]} />}
+                {!window?.CONFIG?.menu?.resources?.disable && enableResources && <MenuRow app={app} icon={<IoServerOutline size={20}/>} label="Resources" collapsed={collapsed} onClick={go("/resources")} route="/resources" roles={["admin", "developer"]} />}
 
                 {!window?.CONFIG?.menu?.test?.disable && <MenuRow app={app} icon={<BsClipboardCheck size={20}/>} label="Tests" collapsed={collapsed} onClick={go("/test/form")} route="/test/form" roles={["admin", "developer"]} style={{marginTop: 20}}/>}
 
@@ -164,8 +177,14 @@ function MainMenu({app, showAlert, changeRoute, onContextChange}) {
                                                                     onClick={go("/monitoring")}
                                                                     route="/monitoring"
                                                                     roles={["admin"]}/>}
+            {!window?.CONFIG?.menu?.dataCompliance.disable && enableDataCompliance && <MenuRow app={app} icon={<VscLaw size={20}/>}
+                                                                       label="Compliance"
+                                                                       collapsed={collapsed}
+                                                                       onClick={go("/compliance")}
+                                                                       route="/compliance"
+                                                                       roles={["admin"]}/>}
             {!window?.CONFIG?.menu?.maintenance?.disable && <MenuRow app={app} icon={<VscTools size={20}/>}
-                                                                     label="Maintenance"
+                                                                     label="Settings"
                                                                      collapsed={collapsed}
                                                                      onClick={go("/maintenance")}
                                                                      route="/maintenance"

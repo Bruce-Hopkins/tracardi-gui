@@ -89,6 +89,53 @@ const AppBox = () => {
         setDarkMode(darkMode)
     }
 
+    const enableEventReshaping = window._env_.SERVER?.ENABLE_EVENT_RESHAPING !== false
+    const enableEventMapping = window._env_.SERVER?.ENABLE_EVENT_MAPPING !== false
+    const enableEventValidation = window._env_.SERVER?.ENABLE_EVENT_VALIDATION !== false
+    const enableEventToProfileMapping = window._env_.SERVER?.ENABLE_EVENT_TO_PROFILE_MAPPING !== false
+    const enableIdentificationPoints = window._env_.SERVER?.ENABLE_IDENTIFICATION_POINTS !== false
+
+    const mappingTabsRights = [
+        [enableEventReshaping , new PrivateTab(["admin", "developer"],
+            <EventReshaping/>, "/inbound/event/reshaping", <>
+                <BsStar size={20} style={{marginRight: 5}}/>{"Event reshaping"}
+            </>)],
+        [enableEventMapping, new PrivateTab(["admin", "developer"],
+            <EventMapping/>, "/inbound/event/management", <><BsStar size={20}
+                                                                    style={{marginRight: 5}}/>{"Event mapping"}</>
+        )],
+        [enableEventToProfileMapping, new PrivateTab(["admin", "developer"],
+            <EventToProfile/>, "/inbound/event-to-profile", "Event to profile mapping"
+        )],
+    ]
+
+    const validationTabsRights = [
+        [enableEventValidation, new PrivateTab(["admin", "developer"],
+            <EventValidation/>, "/inbound/event/validation", <>
+                <BsStar size={20} style={{marginRight: 5}}/>{"Event validation"}
+            </>)]
+    ]
+
+    const identificationTabRights = [
+        [enableIdentificationPoints, new PrivateTab(["admin", "developer"],
+            <IdentificationPoint/>, "/identification/point", <>
+                <BsStar size={20} style={{marginRight: 5}}/>{"Identification points"}
+            </>)],
+
+    ]
+
+    const validationTabs = validationTabsRights
+        .filter(([flag]) => flag) // Filter for items where the flag is true
+        .map(([, object]) => object); // Extract only the object
+
+    const mappingTabs = mappingTabsRights
+        .filter(([flag]) => flag) // Filter for items where the flag is true
+        .map(([, object]) => object); // Extract only the object
+
+    const identificationTab = identificationTabRights
+        .filter(([flag]) => flag) // Filter for items where the flag is true
+        .map(([, object]) => object); // Extract only the object
+
     return <DataContext.Provider value={production}>
         <ThemeProvider theme={darkMode ? darkTheme : (production ? productionTheme : stagingTheme)}>
         <MainContent onContextChange={handleContextChange}>
@@ -218,30 +265,25 @@ const AppBox = () => {
                 </ErrorBoundary>
             </PrivateRoute>
 
-            {/*Transformation*/}
+            {/*Validation*/}
+
+            <PrivateRoute path={urlPrefix("/validation")} roles={["admin", "developer"]}>
+                <ErrorBoundary>
+                    <Suspense fallback={<CenteredCircularProgress/>}>
+                        <TopBar onDarkMode={handleThemeChange}>Event Validation</TopBar>
+                        <PageTabs tabs={validationTabs}
+                        />
+                    </Suspense>
+                </ErrorBoundary>
+            </PrivateRoute>
+
+            {/*Mapping*/}
 
             <PrivateRoute path={urlPrefix("/transformations")} roles={["admin", "developer"]}>
                 <ErrorBoundary>
                     <Suspense fallback={<CenteredCircularProgress/>}>
                         <TopBar onDarkMode={handleThemeChange}>Data Mapping and Transformation</TopBar>
-                        <PageTabs tabs={[
-                            new PrivateTab(["admin", "developer"],
-                                <EventValidation/>, "/inbound/event/validation", <>
-                                    <BsStar size={20} style={{marginRight: 5}}/>{"Event validation"}
-                                </>),
-                            new PrivateTab(["admin", "developer"],
-                                <EventReshaping/>, "/inbound/event/reshaping", <>
-                                    <BsStar size={20} style={{marginRight: 5}}/>{"Event reshaping"}
-                                </>),
-                            new PrivateTab(["admin", "developer"],
-                                <EventMapping/>, "/inbound/event/management", <><BsStar size={20}
-                                                                                           style={{marginRight: 5}}/>{"Event mapping"}</>
-                            ),
-                            new PrivateTab(["admin", "developer"],
-                                <EventToProfile/>, "/inbound/event-to-profile", "Event to profile mapping"
-                            ),
-
-                        ]}
+                        <PageTabs tabs={mappingTabs}
                         />
                     </Suspense>
                 </ErrorBoundary>
@@ -252,15 +294,23 @@ const AppBox = () => {
             <PrivateRoute path={urlPrefix("/identification")} roles={["admin", "developer", "marketer"]}>
                 <ErrorBoundary>
                     <Suspense fallback={<CenteredCircularProgress/>}>
-                        <TopBar onDarkMode={handleThemeChange}>Identity Resolution and Consents</TopBar>
+                        <TopBar onDarkMode={handleThemeChange}>Identity Resolution</TopBar>
+                        <PageTabs tabs={identificationTab}
+                        />
+                    </Suspense>
+                </ErrorBoundary>
+            </PrivateRoute>
+
+            {/*Compliance*/}
+
+            <PrivateRoute path={urlPrefix("/compliance")} roles={["admin", "developer", "marketer"]}>
+                <ErrorBoundary>
+                    <Suspense fallback={<CenteredCircularProgress/>}>
+                        <TopBar onDarkMode={handleThemeChange}>Data Compliance</TopBar>
                         <PageTabs tabs={[
-                            new PrivateTab(["admin", "developer", "marketer"],
+                            new PrivateTab(["admin", "developer"],
                                 <Consents/>, "/consents/type", "Consent types"),
                             new PrivateTab(["admin", "developer"],
-                                <IdentificationPoint/>, "/identification/point", <>
-                                    <BsStar size={20} style={{marginRight: 5}}/>{"Identification points"}
-                                </>),
-                            new PrivateTab(["admin", "developer", "marketer"],
                                 <ConsentsDataCompliance/>, "/consents/compliance", <>
                                     <BsStar size={20}
                                             style={{marginRight: 5}}/>{"Event data compliance"}</>)

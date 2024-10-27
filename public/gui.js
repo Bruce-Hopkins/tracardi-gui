@@ -86,8 +86,16 @@ const getConfig = () => {
                 name: "Collection",
                 disable: false
             },
+            validation: {
+                name: "Validation",
+                disable: false
+            },
             identification: {
                 name: "Identification",
+                disable: false
+            },
+            dataCompliance: {
+                name: "Data Compliance",
                 disable: false
             },
             reporting: {

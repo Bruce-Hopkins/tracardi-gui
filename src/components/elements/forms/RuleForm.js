@@ -57,6 +57,8 @@ function EventTriggerForm({
         }
     }
 
+    const enableDataCompliance =  window._env_.SERVER?.ENABLE_DATA_COMPLIANCE !== false
+
     return <TuiFormGroupContent>
         <TuiFormGroupField header="Event type" description="Type event type to filter incoming events. If there
                 are no events please start collecting data first.">
@@ -81,7 +83,7 @@ function EventTriggerForm({
                 />
             </div>
         </TuiFormGroupField>
-        <TuiFormGroupField header="Required consents"
+        {enableDataCompliance && <TuiFormGroupField header="Required consents"
                            description="Select consents that are required to route selected event type. Leave empty if none is required.">
             <TuiSelectMultiConsentType
                 label="Required consents"
@@ -89,7 +91,7 @@ function EventTriggerForm({
                 fullWidth={true}
                 onSetValue={value => setConsents(value)}
             />
-        </TuiFormGroupField>
+        </TuiFormGroupField>}
     </TuiFormGroupContent>
 }
 
