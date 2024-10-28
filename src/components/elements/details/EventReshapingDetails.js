@@ -75,11 +75,10 @@ export function EventReshapingCard({data, onDeleteComplete, onEditComplete, disp
             onDeleteComplete={onDeleteComplete}
         />
         <TuiForm>
-            {displayMetadata && <EventTypeMetadata data={data}/>}
             <TuiFormGroup>
-                <TuiFormGroupHeader header="Trigger condition" description="Event reshaping is triggered only when."/>
+                <TuiFormGroupHeader header="Trigger condition"/>
                 <TuiFormGroupContent>
-                    <div style={{fontSize: 18}}><Tag backgroundColor="black" color="white">WHEN</Tag> event type is <Tag>{data?.event_type}</Tag></div>
+                    <div style={{fontSize: 18}}><Tag backgroundColor="black" color="white">WHEN</Tag>event type is <Tag>{data?.event_type}</Tag></div>
                     {data?.reshaping?.condition && <div style={{fontSize: 18}}>
                     <Tag backgroundColor="black" color="white">AND</Tag>{data.reshaping.condition}
                 </div>}

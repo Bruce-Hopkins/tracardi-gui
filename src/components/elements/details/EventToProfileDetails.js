@@ -7,7 +7,6 @@ import {TuiForm, TuiFormGroup, TuiFormGroupContent, TuiFormGroupHeader} from "..
 import {isEmptyObjectOrNull} from "../../../misc/typeChecking";
 import NoData from "../misc/NoData";
 import EventToProfileForm from "../forms/EventToProfileForm";
-import EventTypeMetadata from "./EventTypeMetadata";
 import MappingsObjectDetails from "./MappingsObjectDetails";
 import Tag from "../misc/Tag";
 import {useRequest} from "../../../remote_api/requestClient";
@@ -74,10 +73,8 @@ export function EventToProfileCard({data, onDeleteComplete, onEditComplete, disp
             onDeleteComplete={onDeleteComplete}
         />
         <TuiForm>
-            {displayMetadata && <EventTypeMetadata data={data}/>}
             <TuiFormGroup>
-                <TuiFormGroupHeader header="Trigger condition"
-                                    description="Event data will be copied only if the below condition is met."/>
+                <TuiFormGroupHeader header="Trigger condition"/>
                 <TuiFormGroupContent>
                     <div style={{fontSize: 18, marginBottom: 5}}><Tag backgroundColor="black" color="white">when</Tag>event
                         type <Tag>equals</Tag>{data?.event_type?.id}</div>

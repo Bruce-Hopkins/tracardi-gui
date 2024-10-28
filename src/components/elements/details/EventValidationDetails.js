@@ -8,7 +8,6 @@ import EventValidationForm from "../forms/EventValidationForm";
 import JsonBrowser from "../misc/JsonBrowser";
 import {isEmptyObject} from "../../../misc/typeChecking";
 import NoData from "../misc/NoData";
-import EventTypeMetadata from "./EventTypeMetadata";
 import Tag from "../misc/Tag";
 import {useRequest} from "../../../remote_api/requestClient";
 import {DetailsHeader} from "./DetailsHeader";
@@ -71,7 +70,12 @@ export function EventValidationCard({data, onDeleteComplete, onEditComplete, dis
                 onDeleteComplete={onDeleteComplete}
             />
         <TuiForm>
-            {displayMetadata && <EventTypeMetadata data={data}/>}
+            <TuiFormGroup>
+                <TuiFormGroupHeader header="Trigger condition"/>
+                <TuiFormGroupContent>
+                    <div style={{fontSize: 18}}><Tag backgroundColor="black" color="white">WHEN</Tag>event type is <Tag>{data?.event_type}</Tag></div>
+                </TuiFormGroupContent>
+            </TuiFormGroup>
             {data.validation.condition && <TuiFormGroup>
                 <TuiFormGroupHeader header="Trigger condition"
                                     description="This validation schema is triggered only when."/>

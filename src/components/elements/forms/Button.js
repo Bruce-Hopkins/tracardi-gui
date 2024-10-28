@@ -25,8 +25,7 @@ export default function Button({label, onClick, className, style, icon, disabled
                       style={{margin: 1, ...style}}
                       className={className}
                       size={size}
-    >   
-        {label}
+    >{label}
     </MuiButton>
 
 }

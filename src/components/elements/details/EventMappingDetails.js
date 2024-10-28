@@ -5,13 +5,9 @@ import FormDrawer from "../drawers/FormDrawer";
 import PropTypes from "prop-types";
 import {TuiForm, TuiFormGroup, TuiFormGroupContent, TuiFormGroupHeader} from "../tui/TuiForm";
 import EventMappingForm from "../forms/EventMappingForm";
-import TuiTags from "../tui/TuiTags";
 import PropertyField from "./PropertyField";
-import IconLabel from "../misc/IconLabels/IconLabel";
-import FlowNodeIcons from "../../flow/FlowNodeIcons";
 import {isEmptyObjectOrNull} from "../../../misc/typeChecking";
 import NoData from "../misc/NoData";
-import ActiveTag from "../misc/ActiveTag";
 import {objectMap} from "../../../misc/mappers";
 import AssignValueToKey from "./AssignValueToKey";
 import {useRequest} from "../../../remote_api/requestClient";
@@ -66,6 +62,12 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
 
     const Details = () => <TuiForm>
         <TuiFormGroup>
+            <TuiFormGroupHeader header="Trigger condition"/>
+            <TuiFormGroupContent>
+                <div style={{fontSize: 18}}><Tag backgroundColor="black" color="white">WHEN</Tag>event type is <Tag>{data?.event_type}</Tag></div>
+            </TuiFormGroupContent>
+        </TuiFormGroup>
+        <TuiFormGroup>
 
             <TuiFormGroupHeader header="Event Properties Mapping"
                                 description="The schema outlines how properties are transferred to data or traits.
@@ -73,8 +75,7 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
                                 transferred, and no error will occur."
             />
             <TuiFormGroupContent>
-                <div style={{marginBottom: 10, fontSize: 22}}><Tag backgroundColor="black" color="white">WHEN</Tag>event type is <Tag>{data.event_type}</Tag>:</div>
-                <div style={{paddingLeft: 20}}>
+                <div style={{fontSize: 18}}>
                     {!isEmptyObjectOrNull(data?.index_schema) ?
                         objectMap(data?.index_schema, (key, value) => {
                             return <AssignValueToKey key={key} value={`event@properties.${key}`}
