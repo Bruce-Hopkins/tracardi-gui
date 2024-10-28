@@ -65,39 +65,6 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
     }
 
     const Details = () => <TuiForm>
-        {displayMetadata && <TuiFormGroup>
-            <TuiFormGroupContent>
-                <PropertyField name="Event type Id"
-                               content={<IconLabel value={data.event_type} icon={<FlowNodeIcons icon="event"/>}/>}/>
-                <PropertyField name="Name" content={data.name}/>
-                <PropertyField name="Tags"
-                               content={<TuiTags tags={data.tags} size="small"/>}/>
-                <PropertyField name="Indexing enabled" underline={false}
-                               content={<ActiveTag active={data.enabled}/>}/>
-            </TuiFormGroupContent>
-        </TuiFormGroup>}
-        <TuiFormGroup>
-
-            <TuiFormGroupHeader header="Event Description Template"
-                                description="Description template is used to describe what does particular event type and to create a summary of its data."/>
-            <TuiFormGroupContent>
-                {data.description ? data.description
-                    : <NoData header="No description template">
-                        <span style={{textAlign: "center"}}>This event type does not have description template.</span>
-                    </NoData>}
-            </TuiFormGroupContent>
-        </TuiFormGroup>
-        <TuiFormGroup>
-
-            <TuiFormGroupHeader header="Event Journey Mapping"/>
-            <TuiFormGroupContent>
-                {data.journey ? <PropertyField name="Journey stage" content={data.journey} underline={false}/>
-                    : <NoData header="No journey mapping">
-                        <span
-                            style={{textAlign: "center"}}>This event type is not mapped to any customer journey state.</span>
-                    </NoData>}
-            </TuiFormGroupContent>
-        </TuiFormGroup>
         <TuiFormGroup>
 
             <TuiFormGroupHeader header="Event Properties Mapping"
@@ -118,6 +85,27 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
                     }
                 </div>
 
+            </TuiFormGroupContent>
+        </TuiFormGroup>
+        <TuiFormGroup>
+            <TuiFormGroupHeader header="Event Journey Mapping"/>
+            <TuiFormGroupContent>
+                {data.journey ? <PropertyField name="Journey stage" content={data.journey} underline={false}/>
+                    : <NoData header="No journey mapping">
+                        <span
+                            style={{textAlign: "center"}}>This event type is not mapped to any customer journey state.</span>
+                    </NoData>}
+            </TuiFormGroupContent>
+        </TuiFormGroup>
+        <TuiFormGroup>
+
+            <TuiFormGroupHeader header="Event Description Template"
+                                description="Description template is used to describe what does particular event type and to create a summary of its data."/>
+            <TuiFormGroupContent>
+                {data.description ? data.description
+                    : <NoData header="No description template">
+                        <span style={{textAlign: "center"}}>This event type does not have description template.</span>
+                    </NoData>}
             </TuiFormGroupContent>
         </TuiFormGroup>
     </TuiForm>
