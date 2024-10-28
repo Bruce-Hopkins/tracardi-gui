@@ -12,6 +12,7 @@ import AssignValueToKey from "./AssignValueToKey";
 import Tag from "../misc/Tag";
 import {useRequest} from "../../../remote_api/requestClient";
 import ProductionButton from "../forms/ProductionButton";
+import {DetailsHeader} from "./DetailsHeader";
 
 export function IdentificationPointCard({data, onDeleteComplete, onEditComplete, displayMetadata=true}) {
 
@@ -52,6 +53,19 @@ export function IdentificationPointCard({data, onDeleteComplete, onEditComplete,
     }
 
     const Details = () => <>
+        <DetailsHeader
+            data={data}
+            name={data?.name}
+            type={data?.type}
+            description={data?.description}
+            icon="identity"
+            timestamp={data?.timestamp}
+            tags={data?.tags}
+            locked={data?.locked}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+            onDeleteComplete={onDeleteComplete}
+        />
         <TuiForm>
             {displayMetadata && <EventTypeMetadata data={data}/>}
             <TuiFormGroup>
@@ -75,19 +89,6 @@ export function IdentificationPointCard({data, onDeleteComplete, onEditComplete,
                 </TuiFormGroupContent>
             </TuiFormGroup>
         </TuiForm>
-        <Rows style={{marginTop: 20}}>
-            <ProductionButton
-                onClick={handleEdit}
-                icon={<VscEdit size={20}/>}
-                label="Edit"
-                disabled={typeof data === "undefined"}/>
-            {onDeleteComplete && <ProductionButton
-                icon={<VscTrash size={20}/>}
-                onClick={handleDelete}
-                label="Delete"
-                disabled={typeof data === "undefined"}
-            />}
-        </Rows>
     </>
 
     return <div className="Box10" style={{height: "100%"}}>
