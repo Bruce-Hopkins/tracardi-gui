@@ -1,9 +1,7 @@
 import React, {useEffect} from "react";
-import Rows from "../misc/Rows";
 import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import {useConfirm} from "material-ui-confirm";
 import FormDrawer from "../drawers/FormDrawer";
-import {VscTrash, VscEdit} from "react-icons/vsc";
 import PropTypes from "prop-types";
 import {TuiForm, TuiFormGroup, TuiFormGroupContent, TuiFormGroupHeader} from "../tui/TuiForm";
 import EventMappingForm from "../forms/EventMappingForm";
@@ -17,7 +15,6 @@ import ActiveTag from "../misc/ActiveTag";
 import {objectMap} from "../../../misc/mappers";
 import AssignValueToKey from "./AssignValueToKey";
 import {useRequest} from "../../../remote_api/requestClient";
-import ProductionButton from "../forms/ProductionButton";
 import Tag from "../misc/Tag";
 import {DetailsHeader} from "./DetailsHeader";
 
@@ -123,17 +120,6 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
 
             </TuiFormGroupContent>
         </TuiFormGroup>
-        {!data.build_in && <Rows style={{marginTop: 20, marginBottom: 20}}>
-            <ProductionButton onClick={handleEdit}
-                              icon={<VscEdit size={20}/>}
-                              label="Edit" disabled={typeof data === "undefined"}/>
-            <ProductionButton
-                progress={deleteProgress}
-                icon={<VscTrash size={20}/>}
-                onClick={handleDelete}
-                label="Delete"
-                disabled={typeof data === "undefined"}/>
-        </Rows>}
     </TuiForm>
 
     return <div className="Box10" style={{height: "100%"}}>
@@ -148,6 +134,7 @@ export function EventMappingCard({data, onDeleteComplete, onEditComplete, displa
             locked={data?.locked}
             onDelete={handleDelete}
             onEdit={handleEdit}
+            onDeleteComplete={onDeleteComplete}
         />
         {data && <Details/>}
         <FormDrawer

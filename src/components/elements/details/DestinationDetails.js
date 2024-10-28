@@ -8,9 +8,7 @@ import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import FormDrawer from "../drawers/FormDrawer";
 import Properties from "./DetailProperties";
 import DestinationForm from "../forms/DestinationForm";
-import { VscEdit, VscTrash } from "react-icons/vsc";
 import {useRequest} from "../../../remote_api/requestClient";
-import ProductionButton from "../forms/ProductionButton";
 import NoData from "../misc/NoData";
 import Tag from "../misc/Tag";
 import PropertyField from "./PropertyField";
@@ -20,10 +18,9 @@ import TuiTags from "../tui/TuiTags";
 import ActiveTag from "../misc/ActiveTag";
 import {DisplayOnlyIf} from "../../context/RestrictContext";
 import {isNotEmptyArray} from "../../../misc/typeChecking";
-import {JsonModalButton} from "../forms/buttons/JsonModalDetailsButton";
 import {DetailsHeader} from "./DetailsHeader";
 
-function DestinationDetails({id, onDelete, onEdit}) {
+function DestinationDetails({id, onDelete, onEdit, onDeleteComplete}) {
 
     const [loading, setLoading] = React.useState(false);
     const [deleteProgress, setDeleteProgress] = React.useState(false);
@@ -108,6 +105,7 @@ function DestinationDetails({id, onDelete, onEdit}) {
                 locked={data?.locked}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
+                onDeleteComplete={onDeleteComplete}
             />
             <TuiFormGroup>
                 <TuiFormGroupContent>
@@ -168,10 +166,6 @@ function DestinationDetails({id, onDelete, onEdit}) {
                     </TuiFormGroupContent>
                 </TuiFormGroupContent>
             </TuiFormGroup>
-            {data?.locked !== true && <div style={{display: "flex"}}>
-                <ProductionButton label="Edit" onClick={handleEdit} icon={<VscEdit size={20}/>}/>
-                <ProductionButton label="Delete" onClick={handleDelete} progress={deleteProgress} icon={<VscTrash size={20}/>}/>
-            </div>}
 
             <FormDrawer
                 width={750}

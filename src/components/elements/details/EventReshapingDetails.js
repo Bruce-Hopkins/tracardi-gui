@@ -1,9 +1,7 @@
 import React, {useEffect} from "react";
-import Rows from "../misc/Rows";
 import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import {useConfirm} from "material-ui-confirm";
 import FormDrawer from "../drawers/FormDrawer";
-import {VscTrash, VscEdit} from "react-icons/vsc";
 import PropTypes from "prop-types";
 import {TuiForm, TuiFormGroup, TuiFormGroupContent, TuiFormGroupHeader} from "../tui/TuiForm";
 import EventReshapingForm from "../forms/EventReshapingForm";
@@ -14,7 +12,6 @@ import Tabs, {TabCase} from "../tabs/Tabs";
 import EventTypeMetadata from "./EventTypeMetadata";
 import Tag from "../misc/Tag";
 import {useRequest} from "../../../remote_api/requestClient";
-import ProductionButton from "../forms/ProductionButton";
 import {DetailsHeader} from "./DetailsHeader";
 
 function Spanner({children}) {
@@ -75,6 +72,7 @@ export function EventReshapingCard({data, onDeleteComplete, onEditComplete, disp
             locked={data?.locked}
             onDelete={handleDelete}
             onEdit={handleEditClick}
+            onDeleteComplete={onDeleteComplete}
         />
         <TuiForm>
             {displayMetadata && <EventTypeMetadata data={data}/>}
@@ -112,21 +110,6 @@ export function EventReshapingCard({data, onDeleteComplete, onEditComplete, disp
                 </Tabs>
             </TuiFormGroup>
         </TuiForm>
-            <div style={{marginBottom: 20}}>
-                <Rows style={{marginTop: 20}}>
-                    <ProductionButton onClick={handleEditClick}
-                                      icon={<VscEdit size={20}/>}
-                                      label="Edit"
-                                      disabled={typeof data === "undefined"}/>
-                    {onDeleteComplete && <ProductionButton
-                        icon={<VscTrash size={20}/>}
-                        onClick={handleDelete}
-                        label="Delete"
-                        disabled={typeof data === "undefined"}
-                    />}
-                </Rows>
-            </div>
-
     </>
 
     return <div className="Box10" style={{height: "100%"}}>

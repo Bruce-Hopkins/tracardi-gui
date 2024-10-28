@@ -2,11 +2,9 @@ import React, {Suspense, useEffect} from "react";
 import "../lists/cards/SourceCard.css";
 import "./ResourceDetails.css";
 import "./Details.css";
-import Rows from "../misc/Rows";
 import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import {useConfirm} from "material-ui-confirm";
 import FormDrawer from "../drawers/FormDrawer";
-import {VscTrash, VscEdit} from "react-icons/vsc";
 import PropTypes from "prop-types";
 import {TuiForm, TuiFormGroup, TuiFormGroupContent, TuiFormGroupHeader} from "../tui/TuiForm";
 import EventSourceForm from "../forms/EventSourceForm";
@@ -379,6 +377,7 @@ export default function EventSourceDetails({id, onDeleteComplete}) {
                     locked={data?.locked}
                     onDelete={handleDelete}
                     onEdit={handleEdit}
+                    onDeleteComplete={onDeleteComplete}
                 />
             </div>
             <Tabs

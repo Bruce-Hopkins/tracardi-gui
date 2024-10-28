@@ -108,7 +108,7 @@ const EventData = ({event, metadata, allowedDetails = [], routing=true}) => {
                                    <EventWarnings eventMetaData={event?.metadata}/>
                                    <EventErrorTag eventMetaData={event?.metadata}/>
                                </>}/>
-                {event.journey.state && <PropertyField name="Journey state" content={<EventJourneyTag>{event.journey.state}</EventJourneyTag>} size="small"/>}
+                {event?.journey?.state && <PropertyField name="Journey state" content={<EventJourneyTag>{event.journey.state}</EventJourneyTag>} size="small"/>}
                 {event?.session && <PropertyField name="Session id" content={event.session?.id}>
 
                 </PropertyField>}

@@ -8,7 +8,7 @@ export default function Destinations() {
 
     const urlFunc = useCallback((query) => ('/destinations/by_tag' + ((query) ? "?query=" + query : "")), [])
     const addFunc = useCallback((close) => <DestinationForm onSubmit={close}/>, [])
-    const detailsFunc = useCallback((id, close) => <DestinationDetails id={id} onDelete={close} onEdit={close}/>, []);
+    const detailsFunc = useCallback((id, close) => <DestinationDetails id={id} onDelete={close} onEdit={close} onDeleteComplete={close}/>, []);
 
     return <CardBrowser
         defaultLayout="row"

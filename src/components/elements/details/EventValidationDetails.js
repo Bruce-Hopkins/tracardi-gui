@@ -1,9 +1,7 @@
 import React, {useEffect} from "react";
-import Rows from "../misc/Rows";
 import CenteredCircularProgress from "../progress/CenteredCircularProgress";
 import {useConfirm} from "material-ui-confirm";
 import FormDrawer from "../drawers/FormDrawer";
-import {VscTrash, VscEdit} from "react-icons/vsc";
 import PropTypes from "prop-types";
 import {TuiForm, TuiFormGroup, TuiFormGroupContent, TuiFormGroupField, TuiFormGroupHeader} from "../tui/TuiForm";
 import EventValidationForm from "../forms/EventValidationForm";
@@ -13,7 +11,6 @@ import NoData from "../misc/NoData";
 import EventTypeMetadata from "./EventTypeMetadata";
 import Tag from "../misc/Tag";
 import {useRequest} from "../../../remote_api/requestClient";
-import ProductionButton from "../forms/ProductionButton";
 import {DetailsHeader} from "./DetailsHeader";
 
 export function EventValidationCard({data, onDeleteComplete, onEditComplete, displayMetadata = true}) {
@@ -71,6 +68,7 @@ export function EventValidationCard({data, onDeleteComplete, onEditComplete, dis
                 locked={data?.locked}
                 onDelete={handleDelete}
                 onEdit={handleEditClick}
+                onDeleteComplete={onDeleteComplete}
             />
         <TuiForm>
             {displayMetadata && <EventTypeMetadata data={data}/>}
@@ -96,19 +94,6 @@ export function EventValidationCard({data, onDeleteComplete, onEditComplete, dis
                 </TuiFormGroupContent>
             </TuiFormGroup> : <NoData header="No schema defined"/>}
         </TuiForm>
-            <Rows style={{marginTop: 20, marginBottom: 20}}>
-                <ProductionButton
-                    onClick={handleEditClick}
-                    icon={<VscEdit size={20}/>}
-                    label="Edit"
-                    disabled={typeof data === "undefined"}/>
-                {onDeleteComplete && <ProductionButton
-                    icon={<VscTrash size={20}/>}
-                    onClick={handleDelete}
-                    label="Delete"
-                    disabled={typeof data === "undefined"}
-                />}
-            </Rows>
     </>
 
     return <div className="Box10" style={{height: "100%"}}>

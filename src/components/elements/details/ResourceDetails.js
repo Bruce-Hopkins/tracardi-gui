@@ -91,6 +91,7 @@ export default function ResourceDetails({id, onDeleteComplete}) {
             locked={data?.locked}
             onDelete={onDelete}
             onEdit={onEdit}
+            onDeleteComplete={onDeleteComplete}
         />
         <TuiForm>
             <TuiFormGroup>

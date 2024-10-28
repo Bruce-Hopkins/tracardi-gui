@@ -8,7 +8,7 @@ import React from "react";
 import {JsonModalButton} from "../forms/buttons/JsonModalDetailsButton";
 import Button from "../forms/Button";
 
-export function DetailsHeader({data, name, type, description, icon, timestamp, tags, locked, onDelete, onEdit}) {
+export function DetailsHeader({data, name, type, description, icon, timestamp, tags, locked, onDelete, onEdit, onDeleteComplete}) {
     return <div style={{display: "flex", margin: "5px 20px 20px 20px", flexDirection: "column"}}>
 
         <div style={{display: "flex", justifyContent: "space-between", alignItems: 'center', marginBottom: 10}}>
@@ -27,12 +27,12 @@ export function DetailsHeader({data, name, type, description, icon, timestamp, t
                             label="Edit"
                             disabled={typeof data === "undefined"}
                         />
-                        <ProductionButton
+                        {onDeleteComplete && <ProductionButton
                             onClick={onDelete}
                             icon={<VscTrash size={20}/>}
                             label="Delete"
                             disabled={typeof data === "undefined"}
-                        />
+                        />}
                     </>
                     : <Button label="LOCKED" selected={true} error={true} style={{marginLeft:3}}/>}
                 </Rows>
