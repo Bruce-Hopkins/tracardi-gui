@@ -65,7 +65,6 @@ export const ProfileData = ({profile}) => {
     const loyalty = object2dot(profile?.data?.loyalty, true);
     const identifier = object2dot(profile?.data?.identifier, true);
 
-
     return <Grid container spacing={2} style={{padding: 20}}>
         <Grid item xs={6}>
             <ProfileCard profile={profile}/>
@@ -115,7 +114,7 @@ export const ProfileData = ({profile}) => {
                       tabsStyle={{backgroundColor: _theme.palette.background.paper}}>
                     <TabCase id={0}>
                         <div className="ProfileInfoTab">
-                            {displayPii && pii ? Object.keys(pii).map(key => <PropertyField
+                            {displayPii && pii && !isEmptyObjectOrNull(pii) ? Object.keys(pii).map(key => <PropertyField
                                     key={key}
                                     name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
                                     content={pii[key]}
@@ -129,7 +128,7 @@ export const ProfileData = ({profile}) => {
                     </TabCase>
                     <TabCase id={1}>
                         <div className="ProfileInfoTab">
-                            {displayPii && contact ? Object.keys(contact).map(key => <PropertyField
+                            {displayPii && contact && !isEmptyObjectOrNull(contact) ? Object.keys(contact).map(key => <PropertyField
                                     key={key}
                                     name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
                                     content={contact[key]}
@@ -276,7 +275,9 @@ export const ProfileData = ({profile}) => {
                     </TabCase>
                     <TabCase id={3}>
                         <div className="ProfileInfoTab">
-                            <TuiTags tags={profile?.ids} style={{margin: 2}}/>
+                            {isNotEmptyArray(profile?.ids)
+                                ? <TuiTags tags={profile?.ids} style={{margin: 2}}/>
+                            : <NoData header="No Ids"/>}
                         </div>
                     </TabCase>
                 </Tabs>
