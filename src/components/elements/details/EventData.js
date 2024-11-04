@@ -125,12 +125,6 @@ const EventData = ({event, metadata, allowedDetails = [], routing=true}) => {
         <ShowHide label="Advanced" style={{marginBottom: 20}}>
             <TuiFormGroup>
                 <TuiFormGroupContent>
-                    <PropertyField name="Process time"
-                                   content={<div>Workflow: {event?.metadata?.time?.process_time}, Total: {event?.metadata?.time?.total_time}</div>}/>
-                    {event?.session && <PropertyField name="Session duration"
-                                                      content={Math.floor(event.session.duration / 60).toString() + "m"}>
-
-                    </PropertyField>}
                     <PropertyField name="Debug" content={event?.metadata?.debug ?
                         <BsCheckCircle size={18} color="#00c853"/> : <BsXSquare size={18} color="#d81b60"/>}/>
                     <PropertyField name="Profile less" content={event?.metadata?.profile_less ?

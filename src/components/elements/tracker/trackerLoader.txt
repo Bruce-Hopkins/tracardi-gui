@@ -12,7 +12,7 @@
             source: {
                 id: "<paste-your-source-id>"
             }
-            // Please see the documentation for more settings: http://manual.tracardi.com/getting_started/processes/integration/js/
+            // Please see the documentation for more settings
         }
     }
 

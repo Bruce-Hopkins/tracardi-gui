@@ -61,7 +61,7 @@ export default function NeedHelpButton() {
                                 Don't want to bother us? View the documentation page.
                                 <div style={{display: "flex", justifyContent: "center", marginTop: 10}}>
                                     <Button label="Documentation"
-                                            onClick={external("http://manual.tracardi.com", true)}
+                                            onClick={external("https://tracardi.github.io/documentation/latest/", true)}
                                             icon={<IoDocumentTextOutline size={20}/>}
                                     />
                                 </div>

@@ -52,7 +52,7 @@ function AudienceDetailsForm({data, errors, onUpdate}) {
                 />
                 <div style={{fontSize: 12}}>Do not know how to filter. Click <span
                     style={{textDecoration: "underline", cursor: "pointer"}}
-                    onClick={external("http://manual.tracardi.com/getting_started/codings/search/searchng_after_082/", true)}>here</span> for information.
+                    onClick={external("https://tracardi.github.io/documentation/latest/getting_started/codings/search/searchng_after_082/", true)}>here</span> for information.
                 </div>
             </TuiFormGroupContent>
             <TuiFormGroupContent description="Add required events" style={{paddingTop:0}}>

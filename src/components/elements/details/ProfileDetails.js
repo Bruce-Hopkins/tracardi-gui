@@ -81,7 +81,7 @@ export default function ProfileDetails({profile}) {
     return <div style={{height: "inherit", display: "flex", flexDirection: "column"}}>
         {displayPii && <PiiDetails profile={profile}/>}
         <div className="RightTabScroller">
-            <Tabs tabs={["Personal", "Sessions", "Analytics", "E-Commerce", "Logs", "Json"]}
+            <Tabs tabs={["Personal", "Sessions", "Analytics", "Logs", "Json"]}
                   tabsStyle={{backgroundColor: _theme.palette.background.paper}}>
                 <TabCase id={0}>
                     <ProfileData profile={profile}/>
@@ -196,13 +196,6 @@ export default function ProfileDetails({profile}) {
                 </TabCase>
                 <TabCase id={3}>
                     <div className="Box10">
-                        <NoData header="This feature will be implemented soon">
-                           This is a placeholder for the feature that will be implemented in next version of Tracardi.
-                        </NoData>
-                    </div>
-                </TabCase>
-                <TabCase id={4}>
-                    <div className="Box10">
                         {profile?.id
                             ? <ProfileLogDetails profileId={profile.id}/>
                             : <NoData header="This event has no profile attached.">
@@ -210,7 +203,7 @@ export default function ProfileDetails({profile}) {
                             </NoData>}
                     </div>
                 </TabCase>
-                <TabCase id={5}>
+                <TabCase id={4}>
                     <TuiForm style={{margin: 20}}>
                         <TuiFormGroup style={{overflow: "auto"}}>
                             <JsonBrowser data={profile}/>
