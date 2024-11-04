@@ -381,7 +381,7 @@ export default function EventSourceDetails({id, onDeleteComplete}) {
                 />
             </div>
             <Tabs
-                tabs={["Details", "Use & Javascript", "Analytics", "Raw"]}
+                tabs={["Details", "Use & Javascript", "Analytics"]}
                 defaultTab={tab}
                 onTabSelect={setTab}
                 tabContentStyle={{overflow: "initial"}}
@@ -402,11 +402,6 @@ export default function EventSourceDetails({id, onDeleteComplete}) {
                 </TabCase>
                 <TabCase id={2} key="Analytics">
                     <EventSourceAnalytics/>
-                </TabCase>
-                <TabCase id={3} key="Raw">
-                    <div className="Box10">
-                        <JsonBrowser data={data}/>
-                    </div>
                 </TabCase>
             </Tabs></>
         }
