@@ -21,7 +21,6 @@ import useTheme from "@mui/material/styles/useTheme";
 import NoData from "../misc/NoData";
 import {ProfileImage} from "./ProfileImage";
 import {displayLocation} from "../../../misc/location";
-import Properties from "./DetailProperties";
 import {useRequest} from "../../../remote_api/requestClient";
 import Tag from "../misc/Tag";
 import ProfileCacheDetails from "./ProfileCacheDetails";
@@ -64,6 +63,13 @@ export const ProfileData = ({profile}) => {
     const job = object2dot(profile?.data?.job, true);
     const loyalty = object2dot(profile?.data?.loyalty, true);
     const identifier = object2dot(profile?.data?.identifier, true);
+
+    const displayFieldChange = (field) => {
+        if (profile?.metadata?.fields && field in profile.metadata.fields) {
+            return profile.metadata.fields[field]
+        }
+        return null
+    }
 
     return <Grid container spacing={2} style={{padding: 20}}>
         <Grid item xs={6}>
@@ -119,7 +125,7 @@ export const ProfileData = ({profile}) => {
                                     name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
                                     content={pii[key]}
                                     field={`data.pii.${key}`}
-                                    metadata={profile?.metadata?.fields[`data.pii.${key}`]}
+                                    metadata={displayFieldChange(`data.pii.${key}`)}
                                 />)
                                 : <NoData header="No Personal Data"/>
                             }
@@ -133,7 +139,7 @@ export const ProfileData = ({profile}) => {
                                     name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
                                     content={contact[key]}
                                     field={`data.contact.${key}`}
-                                    metadata={profile?.metadata?.fields[`data.contact.${key}`]}
+                                    metadata={displayFieldChange(`data.contact.${key}`)}
                                 />)
                                 : <NoData header="No Contact Data"/>
                             }
@@ -147,7 +153,7 @@ export const ProfileData = ({profile}) => {
                                     name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
                                     content={traits[key]}
                                     field={`traits.${key}`}
-                                    metadata={profile?.metadata?.fields[`traits.${key}`]}
+                                    metadata={displayFieldChange(`traits.${key}`)}
                                 />)
 
                                 : <NoData header="No Traits"/>}
@@ -161,7 +167,7 @@ export const ProfileData = ({profile}) => {
                                 name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
                                 content={geo[key]}
                                 field={`data.devices.last.geo.${key}`}
-                                metadata={profile?.metadata?.fields[`data.devices.last.geo.${key}`]}
+                                metadata={displayFieldChange(`data.devices.last.geo.${key}`)}
                             />)
                                 : <NoData header="No Geo Location"/>}
                         </div>
@@ -174,7 +180,7 @@ export const ProfileData = ({profile}) => {
                                 name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
                                 content={media[key]}
                                 field={`data.media.${key}`}
-                                metadata={profile?.metadata?.fields[`data.media.${key}`]}
+                                metadata={displayFieldChange(`data.media.${key}`)}
                             />)
                                 : <NoData header="No Media"/>}
                         </div>
@@ -187,7 +193,7 @@ export const ProfileData = ({profile}) => {
                                 name={(key.charAt(0).toUpperCase() + key.slice(1)).replace("_", " ")}
                                 content={aux[key]}
                                 field={`aux.${key}`}
-                                metadata={profile?.metadata?.fields[`aux.${key}`]}
+                                metadata={displayFieldChange(`aux.${key}`)}
                             />)
                                 : <NoData header="No Auxiliary Data"/>}
                         </div>
@@ -220,7 +226,7 @@ export const ProfileData = ({profile}) => {
                                     name={key}
                                     content={profile?.data?.preferences[key]}
                                     field={`data.preferences.${key}`}
-                                    metadata={profile?.metadata?.fields[`data.preferences.${key}`]}
+                                    metadata={displayFieldChange(`data.preferences.${key}`)}
                                 />)
                                 : <NoData header="No Preferences"/>}
 
@@ -239,7 +245,7 @@ export const ProfileData = ({profile}) => {
                                     name={key}
                                     content={job[key]}
                                     field={`data.job.${key}`}
-                                    metadata={profile?.metadata?.fields[`data.job.${key}`]}
+                                    metadata={displayFieldChange(`data.job.${key}`)}
                                 />)
                                 : <NoData header="No Job Data"/>
                             }
@@ -253,7 +259,7 @@ export const ProfileData = ({profile}) => {
                                     name={key}
                                     content={loyalty[key]}
                                     field={`data.loyalty.${key}`}
-                                    metadata={profile?.metadata?.fields[`data.loyalty.${key}`]}
+                                    metadata={displayFieldChange(`data.loyalty.${key}`)}
                                 />)
                                 : <NoData header="No Loyalty Data"/>
                             }
@@ -267,7 +273,7 @@ export const ProfileData = ({profile}) => {
                                     name={key}
                                     content={identifier[key]}
                                     field={`data.identifier.${key}`}
-                                    metadata={profile?.metadata?.fields[`data.identifier.${key}`]}
+                                    metadata={displayFieldChange(`data.identifier.${key}`)}
                                 />)
                                 : <NoData header="No Identifiers"/>
                             }
