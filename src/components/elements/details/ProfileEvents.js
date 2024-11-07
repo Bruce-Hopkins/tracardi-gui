@@ -42,8 +42,10 @@ function EventStream({events}) {
                                     paddingLeft: 8,
                                     paddingRight: 8,
                                     width: 320
-                                }}><DateValue date={event?.metadata?.time?.create}
-                                              fallback={event?.metadata?.time?.insert}/></div>
+                                }}>
+                                    <DateValue date={event?.metadata?.time?.create}
+                                               fallback={event?.metadata?.time?.insert}/>
+                                </div>
                                 <StepLabel
                                     StepIconComponent={() => eventDot(event)}
                                     onClick={() => handleDetails(event)}

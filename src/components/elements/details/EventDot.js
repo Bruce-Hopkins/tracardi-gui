@@ -3,8 +3,8 @@ import {BsGear} from "react-icons/bs";
 import "./EventDot.css";
 
 export default function eventDot(event) {
-
-    if (event?.source?.id.startsWith("@internal")) {
+    console.log(event?.tags?.values, Array.isArray(event?.tags?.values) && event.tags.values.includes('event:system'))
+    if (Array.isArray(event?.tags?.values) && event.tags.values.includes('event:system')) {
         return <BsGear size={12}
                        title="System Event"
                        style={{marginRight: 10}}/>
