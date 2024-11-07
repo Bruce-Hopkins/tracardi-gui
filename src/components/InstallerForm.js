@@ -73,7 +73,7 @@ const InstallerForm = ({requireAdmin, onInstalled, displayForm, warning, errorMe
                 onInstalled()
             }
         } catch (e) {
-            console.log(error)
+            console.error(error)
             setError(e)
         } finally {
             setProgress(false);

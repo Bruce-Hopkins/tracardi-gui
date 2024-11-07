@@ -160,7 +160,7 @@ const SignInForm = () => {
             setProgress(false)
         }
     };
-    console.log(envs?.license)
+
     return (
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={signInTheme}>
