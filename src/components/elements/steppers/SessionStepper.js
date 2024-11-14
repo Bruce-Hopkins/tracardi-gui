@@ -10,6 +10,7 @@ import FetchError from "../../errors/FetchError";
 import {capitalizeString} from "../misc/EventTypeTag";
 import "./SessionStepper.css";
 import eventDot from "../details/EventDot";
+import useTheme from "@mui/material/styles/useTheme";
 
 export default function SessionStepper({session, profileId, onEventSelect}) {
 
@@ -17,6 +18,8 @@ export default function SessionStepper({session, profileId, onEventSelect}) {
     const [limit, setLimit] = React.useState(20);
     const [hasMore, setHasMore] = React.useState(false);
     const [selectedEvent, setSelectedEvent] = React.useState(null);
+
+    const theme = useTheme()
 
     const handleEventSelect = React.useCallback((eventId) => {
         setSelectedEvent(eventId)
@@ -89,10 +92,10 @@ export default function SessionStepper({session, profileId, onEventSelect}) {
                             alignSelf: "center",
                             paddingLeft: 8,
                             paddingRight: 8,
-                            width: 320
+                            width: 318
                         }}><DateValue date={event?.metadata?.time?.create} fallback={event?.metadata?.time?.insert}/></div>
                         <StepLabel
-                            StepIconComponent={() => eventDot(event)}
+                            StepIconComponent={() => eventDot(event, theme)}
                         >
                             {eventLabel(selectedEvent, event)}
                         </StepLabel>

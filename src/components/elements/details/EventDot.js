@@ -1,14 +1,23 @@
 import React from "react";
 import {BsGear} from "react-icons/bs";
+import {VscPulse} from "react-icons/vsc";
 import "./EventDot.css";
 
-export default function eventDot(event) {
-    console.log(event?.tags?.values, Array.isArray(event?.tags?.values) && event.tags.values.includes('event:system'))
-    if (Array.isArray(event?.tags?.values) && event.tags.values.includes('event:system')) {
-        return <BsGear size={12}
-                       title="System Event"
-                       style={{marginRight: 10}}/>
+export default function eventDot(event, theme) {
+
+    if (Array.isArray(event?.tags?.values)) {
+        if (event.tags.values.includes('event:system')) {
+            return <BsGear size={16}
+                           title="System Event"
+                           style={{marginRight: 10}}/>
+        } else if(event.tags.values.includes('event:signal')) {
+            return <VscPulse size={16}
+                           title="System Signal"
+                           style={{marginRight: 10}}/>
+        }
     }
+
+    const color = theme.palette.primary.main
 
     if (event?.context?.cde?.profile) {
         return <div className="EventDot"
@@ -22,7 +31,7 @@ export default function eventDot(event) {
                 title="Event"
                 style={{
                     backgroundColor: {
-                        collected: "#006db3",
+                        collected: color,
                         error: "#d81b60",
                         processed: "#43a047"
                     }[event?.metadata?.status]

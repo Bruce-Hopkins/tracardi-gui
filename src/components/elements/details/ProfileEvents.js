@@ -9,8 +9,11 @@ import EventDetailsDialog from "../dialog/EventDetailsDialog";
 import {capitalizeString} from "../misc/EventTypeTag";
 import NoData from "../misc/NoData";
 import eventDot from "./EventDot";
+import useTheme from "@mui/material/styles/useTheme";
 
 function EventStream({events}) {
+
+    const theme = useTheme()
 
     const [currentEvent, setCurrentEvent] = useState(null)
     const [open, setOpen] = useState(false)
@@ -41,13 +44,13 @@ function EventStream({events}) {
                                     alignSelf: "center",
                                     paddingLeft: 8,
                                     paddingRight: 8,
-                                    width: 320
+                                    width: 318
                                 }}>
                                     <DateValue date={event?.metadata?.time?.create}
                                                fallback={event?.metadata?.time?.insert}/>
                                 </div>
                                 <StepLabel
-                                    StepIconComponent={() => eventDot(event)}
+                                    StepIconComponent={() => eventDot(event, theme)}
                                     onClick={() => handleDetails(event)}
                                 >
                                     {event?.name || capitalizeString(event?.type)}

@@ -10,7 +10,7 @@ import {ErrorBoundary} from "@sentry/react";
 import TopBar from "./pages/top/TopBar";
 import IdentificationPoint from "./pages/IdentificationPoint";
 import {getDataContext, setDataContext} from "../config";
-import {stagingTheme, productionTheme, darkTheme} from "../themes";
+import {stagingTheme, productionTheme, darkTheme, productionDarkTheme} from "../themes";
 import {ThemeProvider} from "@mui/material/styles";
 import EventTypesToRules from "./pages/EventRouting";
 import ConfigurationPage from "./pages/ConfigurationPage";
@@ -137,7 +137,9 @@ const AppBox = () => {
         .map(([, object]) => object); // Extract only the object
 
     return <DataContext.Provider value={production}>
-        <ThemeProvider theme={darkMode ? darkTheme : (production ? productionTheme : stagingTheme)}>
+        <ThemeProvider theme={darkMode
+            ? (production ? productionDarkTheme : darkTheme)
+            : (production ? productionTheme : stagingTheme)}>
         <MainContent onContextChange={handleContextChange}>
 
             {/*Redirects*/}
